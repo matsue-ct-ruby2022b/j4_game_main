@@ -2222,4 +2222,8 @@ Window.loop do
   #メインループ
   field.battle_now(hero,enemy,field,merchant,first,diff_level)
 
+  #ゲームクリア系はこの辺に入れてほしい
+
+  #
+
 end
