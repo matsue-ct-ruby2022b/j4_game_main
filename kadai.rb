@@ -1,8 +1,13 @@
 =begin
 
-2022/12/冬季集中講義グループ製作
+2022/12/冬季集中講義グループ製作ゲーム課題
 
-ゲーム課題
+<member>
+j1906 井山剣心
+j1914 金築孝典
+j1916 久野
+j1919 髙橋千賢
+
 
 URL(main-branch) : https://github.com/matsue-ct-ruby2022b/j4_game_main
 
@@ -21,7 +26,7 @@ URL(main-branch) : https://github.com/matsue-ct-ruby2022b/j4_game_main
 (3)バトル(魔王)
 (4)エンドロール
 (5)タイトル
-・ゲームクリア処理
+・ゲームクリア処理を埋め込む場所
 
 =end
 
