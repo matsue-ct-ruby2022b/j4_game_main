@@ -20,8 +20,12 @@ https://www.istockphoto.com/jp/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88/%E5%9F%8E-%E
 http://hi79.web.fc2.com/material/b_back/b_back_r.html
 <br>
 <br>
-・その他参考<br>
+・その他参考「Githubからのダウンロード」<br>
 http://www.humblesoft.com/wiki/?GitHub%E3%81%8B%E3%82%89%E3%83%80%E3%82%A6%E3%83%B3%E3%83%AD%E3%83%BC%E3%83%89%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95
+<br>
+<br>
+・その他参考「fatal: Not a git repository (or any of the parent directories): .git」<br>
+https://qiita.com/gosairei1207/items/701b7ae494b96db0f9a1
 <br>
 <br>
 ・背景透過処理<br>
