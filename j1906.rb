@@ -50,6 +50,9 @@ suzuki=Support_chara.new("suzuki")
 #枠
 frame=Image.new(924,700,[100,0,0])
 
+judge_frame=Image.new(500,150,[255,255,255])
+judge_frame_in=Image.new(480,130,[0,0,0])
+
 #ストーリー
 @font=Font.new(SIZE,fontname="MS 明朝")
 
@@ -197,14 +200,64 @@ def chara_choice
 end
 
 #選択肢
-def judge
+def judge(a,b,c,judge_frame,judge_frame_in)
+    branch=0
+        x = Input.mouse_pos_x  
+        y = Input.mouse_pos_y  
+        message("今から何をしようか",50,50,@font)
+        if x>=260 && x<=760
+            if y>=180 && y<=330
+            Window.draw(260,180, judge_frame,z=0)
+            Window.draw(270,190, judge_frame_in,z=0)
+            branch=1
+            elsif y>=380 && y<=530
+            Window.draw(260,380, judge_frame,z=0)
+            Window.draw(270,390, judge_frame_in,z=0)
+            branch=2
+            elsif y>=580 && y<=730
+            Window.draw(260,580, judge_frame,z=0)
+            Window.draw(270,590, judge_frame_in,z=0)
+            branch=3
+            else
+                branch=0
+            end
+        else
+            branch=0
+        end
+            message(a,400,200,@font)
+            message(b,400,400,@font)
+            message(c,400,600,@font)
 
+        if Input.mousePush?( M_LBUTTON ) && branch!=0
+            branch
+        else
+            0
+        end
 end
 
 #行動選択
-def move
+def move(judge_frame,judge_frame_in)
     message("今から何をしようか",50,50,@font)
-    branch=judge
+    branch=judge("バトル","ステータスツリー","会話",judge_frame,judge_frame_in)
+        if branch == 1
+            battle
+        elsif branch == 2
+            sta
+        elsif branch == 3
+            conver
+        end
+end
+
+def battle
+    message("バトル",50,50,@font)
+end
+
+def sta
+    message("ステータスツリー",50,50,@font)
+end
+
+def conver
+    message("会話",50,50,@font)
 end
 
 #1日の流れ
@@ -247,5 +300,6 @@ Window.loop do
         end
     end
     output_limit(clock)
+    move(judge_frame,judge_frame_in)
     Window.draw_alpha(50,30, frame, 128)
 end
