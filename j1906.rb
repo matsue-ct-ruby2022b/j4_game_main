@@ -51,6 +51,51 @@ end
 story=Story.new
 
 ###############################社長クラス########################################################################################################################################################################
+#画像登録
+#タイトル画面背景
+title_img = Image.load("images/タイトル.jpg")
+#タイトル画像
+title_name = Image.load("images/logo.png")
+#キャラ選択画面背景
+chara_pick = Image.load("images/キャラ選択_背景.jpg")
+castle_back = Image.load("images/castle_back.jpg")
+#赤枠
+red_frame = Image.load("images/frame.png")
+#バトル下枠背景
+battle_frame = Image.load("images/battle_back.png")
+#魔王戦背景
+boss_frame = Image.load("images/魔王城.png")
+#女性キャラ1
+woman1_normal = Image.load("images/chara/woman1/face_normal.png")
+woman1_pinchi = Image.load("images/chara/woman1/face_pinchi.png")
+woman1_tere = Image.load("images/chara/woman1/face_tere.png")
+#女性キャラ2
+woman2_normal = Image.load("images/chara/woman2/face_normal.png")
+woman2_pinchi = Image.load("images/chara/woman2/face_pinchi.png")
+#woman2_tere = Image.load("images/chara/woman2/face_tere.png")
+#女性キャラ3
+woman3_normal = Image.load("images/chara/woman3/face_normal.png")
+woman3_pinchi = Image.load("images/chara/woman3/face_pinchi.png")
+#woman1_tere = Image.load("images/chara/woman1/face_tere.png")
+#男性キャラ1
+man1_normal = Image.load("images/chara/man1/face_normal.png")
+man1_pinchi = Image.load("images/chara/man1/face_pinchi.png")
+#男性キャラ2
+man2_normal = Image.load("images/chara/man2/face_normal.png")
+man2cls_pinchi = Image.load("images/chara/man2/face_pinchi.png")
+#男性キャラ3
+man3_normal = Image.load("images/chara/man3/face_normal.png")
+man3_pinchi = Image.load("images/chara/man3/face_pinchi.png")
+#敵キャラ
+enemy_goblin = Image.load("images/enemy/1001010401.png")
+#敵キャラ2
+enemy_king = Image.load("images/enemy/1322010402.png")
+#敵アイコン
+enemy_goblin_face = Image.load("images/enemy_face/face_1.png")
+#ボスアイコン
+enemy_king_face = Image.load("images/enemy_face/face_2.png")
+
+
 #フィールド全体
 class Field
     attr_accessor :enemy_level, :field_option, :turn, :status, :battle_speed, :crt_enemy, :next_enemy
@@ -2089,7 +2134,7 @@ def chara_choice
    Window.loop do
 
     #背景を描画
-    #Window.draw_morph(0,0,1024,0,1024,768,0,768,castle_back)
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,castle_back)
 
     #下の枠
     Window.draw_box_fill(80, 580, 946, 730, C_WHITE, z=0)
