@@ -58,6 +58,7 @@ title_img = Image.load("images/タイトル.jpg")
 title_name = Image.load("images/logo.png")
 #キャラ選択画面背景
 chara_pick = Image.load("images/キャラ選択_背景.jpg")
+castle_back = Image.load("images/castle_back.jpg")
 #赤枠
 red_frame = Image.load("images/frame.png")
 #バトル下枠背景
@@ -1954,7 +1955,7 @@ Window.loop do
   Window.loop do
 
     #背景を描画
-    Window.draw_morph(0,0,1024,0,1024,768,0,768,chara_pick)
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,castle_back)
 
     #下の枠
     Window.draw_box_fill(80, 580, 946, 730, C_WHITE, z=0)
@@ -2047,7 +2048,7 @@ Window.loop do
   Window.loop do
 
     #背景を描画
-    Window.draw_morph(0,0,1024,0,1024,768,0,768,chara_pick)
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,castle_back)
 
     #下の枠
     Window.draw_box_fill(80, 580, 946, 730, C_WHITE, z=0)
@@ -2159,7 +2160,8 @@ Window.loop do
       if field.crt_enemy == 1 #敵
         field.new_battle
         #debug(強制魔王登場)
-        enemy.bossflag = true
+        #enemy.bossflag = true
+        #
         enemy.set_enemy
         enemy.set_status(diff_level,hero,field)
         #「～」が現れた！
