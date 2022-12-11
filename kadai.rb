@@ -30,22 +30,9 @@ URL : https://github.com/chissa0719/J1919-kadai-EX
 
 =begin
 
-#やることリスト
-
-✓各キャラに固有スキルを最低1つ追加
-・ゲームオーバーを追加
-・音楽を追加
-(・敵キャラを追加)
-✓MP回復問題
-✓お金システム
-✓商人追加
-✓タイトル
-
-・一部未実装
-->音楽
-->効果音
-->タイトル画面「エクストラ」
-->ゲームオーバー
+#夏からの追加分
+・お金の獲得量の増加(2.5倍)
+・新規敵「魔王」追加
 
 =end
 
@@ -98,8 +85,12 @@ man3_normal = Image.load("images/chara/man3/face_normal.png")
 man3_pinchi = Image.load("images/chara/man3/face_pinchi.png")
 #敵キャラ
 enemy_goblin = Image.load("images/enemy/1001010401.png")
+#敵キャラ2
+enemy_king = Image.load("images/enemy/1322010402.png")
 #敵アイコン
 enemy_goblin_face = Image.load("images/enemy_face/face_1.png")
+#ボスアイコン
+enemy_king_face = Image.load("images/enemy_face/face_2.png")
 
 
 #フィールド全体
@@ -313,6 +304,8 @@ class Field
       #敵の名前
       if enemy.type == 1 
         Window.draw_font(460,55,"【ゴブリン】", battle_font, color:[255,255,255,255],z:5)
+      elsif enemy.type == 2
+        Window.draw_font(460,55,"【　魔王　】", battle_font, color:[255,255,255,255],z:5)
       end
       #HP枠
       Window.draw_box_fill(198,  398, 812, 422, C_BLACK, z=3)
@@ -650,7 +643,7 @@ class Hero
     @money = 10
     @need_exp = 10
     @limit_turn = 12
-    @crt_page = 1 #減税のページ数
+    @crt_page = 1 #現在のページ数
     @max_page = 2 #ページ総数
     @is_def = nil
     @status = 0 #状態
@@ -1242,20 +1235,28 @@ end
 
 #敵
 class Enemy
-  attr_accessor :hp, :type, :power, :brain, :def, :avoid, :speed, :exp, :hp_max, :money
+  attr_accessor :hp, :type, :power, :brain, :def, :avoid, :speed, :exp, :hp_max, :money, :bossflag
   def initialize
     @hp = -1
     @exp = 0
+    @bossflag = false
   end
   #敵タイプ抽選
   def set_enemy
     @type = rand(1..1)
+    #もしbossなら
+    if @bossflag == true
+      @type = 2
+    end
   end
   #敵描画
   def print_enemy
     if @type == 1 #ゴブリン
       enemy_goblin = Image.load("images/enemy/1001010401.png")
       Window.draw(370,100,enemy_goblin)
+    elsif @type == 2 #魔王
+      enemy_king = Image.load("images/enemy/1322010402.png")
+      Window.draw(370,100,enemy_king)
     end
   end
   #ステータス設定
@@ -1287,13 +1288,24 @@ class Enemy
     end
     @exp = @exp.to_i
     #お金
-    @money = @exp / 1.5
+    @money = (@exp / 1.5) * 2.5
     #ステータス調整
-    if hero.level == 1
+    if hero.level == 1 && @type != 2
       @hp *= 0.5
       @power *= 0.7
       @def *= 0.7
       @brain *= 0.7
+    end
+    #もし魔王なら
+    if @type == 2
+      @hp = @hp * 30
+      @hp_max = @hp * 30
+      @power = @power * 15
+      @def = @def * 5
+      @brain = @brain * 15
+      @speed = @speed * 20
+      @exp = @exp * 1000000
+      @money = @money * 1000000
     end
     #整数調整
     @hp = @hp.to_i
@@ -1324,7 +1336,7 @@ class Enemy
     is_avoid = nil
     #攻撃種類ランダム
     kind_attack = rand(0..1)
-    if kind_attack == 0 || @type == 1 #物理攻撃
+    if kind_attack == 0 || @type == 1 || @type == 2 #物理攻撃
       if field.enemy_level == 1
         dmg = rand(enemy.power..enemy.power*2) - hero.def
       else
@@ -2053,6 +2065,8 @@ Window.loop do
       first = nil
       if field.crt_enemy == 1 #敵
         field.new_battle
+        #debug(強制魔王登場)
+        enemy.bossflag = true
         enemy.set_enemy
         enemy.set_status(diff_level,hero,field)
         #「～」が現れた！
