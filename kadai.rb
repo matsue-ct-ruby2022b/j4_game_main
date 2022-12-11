@@ -661,48 +661,40 @@ class Field
   end
   #バトルメイン表示
   def battle_now(hero,enemy,field,merchant,first,diff_level)
+    #あらゆる状態をリセット
+    hero.limit_turn = 12
+    hero.status = 0
+    #攻撃力リセット
+    hero.power = hero.origin_power
+    #防御リセット
+    hero.def = hero.before_def
+    #回避リセット
+    if hero.status == 2
+      hero.avoid = 10
+      hero.def -= $up_def.to_i
+      hero.before_def = hero.def
+    end
+    if hero.is_escaped != true && first != true && field.crt_enemy == 1 #逃げたときは経験値が入らない
+      field.finished_battle(hero,enemy,field)
+      Window.update
+      field.exp_calc(hero,enemy,field)
+    end
+    field.select_next(hero,enemy,field,first)
+    first = nil
+    field.new_battle
+    #debug(強制魔王登場)
+    #enemy.bossflag = true
+    #
+    enemy.set_enemy
+    enemy.set_status(diff_level,hero,field)
+    #「～」が現れた！
+    field.entry_enemy(hero,enemy,field)
+  
+    #debug
+    #enemy.hp = 1
+    #enemy.power = 35
+      
     Window.loop do
-    
-      if enemy.hp <= 0
-        #あらゆる状態をリセット
-        hero.limit_turn = 12
-        hero.status = 0
-        #攻撃力リセット
-        hero.power = hero.origin_power
-        #防御リセット
-        hero.def = hero.before_def
-        #回避リセット
-        if hero.status == 2
-          hero.avoid = 10
-          hero.def -= $up_def.to_i
-          hero.before_def = hero.def
-        end
-        if hero.is_escaped != true && first != true && field.crt_enemy == 1 #逃げたときは経験値が入らない
-          field.finished_battle(hero,enemy,field)
-          Window.update
-          field.exp_calc(hero,enemy,field)
-        end
-        field.select_next(hero,enemy,field,first)
-        first = nil
-        if field.crt_enemy == 1 #敵
-          field.new_battle
-          #debug(強制魔王登場)
-          #enemy.bossflag = true
-          #
-          enemy.set_enemy
-          enemy.set_status(diff_level,hero,field)
-          #「～」が現れた！
-          field.entry_enemy(hero,enemy,field)
-        elsif field.crt_enemy == 2 #商人
-          #商品リセット
-          merchant.set_things(hero,enemy,field)
-        end
-      end
-  
-      #debug
-      #enemy.hp = 1
-      #enemy.power = 35
-  
       #バトルなら
       if field.crt_enemy == 1
         #速度比較
@@ -736,12 +728,33 @@ class Field
           end
         end
   
+        if enemy.hp <= 0
+          #あらゆる状態をリセット
+          hero.limit_turn = 12
+          hero.status = 0
+          #攻撃力リセット
+          hero.power = hero.origin_power
+          #防御リセット
+          hero.def = hero.before_def
+          #回避リセット
+          if hero.status == 2
+            hero.avoid = 10
+            hero.def -= $up_def.to_i
+            hero.before_def = hero.def
+          end
+          if hero.is_escaped != true && first != true && field.crt_enemy == 1 #逃げたときは経験値が入らない
+            field.finished_battle(hero,enemy,field)
+            Window.update
+            field.exp_calc(hero,enemy,field)
+          end
+          if Input.mousePush?(M_LBUTTON)
+            return
+          end
+        end
+
         #ターンを進める
         field.turn_cnt(hero,enemy,field)
-  
-      elsif field.crt_enemy == 2 #商人
-        #表示
-        merchant.print_merchant(hero,enemy,field)
+
       end
     end
   end
@@ -1975,6 +1988,7 @@ enemy = Enemy.new
 merchant = Merchant.new
 
 Window.loop do
+  #Window.update
   #タイトル画面
   Window.loop do
 
@@ -2225,5 +2239,9 @@ Window.loop do
   #ゲームクリア系はこの辺に入れてほしい
 
   #
+
+  #画面ちらつき防止策(剣心が画像を変更する予定)
+  title_img = Image.load("images/タイトル.jpg")
+  Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
 
 end
