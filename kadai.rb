@@ -1358,7 +1358,7 @@ class Enemy
     @speed = 10 + (rand(1..5) * @type) + (stage_level - 1)
     #経験値
     all_status = @hp + @power + @def + @brain + @speed
-    @exp = rand(1..10) + (@type * 15) + ((stage_level - 1) * 15) + (all_status * 0.3)
+    @exp = (rand(1..10) + (@type * 15) + ((stage_level - 1) * 15) + (all_status * 0.3)) * 2
     if field.enemy_level == 0
       @exp = @exp/5
     elsif field.enemy_level == 1
@@ -1700,7 +1700,7 @@ class Merchant
       x = Input.mouse_pos_x  # マウスカーソルのx座標
       y = Input.mouse_pos_y  # マウスカーソルのy座標
       #マウス座標表示
-      Window.draw_font(100, 350, "x : #{x}, y : #{y}", merchant_font,color:[255,0,0,0],z:10)
+      #Window.draw_font(100, 350, "x : #{x}, y : #{y}", merchant_font,color:[255,0,0,0],z:10)
       #商品表示
       for i in 0..1 #縦2つ
         for j in 0..2 #横3つ
