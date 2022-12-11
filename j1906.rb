@@ -2085,6 +2085,95 @@ end
 
 #キャラ選択
 def chara_choice
+   #選択画面
+   Window.loop do
+
+    #背景を描画
+    #Window.draw_morph(0,0,1024,0,1024,768,0,768,castle_back)
+
+    #下の枠
+    Window.draw_box_fill(80, 580, 946, 730, C_WHITE, z=0)
+
+    #キャラの顔
+    Window.draw_morph(80,80,280,80,280,280,80,280,woman1_normal)
+    Window.draw_morph(420,80,620,80,620,280,430,280,woman2_normal)
+    Window.draw_morph(760,80,960,80,960,280,760,280,woman3_normal)
+    Window.draw_morph(80,350,280,350,280,550,80,550,man1_normal)
+    Window.draw_morph(420,350,620,350,620,550,430,550,man2_normal)
+    Window.draw_morph(760,350,960,350,960,550,760,550,man3_normal)
+
+    #マウス座標取得
+    x = Input.mouse_pos_x  # マウスカーソルのx座標
+    y = Input.mouse_pos_y  # マウスカーソルのy座標
+ 
+    #マウス座標表示
+    #Window.draw_font(100, 100, "x : #{x}, y : #{y}", font) 
+
+    #カーソルが合った場合
+    if x >= 80 && x <= 280 && y >= 80 && y <= 280 #左上
+      Window.draw_font(110, 600, "【天使】", intro_font, color:[255,0,0], z:1)
+      Window.draw_font(110, 640, "ターンごとに一定確率でHPを回復できます。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "ステータスのバランスが良く、初心者向きです。", intro_font, color:[0,0,0], z:3)
+      Window.draw_morph(80,80,280,80,280,280,80,280,red_frame)
+      if Input.mousePush?(M_LBUTTON)
+        is_select_num = 0 #天使
+        break
+      end
+    elsif x >= 420 && x <= 620 && y >= 80 && y <= 280 #上段真ん中
+      Window.draw_font(110, 600, "【迷い人】", intro_font, color:[255,0,0], z:1)
+      Window.draw_font(110, 640, "回避確率が非常に高く、防御力が高めです。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "攻撃はやや低めのため、序盤は苦戦するかもしれません。", intro_font, color:[0,0,0], z:3)
+      Window.draw_morph(420,80,620,80,620,280,430,280,red_frame)
+      if Input.mousePush?(M_LBUTTON)
+        is_select_num = 1 #迷い人
+        break
+      end
+    elsif x >= 760 && x <= 960 && y >= 80 && y <= 280 #右上
+      Window.draw_font(110, 600, "【魔法研究者】", intro_font, color:[255,0,0], z:1)
+      Window.draw_font(110, 640, "MPと頭脳がとても高く、魔法に特化しています。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "その分、物理的な攻撃には弱いので、注意が必要です。", intro_font, color:[0,0,0], z:3)
+      Window.draw_morph(760,80,960,80,960,280,760,280,red_frame)
+      if Input.mousePush?(M_LBUTTON)
+        is_select_num = 2 #魔法研究者
+        break
+      end
+    elsif x >= 80 && x <= 280 && y >= 350 && y <= 550 #左下
+      Window.draw_font(110, 600, "【勇者】", intro_font, color:[255,0,0], z:1)
+      Window.draw_font(110, 640, "クリティカル率が非常に高く、攻撃力も高いです。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "ステータスはやや攻撃寄りですが、バランス型です。", intro_font, color:[0,0,0], z:3)
+      Window.draw_morph(80,350,280,350,280,550,80,550,red_frame)
+      if Input.mousePush?(M_LBUTTON)
+        is_select_num = 3 #勇者
+        break
+      end
+    elsif x >= 420 && x <= 620 && y >= 350 && y <= 550 #下段真ん中
+      Window.draw_font(110, 600, "【信仰者】", intro_font, color:[255,0,0], z:1)
+      Window.draw_font(110, 640, "神からの啓示で、先制を取りやすくなります。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "また、お金のドロップ量が比較的高めに設定されています。", intro_font, color:[0,0,0], z:3)
+      Window.draw_morph(420,350,620,350,620,550,430,550,red_frame)
+      if Input.mousePush?(M_LBUTTON)
+        is_select_num = 4 #信仰者
+        break
+      end
+    elsif x >= 760 && x <= 960 && y >= 350 && y <= 550 #右下
+      Window.draw_font(110, 600, "【旅人】", intro_font, color:[255,0,0], z:1)
+      Window.draw_font(110, 640, "長年の討伐経験から、経験値の取得率が高くなっています。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "ただし、初期ステータスは低めに設定されています。", intro_font, color:[0,0,0], z:3)
+      Window.draw_morph(760,350,960,350,960,550,760,550,red_frame)
+      if Input.mousePush?(M_LBUTTON)
+        is_select_num = 5 #旅人
+        break
+      end
+    else #デフォルト
+      Window.draw_font(110, 600, "【キャラ選択】", intro_font, color:[255,0,0], z:1)
+      Window.draw_font(110, 640, "戦闘中のキャラの見た目を選択できます。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "キャラには固有の役職と能力があり、様々な作戦を取ることができます。", intro_font, color:[0,0,0], z:3)
+    end
+
+  end
+
+  #主人公タイプ設定
+  hero.set_hero_level(is_select_num)
 
 end
 
@@ -2207,6 +2296,7 @@ Window.loop do
         end
     end
     output_limit(clock)
-    move(judge_frame,judge_frame_in,clock)
+    chara_choice
+    #move(judge_frame,judge_frame_in,clock)
     Window.draw_alpha(50,30, frame, 128)
 end
