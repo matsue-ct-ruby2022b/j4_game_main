@@ -1022,6 +1022,45 @@ class Hero
         end
       end
     end
+    #敵固有スキル
+    if enemy.type == 2 #魔王
+        Window.loop do
+          #背景を描画
+          if enemy.type == 2
+            title_img = Image.load("images/魔王城.png")
+          else
+            title_img = Image.load("images/タイトル.jpg")
+          end
+          Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
+          #敵を描画
+          enemy.print_enemy
+          #バトル枠表示
+          field.print_battle(hero,enemy,field)
+          #マウス座標取得
+          x = Input.mouse_pos_x  # マウスカーソルのx座標
+          y = Input.mouse_pos_y  # マウスカーソルのy座標
+          #枠表示
+          Window.draw_box_fill(230,  320, 780, 400, C_YELLOW, z=8) #大枠
+          Window.draw_box_fill(235,  325, 775, 395, C_BLACK, z=9) #内枠    
+          #表示
+          font = Font.new(32) #MS明朝
+          title_font = Font.new(40)
+          intro_font = Font.new(25)
+          print_font = Font.new(20)
+          #HP残量でセリフ変化
+          if field.turn == 1
+            Window.draw_font(310,350,"ここまで辿りつく輩がいるとはのう・・・", intro_font, color:[255,255,255,255],z:16)
+          elsif hero.hp < (hero.hp_max * 0.2) #20%を下回ったら
+            Window.draw_font(410,350,"やすらかに眠れ", intro_font, color:[255,255,255,255],z:16)
+          else
+            Window.draw_font(390,350,"まだまだこれから！", intro_font, color:[255,255,255,255],z:16)
+          end
+          #クリックしたら
+          if Input.mousePush?(M_LBUTTON)
+           break 
+          end
+        end
+    end
   end
   #自分のターン
   def my_turn(hero,enemy,field)
@@ -2132,7 +2171,8 @@ Window.loop do
     end
 
     #debug
-    enemy.hp = 1
+    #enemy.hp = 1
+    #enemy.power = 35
 
     #バトルなら
     if field.crt_enemy == 1
