@@ -659,6 +659,92 @@ class Field
       field.crt_enemy = 1 #敵
     end
   end
+  #バトルメイン表示
+  def battle_now(hero,enemy,field,merchant,first,diff_level)
+    Window.loop do
+    
+      if enemy.hp <= 0
+        #あらゆる状態をリセット
+        hero.limit_turn = 12
+        hero.status = 0
+        #攻撃力リセット
+        hero.power = hero.origin_power
+        #防御リセット
+        hero.def = hero.before_def
+        #回避リセット
+        if hero.status == 2
+          hero.avoid = 10
+          hero.def -= $up_def.to_i
+          hero.before_def = hero.def
+        end
+        if hero.is_escaped != true && first != true && field.crt_enemy == 1 #逃げたときは経験値が入らない
+          field.finished_battle(hero,enemy,field)
+          Window.update
+          field.exp_calc(hero,enemy,field)
+        end
+        field.select_next(hero,enemy,field,first)
+        first = nil
+        if field.crt_enemy == 1 #敵
+          field.new_battle
+          #debug(強制魔王登場)
+          #enemy.bossflag = true
+          #
+          enemy.set_enemy
+          enemy.set_status(diff_level,hero,field)
+          #「～」が現れた！
+          field.entry_enemy(hero,enemy,field)
+        elsif field.crt_enemy == 2 #商人
+          #商品リセット
+          merchant.set_things(hero,enemy,field)
+        end
+      end
+  
+      #debug
+      #enemy.hp = 1
+      #enemy.power = 35
+  
+      #バトルなら
+      if field.crt_enemy == 1
+        #速度比較
+        if hero.speed >= enemy.speed #自分が先制
+          #ターン表示
+          field.print_turn(hero,enemy,field)
+          #固有
+          hero.origin_skill(hero,enemy,field)
+          #自分のターン
+          hero.my_turn(hero,enemy,field)
+          #継続ターン表示調整
+          hero.limit_turn += 1
+          #敵の行動
+          if enemy.hp > 0
+            enemy.calc_damage(hero,enemy,field)
+          end
+          #調整
+          hero.limit_turn -= 1
+        else #相手の先制
+          #ターン表示
+          field.print_turn(hero,enemy,field)
+          #固有
+          hero.origin_skill(hero,enemy,field)
+          #敵の行動
+          if enemy.hp > 0
+            enemy.calc_damage(hero,enemy,field)
+          end
+          #自分のターン
+          if enemy.hp > 0 #反撃で倒せる場合があるため
+            hero.my_turn(hero,enemy,field)
+          end
+        end
+  
+        #ターンを進める
+        field.turn_cnt(hero,enemy,field)
+  
+      elsif field.crt_enemy == 2 #商人
+        #表示
+        merchant.print_merchant(hero,enemy,field)
+      end
+    end
+  end
 end
 
 #主人公
@@ -2134,89 +2220,6 @@ Window.loop do
   Window.update
 
   #メインループ
-  Window.loop do
-    
-    if enemy.hp <= 0
-      #あらゆる状態をリセット
-      hero.limit_turn = 12
-      hero.status = 0
-      #攻撃力リセット
-      hero.power = hero.origin_power
-      #防御リセット
-      hero.def = hero.before_def
-      #回避リセット
-      if hero.status == 2
-        hero.avoid = 10
-        hero.def -= $up_def.to_i
-        hero.before_def = hero.def
-      end
-      if hero.is_escaped != true && first != true && field.crt_enemy == 1 #逃げたときは経験値が入らない
-        field.finished_battle(hero,enemy,field)
-        Window.update
-        field.exp_calc(hero,enemy,field)
-      end
-      field.select_next(hero,enemy,field,first)
-      first = nil
-      if field.crt_enemy == 1 #敵
-        field.new_battle
-        #debug(強制魔王登場)
-        #enemy.bossflag = true
-        #
-        enemy.set_enemy
-        enemy.set_status(diff_level,hero,field)
-        #「～」が現れた！
-        field.entry_enemy(hero,enemy,field)
-      elsif field.crt_enemy == 2 #商人
-        #商品リセット
-        merchant.set_things(hero,enemy,field)
-      end
-    end
-
-    #debug
-    #enemy.hp = 1
-    #enemy.power = 35
-
-    #バトルなら
-    if field.crt_enemy == 1
-      #速度比較
-      if hero.speed >= enemy.speed #自分が先制
-        #ターン表示
-        field.print_turn(hero,enemy,field)
-        #固有
-        hero.origin_skill(hero,enemy,field)
-        #自分のターン
-        hero.my_turn(hero,enemy,field)
-        #継続ターン表示調整
-        hero.limit_turn += 1
-        #敵の行動
-        if enemy.hp > 0
-          enemy.calc_damage(hero,enemy,field)
-        end
-        #調整
-        hero.limit_turn -= 1
-      else #相手の先制
-        #ターン表示
-        field.print_turn(hero,enemy,field)
-        #固有
-        hero.origin_skill(hero,enemy,field)
-        #敵の行動
-        if enemy.hp > 0
-          enemy.calc_damage(hero,enemy,field)
-        end
-        #自分のターン
-        if enemy.hp > 0 #反撃で倒せる場合があるため
-          hero.my_turn(hero,enemy,field)
-        end
-      end
-
-      #ターンを進める
-      field.turn_cnt(hero,enemy,field)
-
-    elsif field.crt_enemy == 2 #商人
-      #表示
-      merchant.print_merchant(hero,enemy,field)
-    end
-
-  end
+  field.battle_now(hero,enemy,field,merchant,first,diff_level)
 
 end
