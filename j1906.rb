@@ -1,33 +1,40 @@
 
 require 'dxruby'
 
-#ƒXƒg[ƒŠ[
-@font=Font.new(SIZE,fontname="MS –¾’©")
+#åˆæœŸå€¤
+HEIGHT=1024
+WIDTH=761
+
+TITLE=50
+SIZE=20
+
+#ã‚¹ãƒˆãƒ¼ãƒªãƒ¼
+@font=Font.new(SIZE,fontname="MS æ˜æœ")
 
 @story=[
     [
-        "‚ ‚¢‚¤‚¦‚¨",
-        "‚ ‚¢‚¤‚¦‚¨",
-        "‚ ‚¢‚¤‚¦‚¨",
-        "‚ ‚¢‚¤‚¦‚¨",
+        "ã‚ã„ã†ãˆãŠ",
+        "ã‚ã„ã†ãˆãŠ",
+        "ã‚ã„ã†ãˆãŠ",
+        "ã‚ã„ã†ãˆãŠ",
     ],
     [
-        "‚©‚«‚­‚¯‚±",
-        "‚©‚«‚­‚¯‚±",
-        "‚©‚«‚­‚¯‚±",
-        "‚©‚«‚­‚¯‚±",
+        "ã‹ããã‘ã“",
+        "ã‹ããã‘ã“",
+        "ã‹ããã‘ã“",
+        "ã‹ããã‘ã“",
     ],
     [
-        "‚³‚µ‚·‚¹‚»",
-        "‚³‚µ‚·‚¹‚»",
-        "‚³‚µ‚·‚¹‚»",
-        "‚³‚µ‚·‚¹‚»",
+        "ã•ã—ã™ã›ã",
+        "ã•ã—ã™ã›ã",
+        "ã•ã—ã™ã›ã",
+        "ã•ã—ã™ã›ã",
     ],
     [
-        "‚½‚¿‚Â‚Ä‚Æ",
-        "‚½‚¿‚Â‚Ä‚Æ",
-        "‚½‚¿‚Â‚Ä‚Æ",
-        "‚½‚¿‚Â‚Ä‚Æ",
+        "ãŸã¡ã¤ã¦ã¨",
+        "ãŸã¡ã¤ã¦ã¨",
+        "ãŸã¡ã¤ã¦ã¨",
+        "ãŸã¡ã¤ã¦ã¨",
     ],
 ]
 
@@ -43,32 +50,29 @@ def scene(turn,num)
     else 
         true
     end
-
 end
 
 def judge
-    Window.draw_font(50,50),"¡‚©‚ç‰½‚ğ‚µ‚æ‚¤‚©",@font,z:5)    
+    Window.draw_font(50,50,"ä»Šã‹ã‚‰ä½•ã‚’ã—ã‚ˆã†ã‹",@font,z:5)    
 end
 
 def live
 
 end
 
-#main•¶
+#mainæ–‡
 story_num=0
 page=0
 Window.loop do
        if !scene(page,story_num)
             page+=1
-            sroty_num=0
+            story_num=0
         else
             if Input.key_push?(K_RETURN)
-                sroty_num+=1
+                story_num+=1
             elsif Input.key_push?(K_LEFT)
                 page-=1
-                sroty_num=0
+                story_num=0
             end
         end
-    end
-
 end
