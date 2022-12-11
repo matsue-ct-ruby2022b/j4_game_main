@@ -28,7 +28,7 @@ http://www.humblesoft.com/wiki/?GitHub%E3%81%8B%E3%82%89%E3%83%80%E3%82%A6%E3%83
 https://qiita.com/gosairei1207/items/701b7ae494b96db0f9a1
 <br>
 <br>
-・その他参考「Git masterブランチの変更」
+・その他参考「Git masterブランチの変更」<br>
 https://qiita.com/hokorobi/items/b884b8e854596a124159
 <br>
 <br>
@@ -36,11 +36,11 @@ https://qiita.com/hokorobi/items/b884b8e854596a124159
 https://www.bannerkoubou.com/photoeditor/transparent/
 <br>
 <br>
-・タイトルロゴ自動作成サイト
+・タイトルロゴ自動作成サイト<br>
 https://www.shopify.com/jp/tools/logo-maker/onboarding/select-logo
 <br>
 <br>
-・画像オンライン検索サイト
+・画像オンライン検索サイト<br>
 https://smallseotools.com/ja/reverse-image-search/
 <br>
 <br>
