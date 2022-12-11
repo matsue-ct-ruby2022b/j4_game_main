@@ -711,6 +711,10 @@ class Field
           if enemy.hp > 0
             enemy.calc_damage(hero,enemy,field)
           end
+          #敵の行動で死ぬ場合
+          if hero.hp <= 0
+            return
+          end
           #調整
           hero.limit_turn -= 1
         else #相手の先制
@@ -721,6 +725,10 @@ class Field
           #敵の行動
           if enemy.hp > 0
             enemy.calc_damage(hero,enemy,field)
+          end
+          #敵の行動で死ぬ場合
+          if hero.hp <= 0
+            return
           end
           #自分のターン
           if enemy.hp > 0 #反撃で倒せる場合があるため
@@ -1406,6 +1414,14 @@ class Hero
     else #発動可能
       @mp += num
       return true
+    end
+  end
+  #HP残量チェック
+  def check_hp()
+    if @hp <= 0
+      return true
+    else
+      return false
     end
   end
 end
@@ -2236,8 +2252,11 @@ Window.loop do
   #メインループ
   field.battle_now(hero,enemy,field,merchant,first,diff_level)
 
-  #ゲームクリア系はこの辺に入れてほしい
+  #この辺に入れてほしい
+  if hero.check_hp() == true
+    #ゲームオーバー処理
 
+  end
   #
 
   #画面ちらつき防止策(剣心が画像を変更する予定)
