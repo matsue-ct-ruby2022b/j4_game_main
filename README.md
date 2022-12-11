@@ -44,9 +44,10 @@ https://www.shopify.com/jp/tools/logo-maker/onboarding/select-logo
 https://smallseotools.com/ja/reverse-image-search/
 <br>
 <br>
+<br>
+<br>
 ※本Gitリポジトリは、学校の課題に際して作成したものです。<br>
 　実在する団体、事件等とは一切関わりはありません。<br>
 　また、本リポジトリ上のプログラムを実行することでの不具合、エラー等につきましては<br>
 　一切責任を負いませんので、あらかじめご了承ください。<br>
-<br>
 <br>
