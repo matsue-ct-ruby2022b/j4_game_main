@@ -62,6 +62,8 @@ chara_pick = Image.load("images/キャラ選択_背景.jpg")
 red_frame = Image.load("images/frame.png")
 #バトル下枠背景
 battle_frame = Image.load("images/battle_back.png")
+#魔王戦背景
+boss_frame = Image.load("images/魔王城.png")
 #女性キャラ1
 woman1_normal = Image.load("images/chara/woman1/face_normal.png")
 woman1_pinchi = Image.load("images/chara/woman1/face_pinchi.png")
@@ -319,6 +321,7 @@ class Field
         end
       end
     end
+=begin
     #左上表示枠
     Window.draw_box_fill(20,  20, 170, 170, C_WHITE, z=2)
     Window.draw_box_fill(25,  25, 165, 165, C_BLACK, z=3)
@@ -332,13 +335,18 @@ class Field
     elsif field.next_enemy == 2 #商人
         Window.draw_morph(45,60,145,60,145,160,45,160,merchant_img,z:5)
     end
+=end
   end
   #「敵を倒した！」表示
   def finished_battle(hero,enemy,field)
     flag = nil
     Window.loop do
       #背景を描画
-      title_img = Image.load("images/タイトル.jpg")
+      if enemy.type == 2
+        title_img = Image.load("images/魔王城.png")
+      else
+        title_img = Image.load("images/タイトル.jpg")
+      end
       Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
       #敵を描画
       #enemy.print_enemy
@@ -376,7 +384,11 @@ class Field
   end
   #経験値計算
   def exp_calc(hero,enemy,field)
-    title_img = Image.load("images/タイトル.jpg")
+    if enemy.type == 2
+      title_img = Image.load("images/魔王城.png")
+    else
+      title_img = Image.load("images/タイトル.jpg")
+    end
     exp_cnt = 0
     #ラプソディ用
     hero.power = hero.origin_power
@@ -507,7 +519,11 @@ class Field
     print_font = Font.new(26)
     turn_font = Font.new(18)
     #背景を描画
-    title_img = Image.load("images/タイトル.jpg")
+    if enemy.type == 2
+      title_img = Image.load("images/魔王城.png")
+    else
+      title_img = Image.load("images/タイトル.jpg")
+    end
     Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
     #敵を描画
     enemy.print_enemy
@@ -536,6 +552,8 @@ class Field
     man3_normal = Image.load("images/chara/man3/face_normal.png")
     #敵アイコン
     enemy_goblin_face = Image.load("images/enemy_face/face_1.png")
+    #敵アイコン
+    enemy_king_face = Image.load("images/enemy_face/face_2.png")
     #アイコン表示
     if hero.speed >= enemy.speed
       Window.draw_font(425,180,"#{trn}  ターン目", print_font,color:[255,255,255,255],z:10)
@@ -558,6 +576,8 @@ class Field
       #敵アイコン表示
       if enemy.type == 1
         Window.draw_morph(545,258,615,258,615,328,545,328,enemy_goblin_face,z:15)
+      elsif enemy.type == 2
+        Window.draw_morph(545,258,615,258,615,328,545,328,enemy_king_face,z:15)
       end
     elsif hero.speed < enemy.speed
       Window.draw_font(425,180,"#{trn}  ターン目", print_font,color:[255,255,255,255],z:10)
@@ -567,6 +587,8 @@ class Field
       #敵アイコン表示
       if enemy.type == 1 && enemy.hp > 0
         Window.draw_morph(370,258,440,258,440,328,370,328,enemy_goblin_face,z:15)
+      elsif enemy.type == 2
+        Window.draw_morph(370,258,440,258,440,328,370,328,enemy_king_face,z:15)
       end
       #自分アイコン表示
       if hero.hero_type == 0
@@ -594,7 +616,11 @@ class Field
     entry_font = Font.new(26)
     Window.loop do
       #背景を描画
-      title_img = Image.load("images/タイトル.jpg")
+      if enemy.type == 2
+        title_img = Image.load("images/魔王城.png")
+      else
+        title_img = Image.load("images/タイトル.jpg")
+      end
       Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
       #敵を描画
       enemy.print_enemy
@@ -888,7 +914,11 @@ class Hero
     print_time = 0
     Window.loop do
         #背景を描画
-        title_img = Image.load("images/タイトル.jpg")
+        if enemy.type == 2
+          title_img = Image.load("images/魔王城.png")
+        else
+          title_img = Image.load("images/タイトル.jpg")
+        end
         Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
         #敵を描画
         enemy.print_enemy
@@ -962,7 +992,11 @@ class Hero
         new_hp = hero.hp
         Window.loop do
           #背景を描画
-          title_img = Image.load("images/タイトル.jpg")
+          if enemy.type == 2
+            title_img = Image.load("images/魔王城.png")
+          else
+            title_img = Image.load("images/タイトル.jpg")
+          end
           Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
           #敵を描画
           enemy.print_enemy
@@ -1003,7 +1037,11 @@ class Hero
       #逃げたか
       hero.is_escaped = nil
       #背景を描画
-      title_img = Image.load("images/タイトル.jpg")
+      if enemy.type == 2
+        title_img = Image.load("images/魔王城.png")
+      else
+        title_img = Image.load("images/タイトル.jpg")
+      end
       Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
       #敵を描画
       enemy.print_enemy
@@ -1208,7 +1246,7 @@ class Hero
         end
       elsif x >= 183 && x <= 267 && y >= 665 && y <= 693 #にげる
         Window.draw_box(173, 655, 275, 703, C_WHITE, z=5)
-        if Input.mousePush?(M_LBUTTON)
+        if Input.mousePush?(M_LBUTTON) && enemy.type != 2
           enemy.hp = 0 #敵を消去
           hero.is_escaped = true #逃げた
           break
@@ -1299,11 +1337,11 @@ class Enemy
     #もし魔王なら
     if @type == 2
       @hp = @hp * 30
-      @hp_max = @hp * 30
-      @power = @power * 15
+      @hp_max = @hp * 25
+      @power = @power * 12
       @def = @def * 5
-      @brain = @brain * 15
-      @speed = @speed * 20
+      @brain = @brain * 12
+      @speed = @speed * 10
       @exp = @exp * 1000000
       @money = @money * 1000000
     end
@@ -1387,7 +1425,11 @@ class Enemy
     print_time = 0
     Window.loop do
         #背景を描画
-        title_img = Image.load("images/タイトル.jpg")
+        if enemy.type == 2
+          title_img = Image.load("images/魔王城.png")
+        else
+          title_img = Image.load("images/タイトル.jpg")
+        end
         Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
         #敵を描画
         enemy.print_enemy
@@ -1440,7 +1482,11 @@ class Enemy
       enemy.hp -= dmg 
       Window.loop do
         #背景を描画
-        title_img = Image.load("images/タイトル.jpg")
+        if enemy.type == 2
+          title_img = Image.load("images/魔王城.png")
+        else
+          title_img = Image.load("images/タイトル.jpg")
+        end
         Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
         #敵を描画
         enemy.print_enemy
@@ -1517,7 +1563,11 @@ class Merchant
     is_heal = nil
     Window.loop do
       #背景を描画
-      title_img = Image.load("images/タイトル.jpg")
+      if enemy.type == 2
+        title_img = Image.load("images/魔王城.png")
+      else
+        title_img = Image.load("images/タイトル.jpg")
+      end
       Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
       #商人を描画
       merchant_img = Image.load("images/chara/merchant/stand.png")
@@ -1574,7 +1624,11 @@ class Merchant
       #リセット
       effect = nil
       #背景を描画
-      title_img = Image.load("images/タイトル.jpg")
+      if enemy.type == 2
+        title_img = Image.load("images/魔王城.png")
+      else
+        title_img = Image.load("images/タイトル.jpg")
+      end
       Window.draw_morph(0,0,1024,0,1024,768,0,768,title_img)
       #商人を描画
       merchant_img = Image.load("images/chara/merchant/stand.png")
@@ -2076,6 +2130,9 @@ Window.loop do
         merchant.set_things(hero,enemy,field)
       end
     end
+
+    #debug
+    enemy.hp = 1
 
     #バトルなら
     if field.crt_enemy == 1
