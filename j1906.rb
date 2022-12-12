@@ -1,4 +1,5 @@
 
+#https://github.com/matsue-ct-ruby2022b/j4_game_main.git
 require 'dxruby'
 
 #初期値
@@ -7,12 +8,12 @@ Window.width = 1024
 Window.height = 768
 
 TITLE=50
-SIZE=20
+SIZE=22
 
 @font=Font.new(SIZE,fontname="MS 明朝")
 
 #枠
-frame=Image.new(924,700,[100,0,0])
+frame=Image.new(924,700,[0,0,0])
 
 judge_frame=Image.new(500,150,[255,255,255])
 judge_frame_in=Image.new(480,130,[0,0,0])
@@ -21,9 +22,9 @@ judge_frame_in=Image.new(480,130,[0,0,0])
 class Support_chara
     attr_accessor :name, :party, :love
     def initialize(key)
-        @name=key  #キャラクター名
+        @name=key       #キャラクター名
         @party=false    #パーティに入っているか(true:入っている,false:入っていない)
-        @love=0     #好感度
+        @love=0         #好感度
     end
 end
 
@@ -60,32 +61,102 @@ class Story
         #序章(王様視点)
         [
           [
-            "あいうえお",
-            "あいうえお",
-            "あいうえお",
-            "あいうえお",
+            "真っ暗な道を独り走っている。まるで何かから逃げているように。",
+            "心の内は,純度99%の絶望と1%の恐怖という不純物しかなかった。",
+            "きっと今、私の顔はとても国民には見せられないものになっているだろう。",
+            "それでも走り続けている。\n\n\n",
+            "突然、闇の中から漏れ出したような光が前方に現れた。",
+            "私はその光に向けて走り出した。",
+            "ただ、光に集まる虫のように、本能的に走り出していた。",
+            "そして、その光の中に飛び込んだ。",
           ],
           [
-            "かきくけこ",
-            "かきくけこ",
-            "かきくけこ",
-            "かきくけこ",
+            "そこで私の目に映ったのは、\n\n崩壊した城と、血まみれで倒れたたくさんの兵士や国民だった。",
+            "\n\nおそらく皆死んでいるのだろう。",
+            "\n\n\n???:「王よ、気分はどうだ。」",
+            "\n\n\n\n後ろから何かに話しかけられた。",
+            "\n\n\n\nしかし振り向けない。恐怖で体が動かない。",
+            "\n\n\n\nそれは、金縛りなんて生易しいいものではなく、",
+            "\n\n\n\nまるで巨人の手にでも捕まってしまったように、\n\n「動かす」という意思すらないかのように。",
+            "\n\n\n\n\n\n\n???:「貴様や貴様の祖先が積み上げてきたものが、\n\nこの魔王の力で一瞬にして崩れた。その気分はどうだと聞いているのだ。」",
           ],
+          [
+            "魔王。",
+            "今こいつは自分のことを魔王といったのか。\n\n300年前に勇者が封印したとされている魔王が自分であると。",
+            "\n\n魔王:「はあ、、何も答える気はないか、、、、では死ね。」",
+            "\n\n\nグサッ",
+            "\n\n\n\n突然、私の目の前に巨大な刃の先が現れた。",
+          ],
+          [
+            "王:「うわああああああああああああ！！！！！！！！！！！！」",
+            "そこで目が覚めた。",
+            "執事:「王！？どうされたんですか？」",
+            "王:「夢か、、、」",
+            "安心と同時に大きな絶望に身を包まれた。寒いはずもないのに震えが止まらない。",
+            "しかし、絶望している場合ではない、\n\n今は王としてこれからの事態に向き合わなければならない。",
+            "\n\n王:「高、、、ランク、、冒、険者の、、、リストを、、、くれ。」",
+          ]
         ],
-        #キャラ選択
+        #魔王討伐依頼
         [
           [
-            "さしすせそ",
-            "さしすせそ",
-            "さしすせそ",
-            "さしすせそ",
+            "王:「お主には１週間後に現れる魔王を一人で魔王と戦ってもらう。」",
+            "私:「えっ！？えええええええええええええ！！！！！！！！！！！？？？？？？？？？？」",
+            "\n\n\nなんでこんなことになってしまったのか。経緯は一切知らない。",
+            "\n\n\nただ家でのんびりしてたら、城の兵士さんが招集状持って、「城に来てもらう」\n\nとか言ってくるから城に来ただけなのに。\n\nこの王様は「おはよう」とか何も言わずに、第一声にとんでもないこと言ってきやがった。",
           ],
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "私:「なんで私なんですか？強い人なんて私以外にもたくさんいるじゃないですか。」",
+            "王:「フィーリングだ。」",
+            "私:「え？」",
+            "王:「なんとなくお主だと思ったんじゃ。」",
+            "なんて言えばいいんだ。頭の中にツッコミと文句が1000個以上出てきて\n\n何を言えばいいかわからなくなってしまった。",
+            "\n\n\n私:「ていうかなんで私１人なんですか？\n\n魔王とかいうとんでもない奴は人類全員で挑むべきでしょう。」",
+            "\n\n\n\n\n王:「それなんだが。城にある書物を読んだところ、\n\n魔王の「孤独者」というスキルのせいで敵の数が多いほどステータスが強化されてしまうらしい。\n\nだから、サポートぐらいはできるだろうが戦闘はお主一人じゃないといけないんだ。」",
+            "\n\n\n\n\n\n\n\n\nなんでそこはそんな慎重に立ち回ってんだこいつ。人選ぶの適当なくせに。",
+            "",
           ],
+          [
+            "王:「あっ！！！ちなみに1週間ていうのは、、、」",
+            "私:「分かってるよ。あんたの予知夢が１週間後しか見れないからだろ。」",
+            "王:「あんたってなんだ、あんたって。私王様だぞ。あんたってなんだよ。」",
+            "おいおい、この人怒ってるよ。\n\nこれから魔王討伐とかいうとんでもない任務任せようとしてる人に無茶苦茶怒ってんだけど。",
+            "\n\n\n王:「とにかくお主には1週間後魔王と討伐してもらう。これは決定事項だ。」",
+          ],
+        ],
+        #魔王討伐をする
+        [
+          [
+            "私:「あーもう、分かりました。魔王討伐の任務引き受けます。」",
+            "王:「おー、そうかそうか。ではよろしく頼む。」",
+            "私:「その代わり、報酬は弾んでくださいね。」",
+            "王:「そりゃもちろん。この城の財宝を好きなだけ持っていけ。」",
+            "\n\n魔王討伐前に盗んでやろうかな、、、",
+            "\n\n\n\nともあれ、こうして私の魔王討伐までの1週間が始まった。",
+          ],
+        ],
+        #断る
+        [
+          [
+            "私:「お断りします。」",
+            "王:「えっ？」",
+            "\n\n王:「ちょっと待て、ちょっと待て。確かに無理難題を言っているのは分かる。\n\nだがそこを頼む。一生のお願いだから。なんでもするから。」",
+            "\n\n\n\n私:「・・・」",
+            "\n\n\n\nあれ？今なんでもって、、、、",
+          ]
+        ],
+        #雑談をする
+        [
+          [
+            "私:「そんなことより、最近家のポチがね更に大きくなって、、、」",
+            "王:「・・・」",
+            "私:「・・・」",
+            "王:「お主、今話逸らそうとしてない？」",
+            "\n\n視線が痛い。この視線で魔王ぐらい倒せるんじゃないか。",
+            "\n\n\n\n私:「してないですよ！！！！」",
+            "\n\n\n\n王:「第一、お主犬飼ってないよな」",
+            "\n\n\n\n私:「、、、、、、えへへ」",
+          ]
         ],
         #会話1(tanaka)
         [
@@ -184,8 +255,8 @@ class Story
     def scene(scenario,turn,num)
       pos_y=0
       scenario[turn][0..num].each_with_index do |n,i|
-        pos_y=50+i*(SIZE*2)
-        message("#{n}",50,pos_y,@font)    
+        pos_y=100+i*(SIZE*2)
+        message("#{n}",80,pos_y,@font)    
       end
       
       if scenario[turn][num]==nil
@@ -200,23 +271,35 @@ class Story
     end
 
     #キーボード入力確認
-    def tale(scene_num)
-        if (scene(@scenario[scene_num],@page,@story_num)==0)
+    def tale(scene_num,picture)
+        if scene(@scenario[scene_num],@page,@story_num)==0
           @page+=1
           @story_num=0
-        elsif(scene(@scenario[scene_num],@page,@story_num)==1)
+        elsif scene(@scenario[scene_num],@page,@story_num)==1
           if Input.key_push?(K_RETURN)
               @story_num+=1
           elsif Input.key_push?(K_LEFT)
               @page-=1
               @story_num=0
           end
-        elsif(scene(@scenario[scene_num],@page,@story_num)==2)
+        elsif scene(@scenario[scene_num],@page,@story_num)==2
           @page=0
           @story_num=0
-          return        
+
+          if scene_num==3 || scene_num==4
+            $progress=$progress
+            return 1
+          else 
+            $progress=$progress+1
+            return 0
+          end    
         end
-        
+
+        #背景を描画
+        if scene_num==0 && @page==3 || scene_num==1 || scene_num==2 || scene_num==3 || scene_num==4 
+          Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+        end
+
     end
 end
 
@@ -226,7 +309,7 @@ story=Story.new
 intro_font = Font.new(25)
 #画像登録
 class Picture
-attr_accessor :title_img,:title_name,:chara_pick,:castle_back,:red_frame,:battle_frame,:boss_frame,:woman1_normal,:woman1_pinchi,:woman1_tere,:woman2_normal,:woman2_pinchi,:woman3_normal,:woman3_pinchi,:man1_normal,:man1_pinchi,:man2_normal,:man2cls_pinchi,:man3_normal,:man3_pinchi,:enemy_goblin,:enemy_king,:nemy_goblin_face,:enemy_king_face 
+attr_accessor :title_img,:title_name,:chara_pick,:castle_back,:red_frame,:battle_frame,:boss_frame,:woman1_normal,:woman1_pinchi,:woman1_tere,:woman2_normal,:woman2_pinchi,:woman3_normal,:woman3_pinchi,:man1_normal,:man1_pinchi,:man2_normal,:man2cls_pinchi,:man3_normal,:man3_pinchi,:enemy_goblin,:enemy_king,:nemy_goblin_face,:enemy_king_face,:town_noon,:town_night 
 def initialize
 #タイトル画面背景
 @title_img = Image.load("images/タイトル.jpg")
@@ -270,6 +353,10 @@ boss_frame = Image.load("images/魔王城.png")
 @enemy_goblin_face = Image.load("images/enemy_face/face_1.png")
 #ボスアイコン
 @enemy_king_face = Image.load("images/enemy_face/face_2.png")
+#行動選択背景(昼)
+@town_noon = Image.load("images/town_noon.jpg")
+#行動選択背景(依る)
+@town_night = Image.load("images/town_night.jpg")
 end
 end
 
@@ -2252,15 +2339,15 @@ def chara_choice(hero,picture,intro_font)
       end
     else #デフォルト
       Window.draw_font(110, 600, "【キャラ選択】", intro_font, color:[255,0,0], z:1)
-      Window.draw_font(110, 640, "戦闘中のキャラの見た目を選択できます。", intro_font, color:[0,0,0], z:2)
-      Window.draw_font(110, 680, "キャラには固有の役職と能力があり、様々な作戦を取ることができます。", intro_font, color:[0,0,0], z:3)
+      Window.draw_font(110, 640, "冒険者の中から魔王討伐者を一人決めよう。", intro_font, color:[0,0,0], z:2)
+      #Window.draw_font(110, 680, "キャラには固有の役職と能力があり、様々な作戦を取ることができます。", intro_font, color:[0,0,0], z:3)
     end
 
   end
 
   #主人公タイプ設定
   hero.set_hero_level(is_select_num)
-
+  $progress=$progress+1
 end
 
 #選択肢
@@ -2268,7 +2355,6 @@ def judge(a,b,c,judge_frame,judge_frame_in)
     branch=0
         x = Input.mouse_pos_x  
         y = Input.mouse_pos_y  
-        message("今から何をしようか",50,50,@font)
         if x>=260 && x<=760
             if y>=180 && y<=330
             Window.draw(260,180, judge_frame,z=0)
@@ -2300,7 +2386,7 @@ def judge(a,b,c,judge_frame,judge_frame_in)
 end
 
 #行動選択
-def move(judge_frame,judge_frame_in,clock)
+def move(judge_frame,judge_frame_in,clock,story)
     message("今から何をしようか",50,50,@font)
     branch=judge("バトル","ステータスツリー","会話",judge_frame,judge_frame_in)
         if branch == 1
@@ -2363,17 +2449,54 @@ def finish(clock)
     clock.now_day+=1
 end
 
+
+
 #メッセージ出力
 def message(mes,pos_x,pos_y,font)
     Window.draw_font(pos_x,pos_y,"#{mes}",font,z:5)    
 end
 
 #main文
+$progress=0
+branch=0
 Window.loop do
-  story.tale(0)
-  output_limit(clock)
-  move(judge_frame,judge_frame_in,clock)
-  Window.draw_alpha(50,30, frame, 128)
-end
+  if $progress==0
+    story.tale(0,picture)
+    Window.draw_alpha(50,30, frame, 128)
+  elsif $progress==1
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+    chara_choice(hero,picture,intro_font)
+  elsif $progress==2
+    story.tale(1,picture)
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+    Window.draw_alpha(50,30, frame, 128)
+  elsif $progress==3
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+    if branch==0
+      message("どうしよう？",450,80,@font)
+      branch=judge("魔王討伐に行く","断る","雑談をする",judge_frame,judge_frame_in)
+    end
 
-chara_choice(hero,picture,intro_font)
+    if branch==1
+      story.tale(2,picture)
+      Window.draw_alpha(50,30, frame, 128)
+    elsif branch==2
+      if story.tale(3,picture)==1
+        branch=0
+      end
+      Window.draw_alpha(50,30, frame, 128)
+    elsif branch==3
+      if story.tale(4,picture)==1
+        branch=0
+      end
+      Window.draw_alpha(50,30, frame, 128)
+    end
+    Window.draw_alpha(50,30, frame, 128)
+  elsif $progress==4
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+    move(judge_frame,judge_frame_in,clock,story)
+    output_limit(clock)
+    Window.draw_alpha(50,30, frame, 128)
+  end
+
+end
