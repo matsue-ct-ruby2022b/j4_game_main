@@ -9,7 +9,7 @@ http://momope8.blog67.fc2.com/blog-category-21.html
 <br>
 <br>
 ・各種敵キャラ「ゴブリン」「魔王」<br>
-(あとで探しときます by chissa0719)
+https://yurudora.com/tkool/
 <br>
 <br>
 ・キャラ選択画面背景「城」<br>
