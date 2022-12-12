@@ -25,38 +25,41 @@ class SkillTree
     end
 
     def initialize
-        #[影響を与えるステータス,変化値,必要なゴールド,x座標,y座標]
+        #スキルツリーのノード[影響を与えるステータス,変化値,必要なゴールド,x座標,y座標]
         @tree_nodes = [
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,100,1],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y],
-               ["hp",1,150,ROOT_X,ROOT_Y]
+               ["root",0,0,ROOT_X,ROOT_Y],#0
+
+               ["hp",20,100,ROOT_X-100,ROOT_Y-100],#1
+               ["hp",50,200,ROOT_X-100,ROOT_Y-200],#2
+               ["hp",120,500,ROOT_X-100,ROOT_Y-300],#3
+               ["hp",150,700,ROOT_X-200,ROOT_Y-300],#4
+               ["mp",30,150,ROOT_X-200,ROOT_Y-100],#5
+               ["mp",70,300,ROOT_X-300,ROOT_Y-200],#6
+               ["mp",200,700,ROOT_X-300,ROOT_Y-100],#7
+
+               ["pow",10,100,ROOT_X+100,ROOT_Y-100],#8
+               ["pow",30,200,ROOT_X+100,ROOT_Y-200],#9
+               ["pow",70,300,ROOT_X+100,ROOT_Y-300],#10
+               ["pow",100,500,ROOT_X+200,ROOT_Y-300],#11
+               ["bra",30,200,ROOT_X+200,ROOT_Y-100],#12
+               ["bra",70,300,ROOT_X+300,ROOT_Y-100],#13
+               ["bra",100,500,ROOT_X+300,ROOT_Y-200],#14
+
+               ["def",10,100,ROOT_X-100,ROOT_Y+100],#15
+               ["def",30,150,ROOT_X-200,ROOT_Y+100],#16
+               ["def",60,300,ROOT_X-300,ROOT_Y+100],#17
+               ["def",100,700,ROOT_X-300,ROOT_Y+200],#18
+               ["pow",20,150,ROOT_X-100,ROOT_Y+200],#19
+               ["pow",50,200,ROOT_X-100,ROOT_Y+300],#20
+               ["pow",50,200,ROOT_X-200,ROOT_Y+300],#21
+
+               ["spe",10,100,ROOT_X+100,ROOT_Y+100],#22
+               ["spe",20,150,ROOT_X+200,ROOT_Y+100],#23
+               ["spe",100,350,ROOT_X+300,ROOT_Y+100],#24
+               ["spe",200,700,ROOT_X+300,ROOT_Y+200],#25
+               ["def",10,150,ROOT_X+100,ROOT_Y+200],#26
+               ["def",30,150,ROOT_X+100,ROOT_Y+300],#27
+               ["def",60,300,ROOT_X+200,ROOT_Y+300]#28
             ]
         @root = nil
         @count = 0
@@ -119,6 +122,8 @@ class SkillTree
                 return return_node
             end
         end
+
+        return node
     end
 
     def open_node(n)
@@ -127,6 +132,10 @@ class SkillTree
     end
 end 
 
+def my_draw_image(x,y,image)#中心座標で表示
+    Window.draw(x-image.width/2,y-image.height/2,image)
+end
+
 tree = SkillTree.new()
 tree.init
 #tree.show(tree.root)
@@ -134,5 +143,22 @@ tree.init
 #node=tree.get_node(3)
 #puts "#{node.node_num},#{node.x},#{node.y},#{node.release_flag}"
 Window.loop do
+    x=Input.mouse_pos_x
+    y=Input.mouse_pos_y
     Window.draw_box_fill(800, 0, 1023, 767, C_WHITE, z=1)
+    Window.draw_font(850, 100, "「#{x},#{y}」", Font.new(22), color:C_BLACK, z:2)
+    NODE_MAX_NUM.times do |i|
+        node=tree.get_node(i)
+        node.children.each do |child|
+            #ノード間の線
+            Window.draw_line(node.x,node.y,child.x,child.y,C_WHITE)
+        end
+        #ノード
+        Window.draw_circle_fill(node.x,node.y,30,C_WHITE)
+        #文字
+        image=Image.new(50,50)
+        image.draw_font(10,10,"#{node.effected_status}",Font.new(20),C_BLACK)
+        my_draw_image(node.x,node.y,image)
+    end
+ 
 end
