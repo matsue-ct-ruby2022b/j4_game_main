@@ -9,6 +9,14 @@ Window.height = 768
 TITLE=50
 SIZE=20
 
+@font=Font.new(SIZE,fontname="MS 明朝")
+
+#枠
+frame=Image.new(924,700,[100,0,0])
+
+judge_frame=Image.new(500,150,[255,255,255])
+judge_frame_in=Image.new(480,130,[0,0,0])
+
 #サポートキャラ
 class Support_chara
     attr_accessor :name, :party, :love
@@ -45,57 +53,227 @@ class Story
         @scene_num=0 #シナリオ番号
         @page=0      #ページ番号
         @story_num=0 #文章番号
+        #文字設定
+        @font=Font.new(SIZE,fontname="MS 明朝")
+        #シナリオ
+        @scenario=[
+        #序章(王様視点)
+        [
+          [
+            "あいうえお",
+            "あいうえお",
+            "あいうえお",
+            "あいうえお",
+          ],
+          [
+            "かきくけこ",
+            "かきくけこ",
+            "かきくけこ",
+            "かきくけこ",
+          ],
+        ],
+        #キャラ選択
+        [
+          [
+            "さしすせそ",
+            "さしすせそ",
+            "さしすせそ",
+            "さしすせそ",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+        #会話1(tanaka)
+        [
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+        #会話2(tanaka)
+        [
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+        #会話1(suzuki)
+        [
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+        #会話2(suzuki)
+        [
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+        #会話1(魔王戦闘前)
+        [
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+        #会話2(魔王戦闘後)
+        [
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+      ]
+    end
+
+    #シナリオ
+    def scene(scenario,turn,num)
+      pos_y=0
+      scenario[turn][0..num].each_with_index do |n,i|
+        pos_y=50+i*(SIZE*2)
+        message("#{n}",50,pos_y,@font)    
+      end
+      
+      if scenario[turn][num]==nil
+        if scenario[turn+1]==nil
+          return 2
+        else
+          return 0
+        end
+      else 
+        return 1
+      end
+    end
+
+    #キーボード入力確認
+    def tale(scene_num)
+        if (scene(@scenario[scene_num],@page,@story_num)==0)
+          @page+=1
+          @story_num=0
+        elsif(scene(@scenario[scene_num],@page,@story_num)==1)
+          if Input.key_push?(K_RETURN)
+              @story_num+=1
+          elsif Input.key_push?(K_LEFT)
+              @page-=1
+              @story_num=0
+          end
+        elsif(scene(@scenario[scene_num],@page,@story_num)==2)
+          @page=0
+          @story_num=0
+          return        
+        end
+        
     end
 end
 
 story=Story.new
 
 ###############################社長クラス########################################################################################################################################################################
+intro_font = Font.new(25)
 #画像登録
+class Picture
+attr_accessor :title_img,:title_name,:chara_pick,:castle_back,:red_frame,:battle_frame,:boss_frame,:woman1_normal,:woman1_pinchi,:woman1_tere,:woman2_normal,:woman2_pinchi,:woman3_normal,:woman3_pinchi,:man1_normal,:man1_pinchi,:man2_normal,:man2cls_pinchi,:man3_normal,:man3_pinchi,:enemy_goblin,:enemy_king,:nemy_goblin_face,:enemy_king_face 
+def initialize
 #タイトル画面背景
-title_img = Image.load("images/タイトル.jpg")
+@title_img = Image.load("images/タイトル.jpg")
 #タイトル画像
-title_name = Image.load("images/logo.png")
+@title_name = Image.load("images/logo.png")
 #キャラ選択画面背景
-chara_pick = Image.load("images/キャラ選択_背景.jpg")
-castle_back = Image.load("images/castle_back.jpg")
+@chara_pick = Image.load("images/キャラ選択_背景.jpg")
+@castle_back = Image.load("images/castle_back.jpg")
 #赤枠
-red_frame = Image.load("images/frame.png")
+@red_frame = Image.load("images/frame.png")
 #バトル下枠背景
-battle_frame = Image.load("images/battle_back.png")
+@battle_frame = Image.load("images/battle_back.png")
 #魔王戦背景
 boss_frame = Image.load("images/魔王城.png")
 #女性キャラ1
-woman1_normal = Image.load("images/chara/woman1/face_normal.png")
-woman1_pinchi = Image.load("images/chara/woman1/face_pinchi.png")
-woman1_tere = Image.load("images/chara/woman1/face_tere.png")
+@woman1_normal = Image.load("images/chara/woman1/face_normal.png")
+@woman1_pinchi = Image.load("images/chara/woman1/face_pinchi.png")
+@woman1_tere = Image.load("images/chara/woman1/face_tere.png")
 #女性キャラ2
-woman2_normal = Image.load("images/chara/woman2/face_normal.png")
-woman2_pinchi = Image.load("images/chara/woman2/face_pinchi.png")
+@woman2_normal = Image.load("images/chara/woman2/face_normal.png")
+@woman2_pinchi = Image.load("images/chara/woman2/face_pinchi.png")
 #woman2_tere = Image.load("images/chara/woman2/face_tere.png")
 #女性キャラ3
-woman3_normal = Image.load("images/chara/woman3/face_normal.png")
-woman3_pinchi = Image.load("images/chara/woman3/face_pinchi.png")
+@woman3_normal = Image.load("images/chara/woman3/face_normal.png")
+@woman3_pinchi = Image.load("images/chara/woman3/face_pinchi.png")
 #woman1_tere = Image.load("images/chara/woman1/face_tere.png")
 #男性キャラ1
-man1_normal = Image.load("images/chara/man1/face_normal.png")
-man1_pinchi = Image.load("images/chara/man1/face_pinchi.png")
+@man1_normal = Image.load("images/chara/man1/face_normal.png")
+@man1_pinchi = Image.load("images/chara/man1/face_pinchi.png")
 #男性キャラ2
-man2_normal = Image.load("images/chara/man2/face_normal.png")
-man2cls_pinchi = Image.load("images/chara/man2/face_pinchi.png")
+@man2_normal = Image.load("images/chara/man2/face_normal.png")
+@man2cls_pinchi = Image.load("images/chara/man2/face_pinchi.png")
 #男性キャラ3
-man3_normal = Image.load("images/chara/man3/face_normal.png")
-man3_pinchi = Image.load("images/chara/man3/face_pinchi.png")
+@man3_normal = Image.load("images/chara/man3/face_normal.png")
+@man3_pinchi = Image.load("images/chara/man3/face_pinchi.png")
 #敵キャラ
-enemy_goblin = Image.load("images/enemy/1001010401.png")
+@enemy_goblin = Image.load("images/enemy/1001010401.png")
 #敵キャラ2
-enemy_king = Image.load("images/enemy/1322010402.png")
+@enemy_king = Image.load("images/enemy/1322010402.png")
 #敵アイコン
-enemy_goblin_face = Image.load("images/enemy_face/face_1.png")
+@enemy_goblin_face = Image.load("images/enemy_face/face_1.png")
 #ボスアイコン
-enemy_king_face = Image.load("images/enemy_face/face_2.png")
+@enemy_king_face = Image.load("images/enemy_face/face_2.png")
+end
+end
 
-
+picture=Picture.new
 #フィールド全体
 class Field
     attr_accessor :enemy_level, :field_option, :turn, :status, :battle_speed, :crt_enemy, :next_enemy
@@ -1980,172 +2158,35 @@ class Field
       end
     end
   end
+
+#オブジェクト生成
+field = Field.new
+hero = Hero.new
+enemy = Enemy.new
+merchant = Merchant.new
 ################################################################################################################################################################################################################
-#枠
-frame=Image.new(924,700,[100,0,0])
-
-judge_frame=Image.new(500,150,[255,255,255])
-judge_frame_in=Image.new(480,130,[0,0,0])
-
-#ストーリー
-@font=Font.new(SIZE,fontname="MS 明朝")
-
-#シナリオ
-@story=[
-    #序章(王様視点)
-    [
-    [
-        "あいうえお",
-        "あいうえお",
-        "あいうえお",
-        "あいうえお",
-    ],
-    [
-        "かきくけこ",
-        "かきくけこ",
-        "かきくけこ",
-        "かきくけこ",
-    ],
-],
-    #キャラ選択
-    [
-    [
-        "さしすせそ",
-        "さしすせそ",
-        "さしすせそ",
-        "さしすせそ",
-    ],
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-],
-    #会話1(tanaka)
-    [
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-],
-    #会話2(tanaka)
-    [
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-],
-    #会話1(suzuki)
-    [
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-],
-    #会話2(suzuki)
-    [
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-],
-    #会話1(魔王戦闘前)
-    [
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-],
-    #会話2(魔王戦闘後)
-    [
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-    [
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-        "たちつてと",
-    ],
-],
-]
-
-#シナリオ
-def scene(scene,turn,num)
-   
-    @story[scene][turn][0..num].each_with_index do |n,i|
-       message("#{n}",50,50+i*(SIZE*2),@font)    
-    end
-
-    if @story[scene][turn][num]==nil
-        false
-    else 
-        true
-    end
-end
 
 #キャラ選択
-def chara_choice
+def chara_choice(hero,picture,intro_font)
+   #変数等準備
+   is_select_num = nil #どのキャラが選択されたか
+
    #選択画面
    Window.loop do
 
     #背景を描画
-    Window.draw_morph(0,0,1024,0,1024,768,0,768,castle_back)
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
 
     #下の枠
     Window.draw_box_fill(80, 580, 946, 730, C_WHITE, z=0)
 
     #キャラの顔
-    Window.draw_morph(80,80,280,80,280,280,80,280,woman1_normal)
-    Window.draw_morph(420,80,620,80,620,280,430,280,woman2_normal)
-    Window.draw_morph(760,80,960,80,960,280,760,280,woman3_normal)
-    Window.draw_morph(80,350,280,350,280,550,80,550,man1_normal)
-    Window.draw_morph(420,350,620,350,620,550,430,550,man2_normal)
-    Window.draw_morph(760,350,960,350,960,550,760,550,man3_normal)
+    Window.draw_morph(80,80,280,80,280,280,80,280,picture.woman1_normal)
+    Window.draw_morph(420,80,620,80,620,280,430,280,picture.woman2_normal)
+    Window.draw_morph(760,80,960,80,960,280,760,280,picture.woman3_normal)
+    Window.draw_morph(80,350,280,350,280,550,80,550,picture.man1_normal)
+    Window.draw_morph(420,350,620,350,620,550,430,550,picture.man2_normal)
+    Window.draw_morph(760,350,960,350,960,550,760,550,picture.man3_normal)
 
     #マウス座標取得
     x = Input.mouse_pos_x  # マウスカーソルのx座標
@@ -2159,7 +2200,7 @@ def chara_choice
       Window.draw_font(110, 600, "【天使】", intro_font, color:[255,0,0], z:1)
       Window.draw_font(110, 640, "ターンごとに一定確率でHPを回復できます。", intro_font, color:[0,0,0], z:2)
       Window.draw_font(110, 680, "ステータスのバランスが良く、初心者向きです。", intro_font, color:[0,0,0], z:3)
-      Window.draw_morph(80,80,280,80,280,280,80,280,red_frame)
+      Window.draw_morph(80,80,280,80,280,280,80,280,picture.red_frame)
       if Input.mousePush?(M_LBUTTON)
         is_select_num = 0 #天使
         break
@@ -2168,7 +2209,7 @@ def chara_choice
       Window.draw_font(110, 600, "【迷い人】", intro_font, color:[255,0,0], z:1)
       Window.draw_font(110, 640, "回避確率が非常に高く、防御力が高めです。", intro_font, color:[0,0,0], z:2)
       Window.draw_font(110, 680, "攻撃はやや低めのため、序盤は苦戦するかもしれません。", intro_font, color:[0,0,0], z:3)
-      Window.draw_morph(420,80,620,80,620,280,430,280,red_frame)
+      Window.draw_morph(420,80,620,80,620,280,430,280,picture.red_frame)
       if Input.mousePush?(M_LBUTTON)
         is_select_num = 1 #迷い人
         break
@@ -2177,7 +2218,7 @@ def chara_choice
       Window.draw_font(110, 600, "【魔法研究者】", intro_font, color:[255,0,0], z:1)
       Window.draw_font(110, 640, "MPと頭脳がとても高く、魔法に特化しています。", intro_font, color:[0,0,0], z:2)
       Window.draw_font(110, 680, "その分、物理的な攻撃には弱いので、注意が必要です。", intro_font, color:[0,0,0], z:3)
-      Window.draw_morph(760,80,960,80,960,280,760,280,red_frame)
+      Window.draw_morph(760,80,960,80,960,280,760,280,picture.red_frame)
       if Input.mousePush?(M_LBUTTON)
         is_select_num = 2 #魔法研究者
         break
@@ -2186,7 +2227,7 @@ def chara_choice
       Window.draw_font(110, 600, "【勇者】", intro_font, color:[255,0,0], z:1)
       Window.draw_font(110, 640, "クリティカル率が非常に高く、攻撃力も高いです。", intro_font, color:[0,0,0], z:2)
       Window.draw_font(110, 680, "ステータスはやや攻撃寄りですが、バランス型です。", intro_font, color:[0,0,0], z:3)
-      Window.draw_morph(80,350,280,350,280,550,80,550,red_frame)
+      Window.draw_morph(80,350,280,350,280,550,80,550,picture.red_frame)
       if Input.mousePush?(M_LBUTTON)
         is_select_num = 3 #勇者
         break
@@ -2195,7 +2236,7 @@ def chara_choice
       Window.draw_font(110, 600, "【信仰者】", intro_font, color:[255,0,0], z:1)
       Window.draw_font(110, 640, "神からの啓示で、先制を取りやすくなります。", intro_font, color:[0,0,0], z:2)
       Window.draw_font(110, 680, "また、お金のドロップ量が比較的高めに設定されています。", intro_font, color:[0,0,0], z:3)
-      Window.draw_morph(420,350,620,350,620,550,430,550,red_frame)
+      Window.draw_morph(420,350,620,350,620,550,430,550,picture.red_frame)
       if Input.mousePush?(M_LBUTTON)
         is_select_num = 4 #信仰者
         break
@@ -2204,7 +2245,7 @@ def chara_choice
       Window.draw_font(110, 600, "【旅人】", intro_font, color:[255,0,0], z:1)
       Window.draw_font(110, 640, "長年の討伐経験から、経験値の取得率が高くなっています。", intro_font, color:[0,0,0], z:2)
       Window.draw_font(110, 680, "ただし、初期ステータスは低めに設定されています。", intro_font, color:[0,0,0], z:3)
-      Window.draw_morph(760,350,960,350,960,550,760,550,red_frame)
+      Window.draw_morph(760,350,960,350,960,550,760,550,picture.red_frame)
       if Input.mousePush?(M_LBUTTON)
         is_select_num = 5 #旅人
         break
@@ -2329,19 +2370,10 @@ end
 
 #main文
 Window.loop do
-    if !scene(story.scene_num,story.page,story.story_num)
-        story.page+=1
-        story.story_num=0
-    else
-        if Input.key_push?(K_RETURN)
-            story.story_num+=1
-        elsif Input.key_push?(K_LEFT)
-            story.page-=1
-            story.story_num=0
-        end
-    end
-    output_limit(clock)
-    chara_choice
-    #move(judge_frame,judge_frame_in,clock)
-    Window.draw_alpha(50,30, frame, 128)
+  story.tale(0)
+  output_limit(clock)
+  move(judge_frame,judge_frame_in,clock)
+  Window.draw_alpha(50,30, frame, 128)
 end
+
+chara_choice(hero,picture,intro_font)
