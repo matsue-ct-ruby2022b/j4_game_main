@@ -1,7 +1,6 @@
 <h2>タイトル : 「一週間で魔王を倒すゲーム(仮)」</h2>
 add to introduction here.ああ
 <br>
-<br>
 <h3>【各種権利表記・参考文献等】</h3>
 ・タイトル画面背景「草原」<br>
 https://plicy.net/GuidebookObject/7898
