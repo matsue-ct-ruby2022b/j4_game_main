@@ -1,5 +1,8 @@
 require 'dxruby'
 
+Window.width=1024
+Window.height=768
+
 NODE_MAX_NUM = 29
 ROOT_X = (Window.width-200)/2
 ROOT_Y = Window.height/2
@@ -118,10 +121,18 @@ class SkillTree
         end
     end
 
+    def open_node(n)
+        node=get_node(n)
+        node.release_flag = 1
+    end
 end 
 
 tree = SkillTree.new()
 tree.init
 #tree.show(tree.root)
-node=tree.get_node(3)
-puts "#{node.node_num},#{node.x},#{node.y}"
+#tree.open_node(3)
+#node=tree.get_node(3)
+#puts "#{node.node_num},#{node.x},#{node.y},#{node.release_flag}"
+Window.loop do
+    Window.draw_box_fill(800, 0, 1023, 767, C_WHITE, z=1)
+end
