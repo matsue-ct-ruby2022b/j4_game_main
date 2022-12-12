@@ -16,6 +16,14 @@ http://momope8.blog67.fc2.com/blog-category-21.html
 https://www.istockphoto.com/jp/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88/%E5%9F%8E-%E5%86%85%E9%83%A8
 <br>
 <br>
+・会話シーン背景「夜の街」<br>
+https://www.ac-illust.com/main/detail.php?id=23082659&word=%E5%8F%A4%E3%81%84%E3%83%AD%E3%83%B3%E3%83%89%E3%83%B3%E3%81%AE%E5%A4%9C%E3%81%AE%E8%A1%97%E4%B8%A6%E3%81%BF%E3%81%AE%E9%A2%A8%E6%99%AF&searchId=#goog_rewarded
+<br>
+<br>
+・会話シーン背景「昼の街」<br>
+https://www.ac-illust.com/main/detail.php?id=2431563&word=%E4%B8%AD%E4%B8%96%E5%BB%BA%E7%AF%89%E9%A2%A8%E3%81%AE%E8%A1%97&data_type=&from_order_history=
+<br>
+<br>
 ・魔王戦背景「魔王城」<br>
 http://hi79.web.fc2.com/material/b_back/b_back_r.html
 <br>
