@@ -40,7 +40,7 @@ https://qiita.com/gosairei1207/items/701b7ae494b96db0f9a1
 https://qiita.com/hokorobi/items/b884b8e854596a124159
 <br>
 <br>
-・その他参考「Logon failed, use ctrl+c to cancel basic credential prompt」<br>
+・その他参考「Login failed, use ctrl+c to cancel basic credential prompt」<br>
 https://qiita.com/shimajiri/items/e7842654db3876f76888
 <br>
 <br>
