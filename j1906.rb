@@ -33,7 +33,7 @@ suzuki=Support_chara.new("suzuki")
 class Clock
     attr_accessor :now_day,:now_time,:date,:wake_up,:deadline,:hour,:minute
     def initialize
-        @now_day=6
+        @now_day=0
         @now_time=0
         @date=7
         @wake_up=540
@@ -174,10 +174,57 @@ class Story
             "1時間経過した"
           ],
         ],
-        #1日の終了
+        #1日目の終了
         [
           [
-            "こうして1日が終わった。"
+            "こうして1日が終わった。",
+            "\n\n魔王討伐まであと6日",
+          ],
+          [
+            "",
+            ""
+          ],
+        ],
+        #2日目の終了
+        [
+          [
+            "こうして1日が終わった。",
+            "\n\n魔王討伐まであと5日",
+          ],
+        ],
+        #3日目の終了
+        [
+          [
+            "こうして1日が終わった。",
+            "\n\n魔王討伐まであと4日",
+          ],
+        ],
+        #4日目の終了
+        [
+          [
+            "こうして1日が終わった。",
+            "\n\n魔王討伐まであと3日",
+          ],
+        ],
+        #5日目の終了
+        [
+          [
+            "こうして1日が終わった。",
+            "\n\n魔王討伐まであと2日",
+          ],
+        ],
+        #6日目の終了
+        [
+          [
+            "こうして1日が終わった。",
+            "\n\n魔王討伐まであと1日",
+          ],
+        ],
+        #7日目の終了
+        [
+          [
+            "こうして1日が終わった。",
+            "\n\nついに明日、魔王討伐が始まる。",
           ],
         ],
         #会話1(tanaka)
@@ -311,7 +358,7 @@ class Story
           if scene_num==3 || scene_num==4
             $progress=$progress
             return 1
-          elsif scene_num==5 || scene_num==6 || scene_num==7 || scene_num==8
+          elsif scene_num==5 || scene_num==6 || scene_num==7 || scene_num==8 || scene_num==9 || scene_num==10 || scene_num==11 || scene_num==12 || scene_num==13 || scene_num==14
             $progress=4
             return 2
           else 
@@ -2591,13 +2638,49 @@ Window.loop do
     end
   #1日の終わり
   elsif $progress==9
-    if story.tale(8,picture)==2
-      clock.now_day=clock.now_day+1
-      clock.now_time=0
-      $progress=4
-    end
-
-    if clock.now_day==7
+    if clock.now_day==0
+      if story.tale(8,picture)==2
+        clock.now_day=clock.now_day+1
+        clock.now_time=0
+        $progress=4
+      end
+    elsif clock.now_day==1
+      if story.tale(9,picture)==2
+        clock.now_day=clock.now_day+1
+        clock.now_time=0
+        $progress=4
+      end
+    elsif clock.now_day==2
+      if story.tale(10,picture)==2
+        clock.now_day=clock.now_day+1
+        clock.now_time=0
+        $progress=4
+      end
+    elsif clock.now_day==3
+      if story.tale(11,picture)==2
+        clock.now_day=clock.now_day+1
+        clock.now_time=0
+        $progress=4
+      end
+    elsif clock.now_day==4
+      if story.tale(12,picture)==2
+        clock.now_day=clock.now_day+1
+        clock.now_time=0
+        $progress=4
+      end
+    elsif clock.now_day==5
+      if story.tale(13,picture)==2
+        clock.now_day=clock.now_day+1
+        clock.now_time=0
+        $progress=4
+      end
+    elsif clock.now_day==6
+      if story.tale(14,picture)==2
+        clock.now_day=clock.now_day+1
+        clock.now_time=0
+        $progress=4
+      end
+    elsif clock.now_day==7
       $progress=10
       enemy.bossflag = true
     end
