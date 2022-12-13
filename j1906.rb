@@ -174,6 +174,12 @@ class Story
             "1時間経過した"
           ],
         ],
+        #1日の終了
+        [
+          [
+            "こうして1日が終わった。"
+          ],
+        ],
         #会話1(tanaka)
         [
           [
@@ -305,7 +311,7 @@ class Story
           if scene_num==3 || scene_num==4
             $progress=$progress
             return 1
-          elsif scene_num==5 || scene_num==6 || scene_num==7
+          elsif scene_num==5 || scene_num==6 || scene_num==7 || scene_num==8
             $progress=4
             return 2
           else 
@@ -2600,10 +2606,11 @@ Window.loop do
     end
   #1日の終わり
   elsif $progress==9
-
-    clock.now_day=clock.now_day+1
-    clock.now_time=0
-    $progress=4
+    if story.tale(8,picture)==2
+      clock.now_day=clock.now_day+1
+      clock.now_time=0
+      $progress=4
+    end
   #魔王討伐
   elsif $progress==10
 
