@@ -1,5 +1,3 @@
-
-#https://github.com/matsue-ct-ruby2022b/j4_game_main.git
 require 'dxruby'
 
 #初期値
@@ -2460,16 +2458,20 @@ end
 $progress=0
 branch=0
 Window.loop do
+  #序章
   if $progress==0
     story.tale(0,picture)
     Window.draw_alpha(50,30, frame, 128)
+  #キャラクターセレクト
   elsif $progress==1
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
     chara_choice(hero,picture,intro_font)
+  #一生
   elsif $progress==2
     story.tale(1,picture)
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
     Window.draw_alpha(50,30, frame, 128)
+  #選択1(魔王討伐に行くか)
   elsif $progress==3
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
     if branch==0
@@ -2477,14 +2479,17 @@ Window.loop do
       branch=judge("魔王討伐に行く","断る","雑談をする",judge_frame,judge_frame_in)
     end
 
+    #魔王討伐に行く
     if branch==1
       story.tale(2,picture)
       Window.draw_alpha(50,30, frame, 128)
+    #断る
     elsif branch==2
       if story.tale(3,picture)==1
         branch=0
       end
       Window.draw_alpha(50,30, frame, 128)
+    #雑談をする
     elsif branch==3
       if story.tale(4,picture)==1
         branch=0
@@ -2492,6 +2497,7 @@ Window.loop do
       Window.draw_alpha(50,30, frame, 128)
     end
     Window.draw_alpha(50,30, frame, 128)
+  #行動選択
   elsif $progress==4
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
     move(judge_frame,judge_frame_in,clock,story)
