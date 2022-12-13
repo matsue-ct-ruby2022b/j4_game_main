@@ -2513,7 +2513,7 @@ end
 
 
 #main文
-$progress=4
+$progress=0
 branch=0
 Window.loop do
   #序章
