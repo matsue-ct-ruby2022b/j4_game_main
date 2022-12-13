@@ -33,7 +33,7 @@ suzuki=Support_chara.new("suzuki")
 class Clock
     attr_accessor :now_day,:now_time,:date,:wake_up,:deadline,:hour,:minute
     def initialize
-        @now_day=0
+        @now_day=6
         @now_time=0
         @date=7
         @wake_up=540
@@ -2478,21 +2478,6 @@ def now_prog(clock)
     clock.minute=(clock.wake_up+clock.now_time)%60
 end    
 
-#21時を過ぎたとき
-def finish(clock)
-    message("こうして僕の1日は終わった",50,50,@font)
-    if(clock.now_day==clock.date)
-        message("明日はいよいよ魔王と決戦だ！",50,150,@font)
-        flag=1
-    else
-        message("魔王討伐まであと#{(clock.date-clock.now_day)}日",50,150,@font)
-    end
-    clock.now_time=0
-    clock.now_day+=1
-end
-
-
-
 #メッセージ出力
 def message(mes,pos_x,pos_y,font)
     Window.draw_font(pos_x,pos_y,"#{mes}",font,z:5)    
@@ -2611,9 +2596,15 @@ Window.loop do
       clock.now_time=0
       $progress=4
     end
+
+    if clock.now_day==7
+      $progress=10
+      enemy.bossflag = true
+    end
   #魔王討伐
   elsif $progress==10
-
+    field.battle_now(hero,enemy,field,merchant,first,diff_level)
+    $progress=0
   end
 
 end
