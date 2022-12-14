@@ -242,6 +242,24 @@ class Story
             "たちつてと",
           ],
         ],
+        #選択肢1
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢2
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢3
+        [
+          [
+            "",
+          ],
+        ],
         #会話2(tanaka)
         [
           [
@@ -255,6 +273,24 @@ class Story
             "たちつてと",
             "たちつてと",
             "たちつてと",
+          ],
+        ],
+        #選択肢1
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢2
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢3
+        [
+          [
+            "",
           ],
         ],
         #会話1(suzuki)
@@ -272,6 +308,24 @@ class Story
             "たちつてと",
           ],
         ],
+        #選択肢1
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢2
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢3
+        [
+          [
+            "",
+          ],
+        ],
         #会話2(suzuki)
         [
           [
@@ -285,6 +339,24 @@ class Story
             "たちつてと",
             "たちつてと",
             "たちつてと",
+          ],
+        ],
+        #選択肢1
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢2
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢3
+        [
+          [
+            "",
           ],
         ],
         #会話1(魔王戦闘前)
@@ -354,17 +426,7 @@ class Story
         elsif scene(@scenario[scene_num],@page,@story_num)==2
           @page=0
           @story_num=0
-
-          if scene_num==3 || scene_num==4
-            $progress=$progress
-            return 1
-          elsif scene_num==5 || scene_num==6 || scene_num==7 || scene_num==8 || scene_num==9 || scene_num==10 || scene_num==11 || scene_num==12 || scene_num==13 || scene_num==14
-            $progress=4
-            return 2
-          else 
-            $progress=$progress+1
-            return 0
-          end    
+          return 1
         end
 
         #背景を描画
@@ -2436,7 +2498,6 @@ def chara_choice(hero,picture,intro_font)
 
   #主人公タイプ設定
   hero.set_hero_level(is_select_num)
-  $progress=$progress+1
 end
 
 ###################################################
@@ -2551,143 +2612,264 @@ end
 
 
 #main文
-$progress=0
+progress=0
 branch=0
 Window.loop do
   #序章
-  if $progress==0
-    story.tale(0,picture)
+  if progress==0
+    if story.tale(0,picture)==1
+      progress=1
+    end
     Window.draw_alpha(50,30, frame, 128)
   #キャラクターセレクト
-  elsif $progress==1
+  elsif progress==1
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
     chara_choice(hero,picture,intro_font)
-  #一生
-  elsif $progress==2
-    story.tale(1,picture)
+    progress=2
+  #一章
+  elsif progress==2
+    if story.tale(1,picture)==1
+      progress=3
+    end
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
     Window.draw_alpha(50,30, frame, 128)
+
   #選択1(魔王討伐に行くか)
-  elsif $progress==3
+  elsif progress==3
   Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
   if branch==0
     message("どうしよう？",450,80,@font)
     branch=judge("魔王討伐に行く","断る","雑談をする",judge_frame,judge_frame_in)
   end
+
   #魔王討伐に行く
   if branch==1
-    story.tale(2,picture)
+    if story.tale(2,picture)==1
+      progress=4
+      branch=0
+    end
   #断る
   elsif branch==2
     if story.tale(3,picture)==1
+      progress=progress
       branch=0
     end
   #雑談をする
   elsif branch==3
     if story.tale(4,picture)==1
+      progress=progress
       branch=0
     end
   end
   Window.draw_alpha(50,30, frame, 128)
   #行動選択
-  elsif $progress==4
+  elsif progress==4
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
     branch=move(judge_frame,judge_frame_in,clock,story)
     if branch==1
-      $progress=5
+      progress=5
     elsif branch==2
-      $progress=6
+      progress=6
     elsif branch==3
-      $progress=7
+      progress=7
     end
     output_limit(clock)
     Window.draw_alpha(50,30, frame, 128)
   #バトル
-  elsif $progress==5
+  elsif progress==5
     field.battle_now(hero,enemy,field,merchant,first,diff_level)
-    $progress=8
+    progress=8
   #ステータスツリー
-  elsif $progress==6
+  elsif progress==6
 
-    $progress=8
+    progress=8
   #会話
-  elsif $progress==7
+  elsif progress==7
+    if story.tale(15,picture)==1
+      progress=10
+    end
 
-    $progress=8
+    progress=8
   #行動終わり
-  elsif $progress==8
+  elsif progress==8
     if branch==1
-      if story.tale(5,picture)==2
+      if story.tale(5,picture)==1
         clock.now_time=clock.now_time+180
+        progress=4
         branch=0
       end
     elsif branch==2
-      if story.tale(6,picture)==2
+      if story.tale(6,picture)==1
         clock.now_time=clock.now_time+120
+        progress=4
         branch=0
       end
     elsif branch==3
-      if story.tale(7,picture)==2
+      if story.tale(7,picture)==1
         clock.now_time=clock.now_time+60
+        progress=4
         branch=0
       end
     end
 
     if clock.now_time>=clock.deadline
-      $progress=9
+      progress=9
     end
   #1日の終わり
-  elsif $progress==9
+  elsif progress==9
     if clock.now_day==0
-      if story.tale(8,picture)==2
+      if story.tale(8,picture)==1
         clock.now_day=clock.now_day+1
         clock.now_time=0
-        $progress=4
+        progress=4
       end
     elsif clock.now_day==1
-      if story.tale(9,picture)==2
+      if story.tale(9,picture)==1
         clock.now_day=clock.now_day+1
         clock.now_time=0
-        $progress=4
+        progress=4
       end
     elsif clock.now_day==2
-      if story.tale(10,picture)==2
+      if story.tale(10,picture)==1
         clock.now_day=clock.now_day+1
         clock.now_time=0
-        $progress=4
+        progress=4
       end
     elsif clock.now_day==3
-      if story.tale(11,picture)==2
+      if story.tale(11,picture)==1
         clock.now_day=clock.now_day+1
         clock.now_time=0
-        $progress=4
+        progress=4
       end
     elsif clock.now_day==4
-      if story.tale(12,picture)==2
+      if story.tale(12,picture)==1
         clock.now_day=clock.now_day+1
         clock.now_time=0
-        $progress=4
+        progress=4
       end
     elsif clock.now_day==5
-      if story.tale(13,picture)==2
+      if story.tale(13,picture)==1
         clock.now_day=clock.now_day+1
         clock.now_time=0
-        $progress=4
+        progress=4
       end
     elsif clock.now_day==6
-      if story.tale(14,picture)==2
+      if story.tale(14,picture)==1
         clock.now_day=clock.now_day+1
         clock.now_time=0
-        $progress=4
+        progress=4
       end
     elsif clock.now_day==7
-      $progress=10
+      progress=10
       enemy.bossflag = true
     end
-  #魔王討伐
-  elsif $progress==10
-    field.battle_now(hero,enemy,field,merchant,first,diff_level)
-    $progress=0
-  end
-
+  #会話1
+  elsif progress==10
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+    if branch==0
+      message("選択肢",450,80,@font)
+      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+    end
+    #選択1
+    if branch==1
+      if story.tale(16,picture)==1
+        branch=0
+        progress=4
+      end
+    #選択2
+    elsif branch==2
+      if story.tale(17,picture)==1
+        branch=0
+        progress=4
+      end
+    #選択3
+    elsif branch==3
+      if story.tale(18,picture)==1
+        branch=0
+        progress=4
+      end
+    end
+    #会話2
+  elsif progress==11
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+    if branch==0
+      message("選択肢",450,80,@font)
+      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+    end
+    #選択1
+    if branch==1
+      if story.tale(16,picture)==1
+        branch=0
+        progress=4
+      end
+    #選択2
+    elsif branch==2
+      if story.tale(17,picture)==1
+        branch=0
+        progress=4
+      end
+    #選択3
+    elsif branch==3
+      if story.tale(18,picture)==1
+        branch=0
+        progress=4
+      end
+    end
+    #会話3
+  elsif progress==12
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+    if branch==0
+      message("選択肢",450,80,@font)
+      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+    end
+    #選択1
+    if branch==1
+      if story.tale(16,picture)==1
+        branch=0
+        progress=4
+      end
+    #選択2
+    elsif branch==2
+      if story.tale(17,picture)==1
+        branch=0
+        progress=4
+      end
+      #選択3
+    elsif branch==3
+      if story.tale(18,picture)==1
+        branch=0
+        progress=4
+      end
+    end
+    #会話4
+    elsif progress==13
+      Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+      if branch==0
+        message("選択肢",450,80,@font)
+        branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+      end
+      #選択1
+      if branch==1
+        if story.tale(16,picture)==1
+          branch=0
+          progress=4
+        end
+      #選択2
+      elsif branch==2
+        if story.tale(17,picture)==1
+          branch=0
+          progress=4
+        end
+      #選択3
+      elsif branch==3
+        if story.tale(18,picture)==1
+          branch=0
+          progress=4
+        end
+      end
+    #魔王討伐
+    elsif progress==100
+      field.battle_now(hero,enemy,field,merchant,first,diff_level)
+      progress=0
+    end
 end
