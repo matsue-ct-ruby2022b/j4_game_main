@@ -1996,8 +1996,12 @@ hero = Hero.new
 enemy = Enemy.new
 merchant = Merchant.new
 
+#BGM設定
+title_bgm = Sound.new("musics/title.m4a")
+
 Window.loop do
-  #Window.update
+  #タイトル曲再生
+  title_bgm.play
   #タイトル画面
   Window.loop do
 
