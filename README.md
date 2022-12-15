@@ -1,7 +1,7 @@
 <h2>タイトル : 「一週間で魔王を倒すゲーム(仮)」</h2>
 <h3>【ゲーム概要】</h3>
-<br>
 add to introduction here.
+<br>
 <br>
 <h3>【開発環境】</h3>
 <開発ソフト> Visual Studio Code<br>
