@@ -8,8 +8,6 @@ add to introduction here.
 <br>
 <使用言語> DxRuby, Ruby<br>
 <br>
-<音楽作成> GrageBand, その他編集・加工ソフト<br>
-<br>
 <h3>【各種権利表記・参考文献等】</h3>
 ・タイトル画面背景「草原」<br>
 https://plicy.net/GuidebookObject/7898
