@@ -2979,16 +2979,13 @@ Window.loop do
       end
     elsif branch==2
       if story.tale(6,picture)==1
-        clock.now_time=clock.now_time+120
+        clock.now_time=clock.now_time+720
         progress=4
         branch=0
       end
-    elsif branch==3
-      if story.tale(7,picture)==1
-        clock.now_time=clock.now_time+60
-        progress=4
-        branch=0
-      end
+    elsif branch==3        
+      progress=4
+      branch=0
     end
 
     if clock.now_time>=clock.deadline
@@ -3037,11 +3034,9 @@ Window.loop do
       if story.tale(14,picture)==1
         clock.now_day=clock.now_day+1
         clock.now_time=0
-        progress=4
+        progress=18
+        enemy.bossflag = true      
       end
-    elsif clock.now_day==7
-      progress=10
-      enemy.bossflag = true
     end
 
   #会話1(rilia1)
@@ -3055,23 +3050,29 @@ Window.loop do
     #選択1
     if branch==1
       if story.tale(16,picture)==1
-        branch=0
-        progress=4
+        branch=3
+        progress=8
         liria.encount=liria.encount+1
+        #liria.love=liria.love+
+        #clock.now_time=clock.now_time+
       end
     #選択2
     elsif branch==2
       if story.tale(17,picture)==1
-        branch=0
-        progress=4
+        branch=3
+        progress=8
         liria.encount=liria.encount+1
+        #liria.love=liria.love+
+        #clock.now_time=clock.now_time+
       end
     #選択3
     elsif branch==3
       if story.tale(18,picture)==1
-        branch=0
-        progress=4
+        branch=3
+        progress=8
         liria.encount=liria.encount+1
+        #liria.love=liria.love+
+        #clock.now_time=clock.now_time+
       end
     end
   #会話2(rilia2)
@@ -3085,23 +3086,29 @@ Window.loop do
     #選択1
     if branch==1
       if story.tale(20,picture)==1
-        branch=0
-        progress=4
+        branch=3
+        progress=8
         liria.encount=liria.encount+1
+        #liria.love=liria.love+
+        #clock.now_time=clock.now_time+
       end
     #選択2
     elsif branch==2
       if story.tale(21,picture)==1
-        branch=0
-        progress=4
+        branch=3
+        progress=8
         liria.encount=liria.encount+1
+        #liria.love=liria.love+
+        #clock.now_time=clock.now_time+
       end
     #選択3
     elsif branch==3
       if story.tale(22,picture)==1
-        branch=0
-        progress=4
+        branch=3
+        progress=8
         liria.encount=liria.encount+1
+        #liria.love=liria.love+
+        #clock.now_time=clock.now_time+
       end
     end
     #会話3(rilia3)
@@ -3115,23 +3122,29 @@ Window.loop do
     #選択1
     if branch==1
       if story.tale(24,picture)==1
-        branch=0
-        progress=4
+        branch=3
+        progress=8
         liria.encount=liria.encount+1
+        #liria.love=liria.love+
+        #clock.now_time=clock.now_time+
       end
     #選択2
     elsif branch==2
       if story.tale(25,picture)==1
-        branch=0
-        progress=4
+        branch=3
+        progress=8
         liria.encount=liria.encount+1
+        #liria.love=liria.love+
+        #clock.now_time=clock.now_time+
       end
       #選択3
     elsif branch==3
       if story.tale(26,picture)==1
-        branch=0
-        progress=4
+        branch=3
+        progress=8
         liria.encount=liria.encount+1
+        #liria.love=liria.love+
+        #clock.now_time=clock.now_time+
       end
     end
     #会話4(rilia4)
@@ -3145,23 +3158,29 @@ Window.loop do
       #選択1
       if branch==1
         if story.tale(28,picture)==1
-          branch=0
-          progress=4
+          branch=3
+          progress=8
           liria.encount=liria.encount+1
+          #liria.love=liria.love+
+          #clock.now_time=clock.now_time+
         end
       #選択2
       elsif branch==2
         if story.tale(29,picture)==1
-          branch=0
-          progress=4
+          branch=3
+          progress=8
           liria.encount=liria.encount+1
+          #liria.love=liria.love+
+          #clock.now_time=clock.now_time+
         end
       #選択3
       elsif branch==3
         if story.tale(30,picture)==1
-          branch=0
-          progress=4
+          branch=3
+          progress=8
           liria.encount=liria.encount+1
+          #liria.love=liria.love+
+          #clock.now_time=clock.now_time+
         end
       end
   #会話1(srag1)
@@ -3175,23 +3194,29 @@ Window.loop do
     #選択1
     if branch==1
       if story.tale(32,picture)==1
-        branch=0
-        progress=4
-        liria.encount=liria.encount+1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+1
+        #srag.love=srag.love+
+        #clock.now_time=clock.now_time+
       end
     #選択2
     elsif branch==2
       if story.tale(33,picture)==1
-        branch=0
-        progress=4
-        liria.encount=liria.encount+1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+1
+        #srag.love=srag.love+
+        #clock.now_time=clock.now_time+
       end
     #選択3
     elsif branch==3
       if story.tale(34,picture)==1
-        branch=0
-        progress=4
-        liria.encount=liria.encount+1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+1
+        #srag.love=srag.love+
+        #clock.now_time=clock.now_time+
       end
     end
   #会話2(srag2)
@@ -3205,23 +3230,29 @@ Window.loop do
     #選択1
     if branch==1
       if story.tale(36,picture)==1
-        branch=0
-        progress=4
-        liria.encount=liria.encount+1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+1
+        #srag.love=srag.love+
+        #clock.now_time=clock.now_time+
       end
     #選択2
     elsif branch==2
       if story.tale(37,picture)==1
-        branch=0
-        progress=4
-        liria.encount=liria.encount+1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+1
+        #srag.love=srag.love+
+        #clock.now_time=clock.now_time+
       end
     #選択3
     elsif branch==3
       if story.tale(38,picture)==1
-        branch=0
-        progress=4
-        liria.encount=liria.encount+1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+1
+        #srag.love=srag.love+
+        #clock.now_time=clock.now_time+
       end
     end
     #会話3(srag3)
@@ -3235,23 +3266,29 @@ Window.loop do
     #選択1
     if branch==1
       if story.tale(40,picture)==1
-        branch=0
-        progress=4
-        liria.encount=liria.encount+1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+1
+        #srag.love=srag.love+
+        #clock.now_time=clock.now_time+
       end
     #選択2
     elsif branch==2
       if story.tale(41,picture)==1
-        branch=0
-        progress=4
-        liria.encount=liria.encount+1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+1
+        #srag.love=srag.love+
+        #clock.now_time=clock.now_time+
       end
       #選択3
     elsif branch==3
       if story.tale(42,picture)==1
-        branch=0
-        progress=4
-        liria.encount=liria.encount+1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+1
+        #srag.love=srag.love+
+        #clock.now_time=clock.now_time+
       end
     end
     #会話4(srag4)
@@ -3265,28 +3302,42 @@ Window.loop do
       #選択1
       if branch==1
         if story.tale(44,picture)==1
-          branch=0
-          progress=4
-          liria.encount=liria.encount+1
+          branch=3
+          progress=8
+          srag.encount=srag.encount+1
+          #srag.love=srag.love+
+          #clock.now_time=clock.now_time+
         end
       #選択2
       elsif branch==2
         if story.tale(45,picture)==1
-          branch=0
-          progress=4
-          liria.encount=liria.encount+1
+          branch=3
+          progress=8
+          srag.encount=srag.encount+1
+          #srag.love=srag.love+
+          #clock.now_time=clock.now_time+
         end
       #選択3
       elsif branch==3
         if story.tale(46,picture)==1
-          branch=0
-          progress=4
-          liria.encount=liria.encount+1
+          branch=3
+          progress=8
+          srag.encount=srag.encount+1
+          #srag.love=srag.love+
+          #clock.now_time=clock.now_time+
         end
       end
     #魔王討伐
-    elsif progress==100
-      field.battle_now(hero,enemy,field,merchant,first,diff_level)
-      progress=0
+    elsif progress==18
+      if story.tale(47,picture)==1      
+        field.battle_now(hero,enemy,field,merchant,first,diff_level)
+        progress=19
+      end
+    #エンディング
+    elsif progress==19
+      #エンディング処理
+      if story.tale(48,picture)==1
+        #エンディングロール
+      end
     end
 end
