@@ -1,10 +1,10 @@
 <h2>タイトル : 「一週間で魔王を倒すゲーム(仮)」</h2>
 add to introduction here.ああ
 <br>
-<h3>開発環境</h3>
-<開発ソフト> Visual Studio Code
-<使用言語> DxRuby, Ruby
-<音楽作成> GrageBand, その他編集・加工ソフト
+<h3>【開発環境】</h3>
+<開発ソフト> Visual Studio Code<br>
+<使用言語> DxRuby, Ruby<br>
+<音楽作成> GrageBand, その他編集・加工ソフト<br>
 <br>
 <h3>【各種権利表記・参考文献等】</h3>
 ・タイトル画面背景「草原」<br>
