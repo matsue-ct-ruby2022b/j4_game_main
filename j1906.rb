@@ -18,16 +18,17 @@ judge_frame_in=Image.new(480,130,[0,0,0])
 
 #サポートキャラ
 class Support_chara
-    attr_accessor :name, :party, :love
+    attr_accessor :name, :party, :love,:encount
     def initialize(key)
         @name=key       #キャラクター名
         @party=false    #パーティに入っているか(true:入っている,false:入っていない)
         @love=0         #好感度
+        @encount=0      #会話数
     end
 end
 
-tanaka=Support_chara.new("tanaka")
-suzuki=Support_chara.new("suzuki")
+liria=Support_chara.new("liria")      #リーリア
+srag=Support_chara.new("srag")        #スラグ
 
 #時間
 class Clock
@@ -337,7 +338,40 @@ class Story
             "\n\nついに明日、魔王討伐が始まる。",
           ],
         ],
-        #会話1(tanaka)
+        #会話1(liria)
+        [
+          [
+            "",
+            "",
+            "",
+            "",
+          ],
+          [
+            "",
+            "",
+            "",
+            "",
+          ],
+        ],
+        #選択肢1
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢2
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢3
+        [
+          [
+            "",
+          ],
+        ],
+        #会話2(liria)
         [
           [
             "たちつてと",
@@ -370,7 +404,7 @@ class Story
             "",
           ],
         ],
-        #会話2(tanaka)
+        #会話3(liria)
         [
           [
             "たちつてと",
@@ -403,7 +437,7 @@ class Story
             "",
           ],
         ],
-        #会話1(suzuki)
+        #会話4(liria)
         [
           [
             "たちつてと",
@@ -436,7 +470,106 @@ class Story
             "",
           ],
         ],
-        #会話2(suzuki)
+        #会話1(srag)
+        [
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+        #選択肢1
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢2
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢3
+        [
+          [
+            "",
+          ],
+        ],
+        #会話2(srag)
+        [
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+        #選択肢1
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢2
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢3
+        [
+          [
+            "",
+          ],
+        ],
+        #会話3(srag)
+        [
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+          [
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+            "たちつてと",
+          ],
+        ],
+        #選択肢1
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢2
+        [
+          [
+            "",
+          ],
+        ],
+        #選択肢3
+        [
+          [
+            "",
+          ],
+        ],
+        #会話4(srag
         [
           [
             "たちつてと",
@@ -2658,25 +2791,6 @@ def move(judge_frame,judge_frame_in,clock,story)
     return branch
 end
 
-def battle(clock)
-    message("バトル",50,50,@font)
-    clock.now_time+=180
-end
-
-def sta(clock)
-    message("ステータスツリー",50,50,@font)
-    clock.now_time+=120
-end
-
-def conver(clock)
-    message("会話",50,50,@font)
-end
-
-#1日の流れ
-def live
-    
-end
-
 def output_limit(clock)
     now_prog(clock)
     if clock.minute<10 
@@ -2722,7 +2836,7 @@ end
 
 
 #main文
-progress=0
+progress=4
 branch=0
 Window.loop do
   #序章
@@ -2772,6 +2886,7 @@ Window.loop do
     end
   end
   Window.draw_alpha(50,30, frame, 128)
+
   #行動選択
   elsif progress==4
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
@@ -2782,6 +2897,7 @@ Window.loop do
       progress=6
     elsif branch==3
       progress=7
+      branch=0
     end
     output_limit(clock)
     Window.draw_alpha(50,30, frame, 128)
@@ -2795,11 +2911,64 @@ Window.loop do
     progress=8
   #会話
   elsif progress==7
-    if story.tale(15,picture)==1
-      progress=10
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+    Window.draw_alpha(50,30, frame, 128)
+    if branch==0
+      message("どこへ行こう？",450,80,@font)
+      branch=judge("ご飯でも食べようかな","ギルドに行こうか","やっぱりやめよう",judge_frame,judge_frame_in)
     end
-
-    progress=8
+    #選択1
+    if branch==1
+        if liria.encount==0
+          if story.tale(15,picture)==1
+            progress=10
+            branch=0
+          end
+        elsif liria.encount==1
+          if story.tale(19,picture)==1
+            progress=11
+            branch=0
+          end
+        elsif liria.encount==2
+          if story.tale(23,picture)==1
+            progress=12
+            branch=0
+          end
+        elsif liria.encount==3
+          if story.tale(27,picture)==1
+            progress=13
+            branch=0
+          end
+        end
+    #選択2
+    elsif branch==2
+        if srag.encount==0
+          if story.tale(31,picture)==1
+            progress=14
+            branch=0
+          end
+        elsif srag.encount==1
+          if story.tale(35,picture)==1
+            progress=15
+            branch=0
+          end
+        elsif srag.encount==2
+          if story.tale(39,picture)==1
+            progress=16
+            branch=0
+          end
+        elsif srag.encount==3
+          if story.tale(43,picture)==1
+            progress=17
+            branch=0
+          end
+        end
+        #選択3
+      elsif branch==3
+        branch=0
+        progress=4
+      end
+    #progress=8
   #行動終わり
   elsif progress==8
     if branch==1
@@ -2825,6 +2994,7 @@ Window.loop do
     if clock.now_time>=clock.deadline
       progress=9
     end
+
   #1日の終わり
   elsif progress==9
     if clock.now_day==0
@@ -2873,9 +3043,11 @@ Window.loop do
       progress=10
       enemy.bossflag = true
     end
-  #会話1
+
+  #会話1(rilia1)
   elsif progress==10
-    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+    Window.draw_alpha(50,30, frame, 128)
     if branch==0
       message("選択肢",450,80,@font)
       branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
@@ -2885,96 +3057,231 @@ Window.loop do
       if story.tale(16,picture)==1
         branch=0
         progress=4
+        liria.encount=liria.encount+1
       end
     #選択2
     elsif branch==2
       if story.tale(17,picture)==1
         branch=0
         progress=4
+        liria.encount=liria.encount+1
       end
     #選択3
     elsif branch==3
       if story.tale(18,picture)==1
         branch=0
         progress=4
+        liria.encount=liria.encount+1
       end
     end
-    #会話2
+  #会話2(rilia2)
   elsif progress==11
-    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+    Window.draw_alpha(50,30, frame, 128)
     if branch==0
       message("選択肢",450,80,@font)
       branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
     end
     #選択1
     if branch==1
-      if story.tale(16,picture)==1
+      if story.tale(20,picture)==1
         branch=0
         progress=4
+        liria.encount=liria.encount+1
       end
     #選択2
     elsif branch==2
-      if story.tale(17,picture)==1
+      if story.tale(21,picture)==1
         branch=0
         progress=4
+        liria.encount=liria.encount+1
       end
     #選択3
     elsif branch==3
-      if story.tale(18,picture)==1
+      if story.tale(22,picture)==1
         branch=0
         progress=4
+        liria.encount=liria.encount+1
       end
     end
-    #会話3
+    #会話3(rilia3)
   elsif progress==12
-    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+    Window.draw_alpha(50,30, frame, 128)
     if branch==0
       message("選択肢",450,80,@font)
       branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
     end
     #選択1
     if branch==1
-      if story.tale(16,picture)==1
+      if story.tale(24,picture)==1
         branch=0
         progress=4
+        liria.encount=liria.encount+1
       end
     #選択2
     elsif branch==2
-      if story.tale(17,picture)==1
+      if story.tale(25,picture)==1
         branch=0
         progress=4
+        liria.encount=liria.encount+1
       end
       #選択3
     elsif branch==3
-      if story.tale(18,picture)==1
+      if story.tale(26,picture)==1
         branch=0
         progress=4
+        liria.encount=liria.encount+1
       end
     end
-    #会話4
+    #会話4(rilia4)
     elsif progress==13
-      Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.castle_back)
+      Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+      Window.draw_alpha(50,30, frame, 128)
       if branch==0
         message("選択肢",450,80,@font)
         branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
       end
       #選択1
       if branch==1
-        if story.tale(16,picture)==1
+        if story.tale(28,picture)==1
           branch=0
           progress=4
+          liria.encount=liria.encount+1
         end
       #選択2
       elsif branch==2
-        if story.tale(17,picture)==1
+        if story.tale(29,picture)==1
           branch=0
           progress=4
+          liria.encount=liria.encount+1
         end
       #選択3
       elsif branch==3
-        if story.tale(18,picture)==1
+        if story.tale(30,picture)==1
           branch=0
           progress=4
+          liria.encount=liria.encount+1
+        end
+      end
+  #会話1(srag1)
+  elsif progress==14
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+    Window.draw_alpha(50,30, frame, 128)
+    if branch==0
+      message("選択肢",450,80,@font)
+      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+    end
+    #選択1
+    if branch==1
+      if story.tale(32,picture)==1
+        branch=0
+        progress=4
+        liria.encount=liria.encount+1
+      end
+    #選択2
+    elsif branch==2
+      if story.tale(33,picture)==1
+        branch=0
+        progress=4
+        liria.encount=liria.encount+1
+      end
+    #選択3
+    elsif branch==3
+      if story.tale(34,picture)==1
+        branch=0
+        progress=4
+        liria.encount=liria.encount+1
+      end
+    end
+  #会話2(srag2)
+  elsif progress==15
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+    Window.draw_alpha(50,30, frame, 128)
+    if branch==0
+      message("選択肢",450,80,@font)
+      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+    end
+    #選択1
+    if branch==1
+      if story.tale(36,picture)==1
+        branch=0
+        progress=4
+        liria.encount=liria.encount+1
+      end
+    #選択2
+    elsif branch==2
+      if story.tale(37,picture)==1
+        branch=0
+        progress=4
+        liria.encount=liria.encount+1
+      end
+    #選択3
+    elsif branch==3
+      if story.tale(38,picture)==1
+        branch=0
+        progress=4
+        liria.encount=liria.encount+1
+      end
+    end
+    #会話3(srag3)
+  elsif progress==16
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+    Window.draw_alpha(50,30, frame, 128)
+    if branch==0
+      message("選択肢",450,80,@font)
+      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+    end
+    #選択1
+    if branch==1
+      if story.tale(40,picture)==1
+        branch=0
+        progress=4
+        liria.encount=liria.encount+1
+      end
+    #選択2
+    elsif branch==2
+      if story.tale(41,picture)==1
+        branch=0
+        progress=4
+        liria.encount=liria.encount+1
+      end
+      #選択3
+    elsif branch==3
+      if story.tale(42,picture)==1
+        branch=0
+        progress=4
+        liria.encount=liria.encount+1
+      end
+    end
+    #会話4(srag4)
+    elsif progress==17
+      Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+      Window.draw_alpha(50,30, frame, 128)
+      if branch==0
+        message("選択肢",450,80,@font)
+        branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+      end
+      #選択1
+      if branch==1
+        if story.tale(44,picture)==1
+          branch=0
+          progress=4
+          liria.encount=liria.encount+1
+        end
+      #選択2
+      elsif branch==2
+        if story.tale(45,picture)==1
+          branch=0
+          progress=4
+          liria.encount=liria.encount+1
+        end
+      #選択3
+      elsif branch==3
+        if story.tale(46,picture)==1
+          branch=0
+          progress=4
+          liria.encount=liria.encount+1
         end
       end
     #魔王討伐
