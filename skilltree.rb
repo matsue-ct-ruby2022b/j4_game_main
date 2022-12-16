@@ -16,8 +16,9 @@ end
 class SkillTree 
     #スキルツリーの各ノード node.~~
     class Node
-        def initialize(node_num,parent,effected_status,effect_value,need_money,x,y)
+        def initialize(node_num,node_name,parent,effected_status,effect_value,need_money,x,y)
             @node_num = node_num
+            @node_name = node_name
             @parent = parent
             @children = []
             @effected_status = effected_status
@@ -31,52 +32,52 @@ class SkillTree
     end
 
     def initialize
-        #スキルツリーのノード[影響を与えるステータス,変化値,必要なゴールド,x座標,y座標]
+        #スキルツリーのノード[ノードの名前,影響を与えるステータス,変化値,必要なゴールド,x座標,y座標]
         @tree_nodes = [
-               ["root",0,0,ROOT_X,ROOT_Y],#0
+               ["root","root",0,0,ROOT_X,ROOT_Y],#0
 
-               ["hp",20,100,ROOT_X-100,ROOT_Y-100],#1
-               ["hp",50,200,ROOT_X-100,ROOT_Y-200],#2
-               ["hp",120,500,ROOT_X-100,ROOT_Y-300],#3
-               ["hp",150,700,ROOT_X-200,ROOT_Y-300],#4
-               ["mp",30,150,ROOT_X-200,ROOT_Y-100],#5
-               ["mp",70,300,ROOT_X-300,ROOT_Y-200],#6
-               ["mp",200,700,ROOT_X-300,ROOT_Y-100],#7
+               ["HP+","hp",20,100,ROOT_X-100,ROOT_Y-100],#1
+               ["HP++","hp",50,200,ROOT_X-100,ROOT_Y-200],#2
+               ["HP+++","hp",120,500,ROOT_X-100,ROOT_Y-300],#3
+               ["HP++++","hp",150,700,ROOT_X-200,ROOT_Y-300],#4
+               ["MP+","mp",30,150,ROOT_X-200,ROOT_Y-100],#5
+               ["MP++","mp",70,300,ROOT_X-300,ROOT_Y-200],#6
+               ["MP+++","mp",200,700,ROOT_X-300,ROOT_Y-100],#7
 
-               ["pow",10,100,ROOT_X+100,ROOT_Y-100],#8
-               ["pow",30,200,ROOT_X+100,ROOT_Y-200],#9
-               ["pow",70,300,ROOT_X+100,ROOT_Y-300],#10
-               ["pow",100,500,ROOT_X+200,ROOT_Y-300],#11
-               ["bra",30,200,ROOT_X+200,ROOT_Y-100],#12
-               ["bra",70,300,ROOT_X+300,ROOT_Y-100],#13
-               ["bra",100,500,ROOT_X+300,ROOT_Y-200],#14
+               ["ちから+","pow",10,100,ROOT_X+100,ROOT_Y-100],#8
+               ["ちから++","pow",30,200,ROOT_X+100,ROOT_Y-200],#9
+               ["ちから+++","pow",70,300,ROOT_X+100,ROOT_Y-300],#10
+               ["ちから++++","pow",100,500,ROOT_X+200,ROOT_Y-300],#11
+               ["ずのう+","bra",30,200,ROOT_X+200,ROOT_Y-100],#12
+               ["ずのう++","bra",70,300,ROOT_X+300,ROOT_Y-100],#13
+               ["ずのう+++","bra",100,500,ROOT_X+300,ROOT_Y-200],#14
 
-               ["def",10,100,ROOT_X-100,ROOT_Y+100],#15
-               ["def",30,150,ROOT_X-200,ROOT_Y+100],#16
-               ["def",60,300,ROOT_X-300,ROOT_Y+100],#17
-               ["def",100,700,ROOT_X-300,ROOT_Y+200],#18
-               ["pow",20,150,ROOT_X-100,ROOT_Y+200],#19
-               ["pow",50,200,ROOT_X-100,ROOT_Y+300],#20
-               ["pow",50,200,ROOT_X-200,ROOT_Y+300],#21
+               ["まもり+","def",10,100,ROOT_X-100,ROOT_Y+100],#15
+               ["まもり++","def",30,150,ROOT_X-200,ROOT_Y+100],#16
+               ["まもり+++","def",60,300,ROOT_X-300,ROOT_Y+100],#17
+               ["まもり++++","def",100,700,ROOT_X-300,ROOT_Y+200],#18
+               ["ちから+","pow",20,150,ROOT_X-100,ROOT_Y+200],#19
+               ["ちから++","pow",50,200,ROOT_X-100,ROOT_Y+300],#20
+               ["ちから++","pow",50,200,ROOT_X-200,ROOT_Y+300],#21
 
-               ["spe",10,100,ROOT_X+100,ROOT_Y+100],#22
-               ["spe",20,150,ROOT_X+200,ROOT_Y+100],#23
-               ["spe",100,350,ROOT_X+300,ROOT_Y+100],#24
-               ["spe",200,700,ROOT_X+300,ROOT_Y+200],#25
-               ["def",10,150,ROOT_X+100,ROOT_Y+200],#26
-               ["def",30,150,ROOT_X+100,ROOT_Y+300],#27
-               ["def",60,300,ROOT_X+200,ROOT_Y+300]#28
+               ["そくど+","spe",10,100,ROOT_X+100,ROOT_Y+100],#22
+               ["そくど++","spe",20,150,ROOT_X+200,ROOT_Y+100],#23
+               ["そくど+++","spe",100,350,ROOT_X+300,ROOT_Y+100],#24
+               ["そくど++++","spe",200,700,ROOT_X+300,ROOT_Y+200],#25
+               ["まもり+","def",10,150,ROOT_X+100,ROOT_Y+200],#26
+               ["まもり++","def",30,150,ROOT_X+100,ROOT_Y+300],#27
+               ["まもり+++","def",60,300,ROOT_X+200,ROOT_Y+300]#28
             ]
         @root = nil
         @count = 0
         @node_icon={}
-        @node_icon["root"] = Image.load("images/shield1.png")
-        @node_icon["hp"] = Image.load("images/shield1.png")
-        @node_icon["mp"] = Image.load("images/shield2.png")
-        @node_icon["pow"] = Image.load("images/shield3.png")
-        @node_icon["bra"] = Image.load("images/money.png")
-        @node_icon["def"] = Image.load("images/shield1.png")
-        @node_icon["spe"] = Image.load("images/shield1.png")
+        @node_icon["root"] = Image.load("images/shield1.png")#ルートノード画像
+        @node_icon["hp"] = Image.load("images/shield1.png")#HPノード画像
+        @node_icon["mp"] = Image.load("images/shield2.png")#MPノード画像
+        @node_icon["pow"] = Image.load("images/shield3.png")#POWERノード画像
+        @node_icon["bra"] = Image.load("images/money.png")#BRAINノード画像
+        @node_icon["def"] = Image.load("images/shield1.png")#DEFENCEノード画像
+        @node_icon["spe"] = Image.load("images/shield1.png")#SPEEDノード画像
         
     end
     attr_accessor :root
@@ -89,7 +90,7 @@ class SkillTree
             return nil
         end
         
-        node = Node.new(@count,parent,@tree_nodes[@count][0],@tree_nodes[@count][1],@tree_nodes[@count][2],@tree_nodes[@count][3],@tree_nodes[@count][4])
+        node = Node.new(@count,@tree_nodes[@count][0],parent,@tree_nodes[@count][1],@tree_nodes[@count][2],@tree_nodes[@count][3],@tree_nodes[@count][4],@tree_nodes[@count][5])
 
         if depth == 0
             child_num = 4;
@@ -163,10 +164,10 @@ class SkillTree
         for node_num in 0..28 do
             node = get_node(node_num)
             node.children.each_index do |i|
-                if node.children[i].release_flag == 1 #未開放ノードへの線は暗く
+                if node.children[i].release_flag == 1 
                     line_color = C_WHITE
                 else
-                    line_color = [255,100,100,100]
+                    line_color = [255,100,100,100] #未開放ノードへの線は暗く
                 end
                 Window.draw_line(node.x, node.y, node.children[i].x, node.children[i].y, line_color, z=1)
             end
