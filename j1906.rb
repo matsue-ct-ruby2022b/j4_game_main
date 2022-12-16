@@ -22,7 +22,7 @@ class Support_chara
     def initialize(key)
         @name=key       #キャラクター名
         @party=false    #パーティに入っているか(true:入っている,false:入っていない)
-        @love=0         #好感度
+        @love=50         #好感度
         @encount=0      #会話数
     end
 end
@@ -341,266 +341,428 @@ class Story
         #会話1(liria)
         [
           [
-            "",
-            "",
-            "",
-            "",
+            "???:「あっ！、、、久しぶり、、」",
+            "もぐもぐ、、、もぐもぐ、、、",
+            "私:「いっつも何か食べてるねリーリア。」",
+            "\n\n店に入った瞬間、見知った顔が目に入った。",
+            "\n\n到底人が食えるとは思えない量のパスタをむさぼってる女はリーリアという私の幼馴染だ。",
+            "\n\n\n\n私:「何でそんなに食べて太らないの？」",
+            "\n\n\n\nリーリア:「そんなの知らないよ。才能ってやつ？」",
+            "\n\n\n\nなんだろう、無性に腹が立つ。",
           ],
           [
-            "",
-            "",
-            "",
-            "",
+            "リーリア:「はぁ？魔王と戦うことになった！！！！？？？？？」",
+            "私:「シッ！！声が大きいよ。」",
+            "リーリア:「だって、信じられなくて。大丈夫なの？」",
+            "私:「だってしょうがないでしょ、王の奴から直接言われちゃったんだから。」",
+            "リーリア:「でも、、、」",
           ],
         ],
         #選択肢1
         [
           [
-            "",
+            "私:「いーきーたーくーなーいーー」",
+            "リーリア:「えっ！？」",
+            "私:「私だって怖いよー、行きたくないよー。」",
+            "リーリア:「そうよね、分かるわよ」",
+            "\n\nリーリアに慰められながら、気づいたら1時間位騒いでいた。",
+            "\n\n\n\nリーリアの好感度が少し下がった。",
           ],
         ],
         #選択肢2
         [
           [
-            "",
+            "私:「大丈夫、きっと何とかなるよ」",
+            "リーリア:「根拠は？」",
+            "そんなものはない。今の私では魔王には到底及ばないだろうから。でも、、、",
+            "私:「倒すよ、絶対。だから信じて待ってて！」",
+            "リーリア:「ほんとずるいよね。そういうとこ、、、」",
+            "私:「私、この小盛ピザ食べようかな。」",
+            "リーリア:「かしこまりました！！」",
+            "なんで店側みたいに言ってんの？客だよねあなた。",
+            "リーリアと一緒にご飯を食べた。",
+            "\n\nリーリアの好感度が上がった",
+            "\n\n30分が経過した。",
           ],
         ],
         #選択肢3
         [
           [
-            "",
+            "私:「とりあえず、何かたべようかな。リーリアのおすすめある？」",
+            "リーリアの顔が明るくなった。",
+            "リーリア:「そうだなー、このお店で一番美味しいのはこのピザでしょ。\n\n一番おいしい。」",
+            "\n\n私:「じゃあこのピザ食べようかな。」",
+            "\n\n\n\n忘れてた。",
+            "\n\n\n\nこの店の驚異的なボリュームを。食べきるのに2時間かかった。",
+            "\n\n\n\n\n\nリーリアの好感度が少し上がった。",
           ],
         ],
         #会話2(liria)
         [
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "リーリア:「あっ」\n\n私:「あっ」",
+            "\n\n店に入ろうとしたら偶然リーリアにあった。",
+            "\n\nいや、リーリアは毎日ここら辺の店にいるんだけど、、、",
+            "\n\nリーリア:「せっかくだから一緒に食べようよ。」",
+            "\n\n私:「うん。いいよ。」",
+            "\n\n二人で店に入った。"
           ],
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "リーリア:「ねー、このパスタとこのグラタンどっちがいいかな？」",
+            "いや、そういうのはこう、服屋とかおしゃれな場所で発生するイベントでは？",
           ],
         ],
         #選択肢1
         [
           [
-            "",
+            "私:「リーリアってパスタが一番好きだったよね、、、じゃあパスタで。」",
+            "リーリア:「やっぱりそう思う。じゃあパスタにしようかな。」",
+            "最初から決まっていたのでは？",
+            "私:「私はこの小盛アクアパッツァにしようかな。」",
+            "\n\nちなみに、「小盛」と言っているがサイズはちょっと多いくらいだ。",
+            "\n\n\n\nリーリアの好感度が上がった。",
+            "\n\n\n\n30分が経過した。",
           ],
         ],
         #選択肢2
         [
           [
-            "",
+            "私:「じゃあ、、、グラタンで。」",
+            "リーリア:「あーーー、じゃあグラタンにしようかな。」",
+            "不服だよねあなた。明らかに不服だよね。",
+            "私:「じゃあ私はこのアクアパッツァで。」",
+            "\n\n\n\n忘れてた。",
+            "\n\n\n\nこの店の驚異的なボリュームを。食べきるのに2時間かかった。",
+            "\n\n\n\n\n\nリーリアの好感度が少し上がった。",
           ],
         ],
         #選択肢3
         [
           [
-            "",
+            "私:「決めかねてるの？」",
+            "リーリア:「うん。どっちにしようかなって。」",
+            "私:「じゃあ私がグラタン頼むから、リーリアはパスタ頼みなよ。」",
+            "リーリア:「、、、、、シェアってこと？」",
+            "あれ？なんか凄い嫌そうじゃない？",
+            "私:「どう、、、したの？」",
+            "リーリア:「私、、、、シェアするタイプの人嫌い。」",
+            "私:「、、、じゃあグラタンで。」",
+            "リーリア:「じゃあそうする。」",
+            "すごい空気になってしまった。",
+            "\n\nリーリアの好感度が下がった。",
+            "\n\n30分が経過した。"
           ],
         ],
         #会話3(liria)
         [
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-          ],
-          [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "店に入ったとき、中にはいつも通りリーリアが、、、",
+            "いなかった",
+            "私:「店長！リーリアは今日来てないの？」",
+            "店長:「そういえば、まだ今日は来てないね。」",
+            "私:「どうしたんだろう？」",
+            "店長:「確かにおかしいね。あの子が、、、」"
           ],
         ],
         #選択肢1
         [
           [
-            "",
+            "何事も何か口にしないと始まらない。",
+            "私:「店長、パスタください。」",
+            "店長:「あっああ、、、でも良いのかい？」",
+            "私:「・・・」",
+            "リーリア、このパスタ好きだったな",
+            "もうこの世にいない彼女のためにこのパスタを食べよう。",
+            "店長:「何か勝手に死んでることになってない？」",
+            "\n\nリーリアの好感度が大幅に下がった。",
+            "\n\n2時間が経過した。"
           ],
         ],
         #選択肢2
         [
           [
-            "",
+            "私:「とりあえず、リーリアの家に行ってみます。何かあったのかも。」",
+            "店長:「そうかい。行ってらっしゃい。」",
+            "私:「はい、行ってきます。」"
           ],
+          [
+            "リーリアの家に着いた。",
+            "家からはガサガサと大きな音がしている。",
+            "\n\nとりあえず中に入ってみよう。",
+            "\n\n私:「リーリア？」",
+            "\n\n返事はない。",
+            "\n\n私:「入るよ、、、」",
+            "\n\n\n\n家の中は綺麗だった。とりあえず音のする方へ行ってみる。",
+            "\n\n\n\nそこには押し入れで何やらガサガサしているリーリアがいた。",           
+          ],
+          [
+            "私:「リーリア、何してるの？」",
+            "リーリア:「あっ！！ごめん気づかなかった。」",
+            "私:「そんなことより何してるの？」",
+            "リーリア:「いや、、あの、、ちょっと探し物してて。」",
+            "私:「今日はいつもの店行かないの？」",
+            "リーリア:「後で行くよ。先行ってて。」",
+            "私:「分かった。とりあえず無事で良かった。」",
+            "リーリア:「無事？ハハハ、大丈夫だよ、私強いし。」",
+            "私:「そう、じゃあ先行ってるよ。」",
+            "リーリア:「はいよ～。」",
+            "そう言ってリーリアの家を後にした。",
+            "その後しばらく待ったがリーリアは店には現れなかった。",
+            "\n\nリーリアの好感度が大幅に上がった。",
+            "\n\n3時間経過した。"
+          ]
         ],
         #選択肢3
         [
           [
-            "",
+            "私:「とりあえずリーリアを探しに言ってくる。何かあったかもしれないし。」",
+            "店長:「そうかい。行ってらっしゃい。」",
+            "そうして店を出た",
+            "とりあえず河川敷に行ってみよう。",
+            "理由なんてない、なんとなくそう思ったから。",
+            "\n\n河川敷に着いたが誰もいなかった。",
+            "\n\n何でここに来ようと思ったんだろう？",
+            "\n\n\n\nリーリアの好感度が少し上がった。",
+            "\n\n\n\n1時間が経過した。",
           ],
         ],
-        #会話4(liria)
+        #成功(liria)
         [
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "リーリア:「あっ、やっと来た。」",
+            "私:「別に待ち合わせしてないでしょ。」",
+            "リーリア:「そんなことより、早く座る座る。」",
+            "今日のリーリアはやけに起源が良いように見える。",
+            "私:「どうしたのリーリア。何か変だよ。」",
+            "リーリア:「ふふふふ、じゃーん。これ覚えてる。」",
+            "リーリアが出してきたのは1つのペンダントだ。",
           ],
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "私:「これ、、、」",
+            "リーリア:「そう！これ君が初めて私にくれたプレゼント。」",
+            "私:「まさか、、、」",
+            "リーリア:「昨日これ探してたからお店来れなかったの。」",
+            "私:「そうだったんだ。」",
+            "リーリア:「これあげる。」",
+            "私:「いいの？」",
+            "リーリア:「私にはこれくらいしか出来ないから。」",
+            "\n\nリーリアに思い出のペンダントを貰った。"
+          ],
+          [ 
+            "「思い殿ペンダント」\n\n私が初めてリーリアにプレゼントしたペンダント。\n経験値が2倍になる。",
           ],
         ],
-        #選択肢1
+        #失敗(liria)
         [
           [
-            "",
+            "店に入った。",
+            "リーリアはいなかった。",
+            "私:「店長！リーリアは今日も来てないの？」",
+            "店長:「あの子最近全然来ないのよ。前は毎日来てたのに。」",
+            "私:「そうなんだ。」",
+            "それから、私がリーリアに逢うことは無かった。"
           ],
         ],
-        #選択肢2
+        #encountマックス
         [
           [
-            "",
-          ],
-        ],
-        #選択肢3
-        [
-          [
-            "",
+            "もう行かなくて良いだろう。",
           ],
         ],
         #会話1(srag)
         [
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "良いクエストがないかとギルドに来たものの、あまり良いものは無かった。",
+            "私:「はぁ、だめか。地道に稼ぐしかないのかなー。」",
+            "???:「おう、久しぶりだな。」",
+            "突然話をかけられ振り向くと見覚えのある奴がいた。",
+            "私:「おう、スラグ！！」",
+            "この見た目は凄いいかつい男はスラグという冒険者だ。",
+            "私がギルドで初めて出来た友達であり、正直唯一のギルド友達だ。",
+            "スラグ:「浮かない顔してるがどうしたんだ？」",
+            "私:「いやー、お金か経験値がいち早く欲しいんだけど、\n\n良いクエストが無くて。」",
+            "\n\nスラグ:「ほう、、、」",
+            "\n\n何かスラグが悪いことを考えてる気がする。"
           ],
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "スラグ:「そんなお前に朗報だ。」",
+            "私:「え？」",
+            "スラグ:「何か最近、新しいダンジョンが見つかったんだよ。\n\nでな、そのダンジョンにはどうやらお金を増やせる宝があるらしいだよ。」",
+            "\n\n私:「まさか？」",
+            "\n\nスラグ:「そう！それを見つけに行こうってことだよ。\n\nただし、そのダンジョンでは経験値が一切手に入らないらしい。」",
+            "\n\n\n\n私:「つまり？」",
+            "\n\n\n\nスラグ:「そう！見つけない限りずっと無駄骨ってこと。」",
           ],
         ],
         #選択肢1
         [
           [
-            "",
+            "私:「そのダンジョン、私も参加するよ。」",
+            "スラグ:「そうかそうか。そう言ってくれると思ったぜ。」",
+            "私:「その代わり、探索時間は毎回1時間でお願い。」",
+            "スラグ:「少し短い気もするが、まぁしゃあないな。」",
+            "スラグとダンジョン調査の書類を提出した",
+            "手続きに手間取って1時間かかってしまった。",
           ],
         ],
         #選択肢2
         [
           [
-            "",
+            "私:「断る。そんな余裕はない。」",
+            "スラグ:「そうか、じゃあ他の奴探してみるか。話聞いてくれてありがとな。」",
+            "そう言ってスラグは立ち去った。",
+            "30分経過した。",
           ],
         ],
         #選択肢3
         [
           [
-            "",
+            "私:「他にも何か秘密あるでしょ、それ。」",
+            "スラグ:「ないよ別に。\n\n強いて言えば、そこのモンスターは強力でギルドも調査手間取ってるらしいってくらいだ.」",
+            "\n\n私:「でもそれ、逆に言うと、、、」",
+            "\n\nスラグ:「そう！未発見の他の宝もあるかもしれないって事だ。」",
+            "\n\n私:「よし乗った。私もそのダンジョン調査に参加するよ。」",
+            "\n\nスラグ:「そうかそうか、じゃあ手続きしに行こうぜ。」",
+            "\n\nスラグとダンジョン調査の書類を提出した",
+            "\n\n30分経過した。"
           ],
         ],
         #会話2(srag)
         [
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "スラグ:「おっ、来たか。じゃあ行きますか。」",
+            "私:「うん、行こう。」",
           ],
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "スラグ:「そういえば、何でお前良いクエスト探してたんだ？」",
+            "私:「実は、魔王討伐の任務受けちゃったんだよ。」",
+            "スラグ:「魔王！？マオウってあの魔王か？」",
+            "私:「そう、その魔王だよ。\n\nだから急いでレベル上げとかしなきゃ行けないんだ。」",
+            "\n\nスラグ:「そうか、、、じゃあさっさと見つけちまおう。」",
+            "\n\n私:「そうだね。」",
+            "\n\nさて、分かれ道か、、、"
           ],
         ],
         #選択肢1
         [
           [
-            "",
+            "私:「左に行こう。」",
+            "スラグ:「根拠は？」",
+            "私:「無い。」",
+            "スラグ:「よし、行こう。」",
+            "\n\n左の道に行ってすぐ、異変に気が付いた。",
+            "\n\n私:「止まって。」",
+            "\n\nスラグ:「どうした。」",
+            "\n\n私:「何か空気がおかしい。」",
+            "\n\n少し顔を出し、前方を見据えた。",
+            "\n\nそこには、ドラゴンが一人立ちはだかるように立っていた。",
+            "\n\nスラグ:「あれはアシッド・ドラゴンだな。」",
+            "\n\nアシッド・ドラゴンは上級の冒険者でも苦戦するレベルのモンスターだが、",
+          ],
+          [
+            "スラグ:「今回はこのくらいで引き上げて準備しよう。」",
+            "スラグの判断は正しい、アシッド・ドラゴンは行動する度酸を吐き出す。",
+            "そのため、基本的には長期戦になるほどこちらが不利になってしまう。",
+            "私:「そうだな、今回は引き上げよう。」",
+            "\n\n私たちはダンジョンを引き上げた。",
+            "\n\n1時間経過した。"
           ],
         ],
         #選択肢2
         [
           [
-            "",
+            "しばらく真ん中の道を進むと、一つのボタンがあった。",
+            "スラグ:「押してみるか？」",
+            "私:「・・・」",
+            "おそらくスラグは押す気はない。",
+            "スラグがみたいのはボタンを押すときに発生する罠を確認しておきたいのだ。",
+            "私:「慎重にな。」",
+            "スラグ:「分かってるって。」",
           ],
+          [
+            "スッ",
+            "\n\nスラグの足元から音がした。",
+            "\n\nスラグ:「え？」",
+            "\n\n瞬間,",
+            "\n\n\n\nドーーン",
+            "\n\n\n\n\n\nスラグの足元が爆発した。",
+            "\n\n\n\n\n\n私:「スラグ！！！！」",
+            "\n\n\n\n\n\nスラグ:「いってぇ。」",
+          ],
+          [
+            "スラグの脚はぼろぼろになっていた。",
+            "私:「とりあえずギルドに帰るぞ」",
+            "スラグ:「ちくしょう、すまねえ。俺のミスだ。」",
+            "私:「しょうかないよ。とりあえず今回はこのダンジョン諦めよう。」",
+            "スラグ:「・・・」",
+            "何も言わない。私たちはギルドに帰り、スラグの処置をしてもらった。",
+            "\n\n30分経過した。"
+          ]
         ],
         #選択肢3
         [
           [
-            "",
+            "右の道をしばらく歩いて気が付いた。",
+            "私:「ここ迷路じゃない？」",
+            "スラグ:「そうだな、とりあえず抜けるまではダンジョン抜けれねえな。」",
+            "私:「しょうがない、攻略しよう。」",
+            "\n\nそこから2時間程かけて私たちは迷路を抜けた。",
+          ],
+          [
+            "私:「止まって。」",
+            "スラグ:「どうした。」",
+            "私:「何か空気がおかしい。」",
+            "少し顔を出し、前方を見据えた。",
+            "そこには、ドラゴンが一人立ちはだかるように立っていた。",
+            "スラグ:「あれはアシッド・ドラゴンだな。」",
+            "アシッド・ドラゴンは上級の冒険者でも苦戦するレベルのモンスターだが、",
+            "スラグ:「今回はこのくらいで引き上げて準備しよう。」",
+            "スラグの判断は正しい、アシッド・ドラゴンは行動する度酸を吐き出す。",
+            "そのため、基本的には長期戦になるほどこちらが不利になってしまう。",
+            "私:「そうだな、今回は引き上げよう。」",
+            "\n\n私たちはダンジョンを引き上げた。",
+            "\n\n2時間経過した。"
           ],
         ],
-        #会話3(srag)
+        #成功(srag)
         [
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "前回のルートから、あのドラゴンの近くまで向かった。",
+            "スラグ:「よし、じゃあ始めるぞ。」",
+            "スラグは100個近い爆弾の準備を始めた。",
+            "スラグはボマーという役職で、爆弾を駆使して戦っている。",
+            "その腕前は一級品で、多人数パーティでも問題なく戦える。"
           ],
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-          ],
-        ],
-        #選択肢1
-        [
-          [
-            "",
-          ],
-        ],
-        #選択肢2
-        [
-          [
-            "",
-          ],
-        ],
-        #選択肢3
-        [
-          [
-            "",
-          ],
-        ],
-        #会話4(srag
-        [
-          [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "スラグ:「5、、4、、、3、、、2、、1、、Go」",
+            "その瞬間、スラグは大量の爆弾をドラゴンに投げつけた。",
+            "爆発の度、ドラゴンから酸が飛び出しているのが分かる。",
+            "ドラゴンがこちらに近づいてきた刹那、",
+            "\n\nドーーン",
+            "\n\n\n\nスラグが仕掛けていた設置型爆弾が軌道した。",
           ],
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "スラグ:「今だ！！！」",
+            "私:「くらええええええええ！！！！」",
+            "渾身の一撃をドラゴンの首めがけてはなった。",
+            "\n\nドラゴンの首は切断され、倒れた。",
+            "\n\nスラグ:「よっっしゃあああああ！！」\n\n私:「やったああああああああ！！」",
           ],
-        ],
-        #選択肢1
-        [
           [
-            "",
+            "ドラゴンを討伐した私たちは、奥にあった扉を開けた。",
+            "そこには、一つの腕輪があった。",
+            "スラグ:「これだけか？」",
+            "私:「これがお金を増やす宝。」",
+            "スラグ:「これお前にやるよ。」",
+            "私:「いいのか？ドラゴンを倒せたのはスラグのおかげなのに。」",
+            "スラグ:「とどめをさしたのはお前だろ。じゃあお前が使え。」",
+            "私:「ありがとう。使わせてもらいます。」",
+            "スラグ:「おう、貸し1な。魔王、絶対倒せよ。」",
+            "私:「ああ、任せろ。」"
           ],
-        ],
-        #選択肢2
-        [
           [
-            "",
-          ],
-        ],
-        #選択肢3
-        [
-          [
-            "",
-          ],
+            "国王の腕輪\n\nかつての国王が愛用していたという腕輪。宝石や金が埋め込まれている。\nお金の取得量が2倍になる。",
+          ]
         ],
         #会話1(魔王戦闘前)
         [
@@ -620,16 +782,7 @@ class Story
         #会話2(魔王戦闘後)
         [
           [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-          ],
-          [
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
-            "たちつてと",
+            "こうしてこの物語は終焉を迎えた。",
           ],
         ],
       ]
@@ -1302,7 +1455,7 @@ class Field
     end
   end
   #バトルメイン表示
-  def battle_now(hero,enemy,field,merchant,first,diff_level)
+  def battle_now(hero,enemy,field,merchant,first,diff_level,liria,srag)
     #あらゆる状態をリセット
     hero.limit_turn = 12
     hero.status = 0
@@ -1328,7 +1481,7 @@ class Field
     #enemy.bossflag = true
     #
     enemy.set_enemy
-    enemy.set_status(diff_level,hero,field)
+    enemy.set_status(diff_level,hero,field,liria,srag)
     #「～」が現れた！
     field.entry_enemy(hero,enemy,field)
   
@@ -2095,7 +2248,7 @@ class Enemy
     end
   end
   #ステータス設定
-  def set_status(stage_level,hero,field)
+  def set_status(stage_level,hero,field,liria,srag)
     #HP
     @hp = ((stage_level * 40)) + (@type * (rand(2..5) * 10)) 
     #ちから
@@ -2121,9 +2274,17 @@ class Enemy
     elsif field.enemy_level == 1
       @exp = @exp/2
     end
-    @exp = @exp.to_i
+    if liria.party==true
+      @exp=@exp.to_i*2
+    else
+      @exp = @exp.to_i
+    end
     #お金
-    @money = (@exp / 1.5) * 2.5
+    if srag.party==true
+      @money = (@exp / 1.5) * 5
+    else
+      @money = (@exp / 1.5) * 2.5
+    end
     #ステータス調整
     if hero.level == 1 && @type != 2
       @hp *= 0.5
@@ -2903,7 +3064,7 @@ Window.loop do
     Window.draw_alpha(50,30, frame, 128)
   #バトル
   elsif progress==5
-    field.battle_now(hero,enemy,field,merchant,first,diff_level)
+    field.battle_now(hero,enemy,field,merchant,first,diff_level,liria,srag)
     progress=8
   #ステータスツリー
   elsif progress==6
@@ -2935,40 +3096,53 @@ Window.loop do
             branch=0
           end
         elsif liria.encount==3
-          if story.tale(27,picture)==1
-            progress=13
+          if liria.love>=100
+            if story.tale(27,picture)==1
+              liria.party=true
+              progress=13
+              branch=0
+            end
+          elsif liria.love<100
+            if story.tale(28,picture)==1
+              progress=13
+              branch=0
+            end
+          end
+        else
+          if story.tale(29,picture)==1
+            progress=7
             branch=0
           end
         end
     #選択2
     elsif branch==2
         if srag.encount==0
-          if story.tale(31,picture)==1
+          if story.tale(30,picture)==1
             progress=14
             branch=0
           end
         elsif srag.encount==1
-          if story.tale(35,picture)==1
+          if story.tale(34,picture)==1
             progress=15
             branch=0
           end
         elsif srag.encount==2
-          if story.tale(39,picture)==1
-            progress=16
-            branch=0
+          if story.tale(38,picture)==1
+              srag.party=true
+              progress=17
+              branch=0
           end
-        elsif srag.encount==3
-          if story.tale(43,picture)==1
-            progress=17
+        else
+          if story.tale(29,picture)==1
+            progress=4
             branch=0
           end
         end
-        #選択3
-      elsif branch==3
-        branch=0
-        progress=4
-      end
-    #progress=8
+    #選択3
+    elsif branch==3
+      branch=0
+      progress=4
+    end
   #行動終わり
   elsif progress==8
     if branch==1
@@ -2979,7 +3153,7 @@ Window.loop do
       end
     elsif branch==2
       if story.tale(6,picture)==1
-        clock.now_time=clock.now_time+720
+        clock.now_time=clock.now_time+120
         progress=4
         branch=0
       end
@@ -3044,8 +3218,8 @@ Window.loop do
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
     Window.draw_alpha(50,30, frame, 128)
     if branch==0
-      message("選択肢",450,80,@font)
-      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+      message("なんて言おう",450,80,@font)
+      branch=judge("駄々をこねる","安心させる","とりあえずご飯を食べる",judge_frame,judge_frame_in)
     end
     #選択1
     if branch==1
@@ -3053,8 +3227,8 @@ Window.loop do
         branch=3
         progress=8
         liria.encount=liria.encount+1
-        #liria.love=liria.love+
-        #clock.now_time=clock.now_time+
+        liria.love=liria.love-10
+        clock.now_time=clock.now_time+60
       end
     #選択2
     elsif branch==2
@@ -3062,8 +3236,8 @@ Window.loop do
         branch=3
         progress=8
         liria.encount=liria.encount+1
-        #liria.love=liria.love+
-        #clock.now_time=clock.now_time+
+        liria.love=liria.love+20
+        clock.now_time=clock.now_time+30
       end
     #選択3
     elsif branch==3
@@ -3071,8 +3245,8 @@ Window.loop do
         branch=3
         progress=8
         liria.encount=liria.encount+1
-        #liria.love=liria.love+
-        #clock.now_time=clock.now_time+
+        liria.love=liria.love+10
+        clock.now_time=clock.now_time+120     
       end
     end
   #会話2(rilia2)
@@ -3080,8 +3254,8 @@ Window.loop do
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
     Window.draw_alpha(50,30, frame, 128)
     if branch==0
-      message("選択肢",450,80,@font)
-      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+      message("どうしよう",450,80,@font)
+      branch=judge("パスタを選ぶ","グラタンを選ぶ","シェアをする",judge_frame,judge_frame_in)
     end
     #選択1
     if branch==1
@@ -3089,8 +3263,8 @@ Window.loop do
         branch=3
         progress=8
         liria.encount=liria.encount+1
-        #liria.love=liria.love+
-        #clock.now_time=clock.now_time+
+        liria.love=liria.love+20
+        clock.now_time=clock.now_time+30
       end
     #選択2
     elsif branch==2
@@ -3098,8 +3272,8 @@ Window.loop do
         branch=3
         progress=8
         liria.encount=liria.encount+1
-        #liria.love=liria.love+
-        #clock.now_time=clock.now_time+
+        liria.love=liria.love+10
+        clock.now_time=clock.now_time+30
       end
     #選択3
     elsif branch==3
@@ -3107,8 +3281,8 @@ Window.loop do
         branch=3
         progress=8
         liria.encount=liria.encount+1
-        #liria.love=liria.love+
-        #clock.now_time=clock.now_time+
+        liria.love=liria.love-20
+        clock.now_time=clock.now_time+30
       end
     end
     #会話3(rilia3)
@@ -3116,8 +3290,8 @@ Window.loop do
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
     Window.draw_alpha(50,30, frame, 128)
     if branch==0
-      message("選択肢",450,80,@font)
-      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+      message("どうしよう",450,80,@font)
+      branch=judge("とりあえず何か食べる","リーリアの家に行く","河川敷に行く",judge_frame,judge_frame_in)
     end
     #選択1
     if branch==1
@@ -3125,8 +3299,8 @@ Window.loop do
         branch=3
         progress=8
         liria.encount=liria.encount+1
-        #liria.love=liria.love+
-        #clock.now_time=clock.now_time+
+        liria.love=liria.love-50
+        clock.now_time=clock.now_time+120
       end
     #選択2
     elsif branch==2
@@ -3134,8 +3308,8 @@ Window.loop do
         branch=3
         progress=8
         liria.encount=liria.encount+1
-        #liria.love=liria.love+
-        #clock.now_time=clock.now_time+
+        liria.love=liria.love+50
+        clock.now_time=clock.now_time+180
       end
       #選択3
     elsif branch==3
@@ -3143,80 +3317,48 @@ Window.loop do
         branch=3
         progress=8
         liria.encount=liria.encount+1
-        #liria.love=liria.love+
-        #clock.now_time=clock.now_time+
+        liria.love=liria.love+10
+        clock.now_time=clock.now_time+60
       end
     end
-    #会話4(rilia4)
-    elsif progress==13
-      Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
-      Window.draw_alpha(50,30, frame, 128)
-      if branch==0
-        message("選択肢",450,80,@font)
-        branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
-      end
-      #選択1
-      if branch==1
-        if story.tale(28,picture)==1
-          branch=3
-          progress=8
-          liria.encount=liria.encount+1
-          #liria.love=liria.love+
-          #clock.now_time=clock.now_time+
-        end
-      #選択2
-      elsif branch==2
-        if story.tale(29,picture)==1
-          branch=3
-          progress=8
-          liria.encount=liria.encount+1
-          #liria.love=liria.love+
-          #clock.now_time=clock.now_time+
-        end
-      #選択3
-      elsif branch==3
-        if story.tale(30,picture)==1
-          branch=3
-          progress=8
-          liria.encount=liria.encount+1
-          #liria.love=liria.love+
-          #clock.now_time=clock.now_time+
-        end
-      end
+  #会話4(rilia4)
+  elsif progress==13
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
+    Window.draw_alpha(50,30, frame, 128)
+    branch=3
+    progress=8
+    liria.encount=liria.encount+1
   #会話1(srag1)
   elsif progress==14
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
     Window.draw_alpha(50,30, frame, 128)
     if branch==0
-      message("選択肢",450,80,@font)
-      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+      message("どうする？",450,80,@font)
+      branch=judge("行く","行かない","もう少し話を聞く",judge_frame,judge_frame_in)
     end
     #選択1
     if branch==1
-      if story.tale(32,picture)==1
+      if story.tale(31,picture)==1
         branch=3
         progress=8
         srag.encount=srag.encount+1
-        #srag.love=srag.love+
-        #clock.now_time=clock.now_time+
+        clock.now_time=clock.now_time+60
       end
     #選択2
     elsif branch==2
+      if story.tale(32,picture)==1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+5
+        clock.now_time=clock.now_time+30
+      end
+    #選択3
+    elsif branch==3
       if story.tale(33,picture)==1
         branch=3
         progress=8
         srag.encount=srag.encount+1
-        #srag.love=srag.love+
-        #clock.now_time=clock.now_time+
-      end
-    #選択3
-    elsif branch==3
-      if story.tale(34,picture)==1
-        branch=3
-        progress=8
-        srag.encount=srag.encount+1
-        #srag.love=srag.love+
-        #clock.now_time=clock.now_time+
+        clock.now_time=clock.now_time+30
       end
     end
   #会話2(srag2)
@@ -3224,119 +3366,52 @@ Window.loop do
     Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
     Window.draw_alpha(50,30, frame, 128)
     if branch==0
-      message("選択肢",450,80,@font)
-      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
+      message("どこに行く？",450,80,@font)
+      branch=judge("左","真ん中","右",judge_frame,judge_frame_in)
     end
     #選択1
     if branch==1
-      if story.tale(36,picture)==1
+      if story.tale(35,picture)==1
         branch=3
         progress=8
         srag.encount=srag.encount+1
-        #srag.love=srag.love+
-        #clock.now_time=clock.now_time+
+        clock.now_time=clock.now_time+60
       end
     #選択2
     elsif branch==2
+      if story.tale(36,picture)==1
+        branch=3
+        progress=8
+        srag.encount=srag.encount+5
+        clock.now_time=clock.now_time+30
+      end
+    #選択3
+    elsif branch==3
       if story.tale(37,picture)==1
         branch=3
         progress=8
         srag.encount=srag.encount+1
-        #srag.love=srag.love+
-        #clock.now_time=clock.now_time+
-      end
-    #選択3
-    elsif branch==3
-      if story.tale(38,picture)==1
-        branch=3
-        progress=8
-        srag.encount=srag.encount+1
-        #srag.love=srag.love+
-        #clock.now_time=clock.now_time+
+        clock.now_time=clock.now_time+120
       end
     end
     #会話3(srag3)
-  elsif progress==16
-    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
-    Window.draw_alpha(50,30, frame, 128)
-    if branch==0
-      message("選択肢",450,80,@font)
-      branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
-    end
-    #選択1
-    if branch==1
-      if story.tale(40,picture)==1
-        branch=3
-        progress=8
-        srag.encount=srag.encount+1
-        #srag.love=srag.love+
-        #clock.now_time=clock.now_time+
-      end
-    #選択2
-    elsif branch==2
-      if story.tale(41,picture)==1
-        branch=3
-        progress=8
-        srag.encount=srag.encount+1
-        #srag.love=srag.love+
-        #clock.now_time=clock.now_time+
-      end
-      #選択3
-    elsif branch==3
-      if story.tale(42,picture)==1
-        branch=3
-        progress=8
-        srag.encount=srag.encount+1
-        #srag.love=srag.love+
-        #clock.now_time=clock.now_time+
-      end
-    end
-    #会話4(srag4)
     elsif progress==17
       Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.town_noon)
       Window.draw_alpha(50,30, frame, 128)
-      if branch==0
-        message("選択肢",450,80,@font)
-        branch=judge("選択1","選択2","選択3",judge_frame,judge_frame_in)
-      end
-      #選択1
-      if branch==1
-        if story.tale(44,picture)==1
-          branch=3
-          progress=8
-          srag.encount=srag.encount+1
-          #srag.love=srag.love+
-          #clock.now_time=clock.now_time+
-        end
-      #選択2
-      elsif branch==2
-        if story.tale(45,picture)==1
-          branch=3
-          progress=8
-          srag.encount=srag.encount+1
-          #srag.love=srag.love+
-          #clock.now_time=clock.now_time+
-        end
-      #選択3
-      elsif branch==3
-        if story.tale(46,picture)==1
-          branch=3
-          progress=8
-          srag.encount=srag.encount+1
-          #srag.love=srag.love+
-          #clock.now_time=clock.now_time+
-        end
-      end
+      branch=3
+      progress=8
+      srag.encount=srag.encount+1
+
     #魔王討伐
     elsif progress==18
-      if story.tale(47,picture)==1      
-        field.battle_now(hero,enemy,field,merchant,first,diff_level)
+      if story.tale(46,picture)==1      
+        field.battle_now(hero,enemy,field,merchant,first,diff_level,liria,srag)
         progress=19
       end
     #エンディング
     elsif progress==19
       #エンディング処理
-      if story.tale(48,picture)==1
+      if story.tale(47,picture)==1
         #エンディングロール
       end
     end
