@@ -48,7 +48,7 @@ class Node
         node_font = Font.new(20)
         for node_num in 0..28 do
             node = get_node(node_num)
-            Window.draw_scale(node.x+30, node.y+30, node_icon[node], 0.3, 0.3, z=2)
+            Window.draw_scale(node.x+30, node.y+30, @node_icon[node], 0.3, 0.3, z=2)
             if node.childeren[i].empty
                 break
             end
