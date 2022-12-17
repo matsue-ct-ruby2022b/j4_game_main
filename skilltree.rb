@@ -25,7 +25,7 @@ class SkillTree
             @x=x
             @y=y
         end
-        attr_accessor :node_num, :parent, :children, :effected_status, :effect_value, :need_money, :release_flag, :x, :y
+        attr_accessor :node_num, :node_name, :parent, :children, :effected_status, :effect_value, :need_money, :release_flag, :x, :y
     end
 
     def initialize
@@ -35,7 +35,7 @@ class SkillTree
         @max_depth = 3
         #スキルツリーのノード[ノードの名前,影響を与えるステータス,変化値,必要なゴールド,x座標,y座標]
         @tree_nodes = [
-               ["root","root",0,0,@root_x,@root_y],#0
+               ["魔王へ挑む者","root",0,0,@root_x,@root_y],#0
 
                ["HP+","hp",50,100,@root_x-100,@root_y-100],#1
                ["HP++","hp",100,200,@root_x-100,@root_y-200],#2
@@ -72,13 +72,13 @@ class SkillTree
         @root = nil
         @count = 0
         @node_icon={}
-        @node_icon["root"] = Image.load("images/shield1.png")#ルートノード画像
-        @node_icon["hp"] = Image.load("images/shield1.png")#HPノード画像
-        @node_icon["mp"] = Image.load("images/shield2.png")#MPノード画像
-        @node_icon["pow"] = Image.load("images/shield3.png")#POWERノード画像
-        @node_icon["bra"] = Image.load("images/money.png")#BRAINノード画像
-        @node_icon["def"] = Image.load("images/shield1.png")#DEFENCEノード画像
-        @node_icon["spe"] = Image.load("images/shield1.png")#SPEEDノード画像
+        @node_icon["root"] = Image.load("images/node_icons/root.png")#ルートノード画像
+        @node_icon["hp"] = Image.load("images/node_icons/hp1.png")#HPノード画像
+        @node_icon["mp"] = Image.load("images/node_icons/mp1.png")#MPノード画像
+        @node_icon["pow"] = Image.load("images/node_icons/pow1.png")#POWERノード画像
+        @node_icon["bra"] = Image.load("images/node_icons/bra1.png")#BRAINノード画像
+        @node_icon["def"] = Image.load("images/node_icons/def1.png")#DEFENCEノード画像
+        @node_icon["spe"] = Image.load("images/node_icons/spe1.png")#SPEEDノード画像
         @tree_back_img = Image.load("images/stone.jpg")
         
     end
@@ -109,6 +109,7 @@ class SkillTree
         
         if depth==0
             @root=node
+            @root.release_flag = 1
         end
 
         return node
@@ -151,6 +152,7 @@ class SkillTree
     def open_node(n,hero)
         node=get_node(n)
         node.release_flag = 1
+        hero.money -= node.need_money
         if node.effected_status == "hp"
             hero.hp_max += node.effect_value
             hero.hp = hero.hp_max
@@ -191,60 +193,97 @@ class SkillTree
                 end
                 Window.draw_line(node.x, node.y, node.children[i].x, node.children[i].y, line_color, z=1)
             end
-            Window.draw_scale(node.x-nodew, node.y-nodeh, @node_icon[node.effected_status], 0.3, 0.3,nodew,nodeh, z=2)
+            if node.release_flag == 0
+                Window.draw_scale(node.x-nodew, node.y-nodeh, @node_icon[node.effected_status], 0.15, 0.15,nodew,nodeh, z=2)
+            elsif node.release_flag == 1
+                Window.draw_scale(node.x-nodew, node.y-nodeh, @node_icon[node.effected_status], 0.15, 0.15,nodew,nodeh, z=2)
+            end
             if node.children.empty?
                 next
             end
         end
     end
 
-    def detail_print
+    def detail_print(n,hero) #選択されたノードを渡す
         detail_font = Font.new(20)
         ui_font = Font.new(32)
-        coin_img = Image.load("images/money.png")
-
+        node_release_button = Image.load("images/node_release_button.png")
         Window.draw_morph(0,0,1024,0,1024,768,0,768,@tree_back_img,alpha:100)#背景描画
-
+        node = get_node(n)
             x = Input.mouse_pos_x  # マウスカーソルのx座標
             y = Input.mouse_pos_y  # マウスカーソルのy座標
             detail_pos_y = 50 #説明文の1行目のy座標
-            #Window.draw_font(100, 100, "x : #{x}, y : #{y}", detail_font)
-            Window.draw_box_fill(800, 0, 1023, 767, C_WHITE, z=1)
-            Window.draw_font(870, 700, "強 化", ui_font, color:C_BLACK, z:2)
+            Window.draw_box_fill(801, 0, 1023, 767, C_WHITE, z=1) #220x767
 
-            #debug用変数,Nodeクラスのメンバを用いる
-            str1 = " HPが10増加します"
-            str2 = " -500G"
-            node_name = "HP+++"
-            Window.draw_font(850, detail_pos_y, "「#{node_name}」", Font.new(22), color:C_BLACK, z:2)
-            Window.draw_font(810, detail_pos_y + 30, "効果:", detail_font, color:C_BLACK, z:2)
-            Window.draw_font(810, detail_pos_y + 50, "#{str1}", detail_font, color:C_BLACK, z:2)
-            Window.draw_font(810, detail_pos_y + 80, "金額:", detail_font, color:C_BLACK, z:2)
-            Window.draw_font(810, detail_pos_y + 100, "#{str2}", detail_font, color:C_BLACK, z:2)
+            Window.draw_font(10, 10, "おわる:右クリック", detail_font, color:C_RED, z:2)
+            Window.draw_font(850, detail_pos_y, "「#{node.node_name}」", Font.new(22), color:C_BLACK, z:2)
+            if n != 0
+                Window.draw_font(810, detail_pos_y + 30, "効果:", detail_font, color:C_BLACK, z:2)
+                Window.draw_font(810, detail_pos_y + 50, "#{node.effected_status}が#{node.effect_value}増加します", detail_font, color:C_BLACK, z:2)
+                Window.draw_font(810, detail_pos_y + 80, "金額:", detail_font, color:C_BLACK, z:2)
+                Window.draw_font(810, detail_pos_y + 100, "#{node.need_money}G", detail_font, color:C_BLACK, z:2)
+            end
+            if hero.money >= node.need_money
+                Window.draw_font(810, detail_pos_y + 200, "所持金:#{hero.money}G", detail_font, color:C_BLACK, z:2)
+            else
+                Window.draw_font(810, detail_pos_y + 200, "所持金:#{hero.money}G", detail_font, color:C_RED, z:2)
+            end
+            if (node.parent == nil || node.parent.release_flag == 1) && hero.money >= node.need_money
+                alpha = 255
+            else
+                alpha = 50
+            end
+            if node.release_flag == 1
+                Window.draw_font(870, detail_pos_y + 150, "開放済み", detail_font, color:C_RED, z:2)
+            else
+                Window.draw_alpha(911-node_release_button.width/2, 620,node_release_button, alpha, z=2) #開放ボタンの表示
+            end
             #Window.draw_scale(890, 120, coin_img, 0.1, 0.1, z=5)
 
-            if 860 <= x && x <= 950 && 640 <= y && y <= 680
+            if 830 <= x && x <= 990 && 620 <= y && y <= 700
                 #コマンド選択画像
-                Window.draw_box(860, 690, 950, 740, C_BLACK, z=4)
-                if Input.mousePush?(M_LBUTTON)
+                Window.draw_box(911-node_release_button.width/2 - 5, 615, 911 + node_release_button.width/2 + 5, 615 + node_release_button.height + 5, C_BLACK, z=2)
+                
+                if Input.mousePush?(M_LBUTTON) && node.parent != nil && node.parent.release_flag == 1 && hero.money >= node.need_money
                     #強化処理
-                    #break
+                    open_node(n,hero)
                 end
             end
+    end
+
+    
+    #マウスクリックされたら呼ばれる, ノード番号を返す
+    def click_node(x,y,node) #nodeは前にクリックされたノードを入れる
+        x = Input.mouse_pos_x  # マウスカーソルのx座標
+        y = Input.mouse_pos_y  # マウスカーソルのy座標
+
+        @node_max_num.times do |i|
+            #マウスカーソルがノードi内にあるか
+            if @tree_nodes[i][4] -50 < x && x < @tree_nodes[i][4] + 50
+                if @tree_nodes[i][5] -50 < y && y < @tree_nodes[i][5] + 50
+                    return i
+                end
+            end
+        end
+        return node #node以外をクリックした時は前にクリックされたノードを返す
     end
 end 
 
 def skilltree_loop(tree,hero)
+    selected_node = 0 #初期化, rootにする
+    
     Window.loop do
-        tree.detail_print
+        x=Input.mouse_pos_x
+        y=Input.mouse_pos_y
         tree.node_print
         if Input.mouse_push?(M_LBUTTON)
-            tree.open_node(4,hero)
-            tree.open_node(7,hero)
-            tree.open_node(11,hero)
-            tree.open_node(14,hero)
-            tree.open_node(18,hero)
-            tree.open_node(25,hero)
+            selected_node = tree.click_node(x,y,selected_node)
+        end
+        if selected_node != nil #selected_nodeがnil以外の時
+            #Window.draw_font(870, 50, "#{selected_node}", Font.new(32), color:C_BLACK, z:2) #debug用
+            tree.detail_print(selected_node,hero)
+        end
+        if Input.mouse_push?(M_RBUTTON)
             return
         end
     end
