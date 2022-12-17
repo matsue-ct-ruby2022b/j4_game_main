@@ -105,6 +105,10 @@ https://smallseotools.com/ja/reverse-image-search/
 https://convertio.co/ja/download/362ec84f2d5c61d52c85035a0504c00e152732/
 <br>
 <br>
+・スキルツリーのアイコン<br>
+https://game-icons.net/
+<br>
+<br>
 <br>
 ※本Gitリポジトリは、学校の課題に際して作成したものです。<br>
 　実在する団体、事件等とは一切関わりはありません。<br>
