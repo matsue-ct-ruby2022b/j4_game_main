@@ -5,6 +5,13 @@ require 'dxruby'
 Window.width = 1024
 Window.height = 768
 
+#BGM設定
+$title_bgm = Sound.new("musics/title.wav")
+$battle1_bgm = Sound.new("musics/battle_1.wav")
+$battle2_bgm = Sound.new("musics/battle_2.wav")
+$boss_bgm = Sound.new("musics/boss_1.wav")
+$end_bgm = Sound.new("musics/end_1.wav")
+
 TITLE=50
 SIZE=22
 SIZE1=20
@@ -107,6 +114,8 @@ end
 #タイトル画面
 def title_start(picture,font)
   title_font = Font.new(40)
+  #タイトル曲再生
+  $title_bgm.play
   Window.loop do
 
     #背景を描画
@@ -136,6 +145,7 @@ def title_start(picture,font)
       #コマンド選択画像
       Window.draw_box(425, 420, 590, 480, C_WHITE, z=4)
       if Input.mousePush?(M_LBUTTON)
+        $title_bgm.stop
         break
       end
     end
@@ -145,6 +155,7 @@ def title_start(picture,font)
       #コマンド選択画像
       Window.draw_box(420, 520, 605, 580, C_WHITE, z=4)
       if Input.mousePush?(M_LBUTTON)
+        $title_bgm.stop
         exit(0)
       end
     end
@@ -154,6 +165,7 @@ def title_start(picture,font)
       #コマンド選択画像
       Window.draw_box(442, 620, 571, 680, C_WHITE, z=4)
       if Input.mousePush?(M_LBUTTON)
+        $title_bgm.stop
         exit(0)
       end
     end
@@ -1200,12 +1212,6 @@ class Field
     Window.draw_font(172,545,"たたかう", command_font, fontcolor:[255,255,255],z:3)
     Window.draw_font(173,605,"ぼうぎょ", command_font, fontcolor:[255,255,255],z:3)
     Window.draw_font(183,665,"にげる",   command_font, fontcolor:[255,255,255],z:3)
-    #画像
-    #タイトル画面背景
-    title_img = Image.load("images/タイトル.jpg")
-    #タイトル画像
-    title_name = Image.load("images/title_logo.png")
-
     #キャラアイコン
     #女性キャラ1
     woman1_normal = Image.load("images/chara/woman1/face_normal.png")
@@ -1443,7 +1449,10 @@ class Field
       hero.exp += enemy.exp
       if hero.exp >= hero.need_exp
         hero.exp -= hero.need_exp
-        up_need = hero.need_exp * 0.3
+        #up_need = (hero.need_exp * 0.1)
+        #up_need = ((hero.level * 1))
+        up_need = 10
+        up_need = up_need.to_i
         hero.need_exp += up_need
         hero.need_exp = hero.need_exp.to_i
         #ステータス増加
@@ -1476,7 +1485,6 @@ class Field
       end
       exp_cnt += 1
     end
-    #hero.origin_def = hero.def *= 2
     new_level = hero.level #取得後のレベル
     new_power = hero.power.to_s.rjust(3)
     new_hp = hero.hp_max.to_s.rjust(3)
@@ -1486,6 +1494,9 @@ class Field
     new_brain = hero.brain.to_s.rjust(3)
     hero.origin_power = hero.power
     hero.power = hero.origin_power
+    #hero.def = new_def
+    hero.origin_def = hero.def * 2
+    hero.before_def = hero.def
     #レベルアップ表示
     if is_levelup != nil
       #クリック待ち
@@ -1667,6 +1678,8 @@ class Field
       #表示
       if enemy.type == 1
         Window.draw_font(405,230,"【ゴブリン】 が現れた！", entry_font,color:[255,255,255,255],z:3)
+      elsif enemy.bossflag == true
+        Window.draw_font(405,230,"【　魔王　】 が現れた！", entry_font,color:[255,255,255,255],z:3)
       end
       #クリックしたら
       if Input.mousePush?(M_LBUTTON)
@@ -2007,7 +2020,7 @@ class Hero
         hero.mp = 0 #mp全消費
       elsif num == 1 #聖戦の響き
         die_rand = rand(1..10)
-          if die_rand == 1 || die_rand == 2 || die_flag == 3
+          if (die_rand == 1 || die_rand == 2 || die_flag == 3) && enemy.bossflag != true
             die_flag = true #即死したか
             dmg = enemy.hp
             enemy.hp = 0
@@ -2189,10 +2202,10 @@ class Hero
           #HP残量でセリフ変化
           if field.turn == 1
             Window.draw_font(310,350,"ここまで辿りつく輩がいるとはのう・・・", intro_font, color:[255,255,255,255],z:16)
-          elsif hero.hp < (hero.hp_max * 0.2) #20%を下回ったら
+          elsif hero.hp < (hero.hp_max * 0.1) #10%を下回ったら
             Window.draw_font(410,350,"やすらかに眠れ", intro_font, color:[255,255,255,255],z:16)
           else
-            Window.draw_font(390,350,"まだまだこれから！", intro_font, color:[255,255,255,255],z:16)
+              Window.draw_font(430,350,"滅びよ！", intro_font, color:[255,255,255,255],z:16)
           end
           #クリックしたら
           if Input.mousePush?(M_LBUTTON)
@@ -3602,7 +3615,18 @@ Window.loop do
     Window.draw_alpha(50,30, frame, 128)
   #バトル
   elsif progress==5
+    bgm_rand = rand(1..2)
+    if bgm_rand == 1
+      $battle1_bgm.play
+    else
+      $battle2_bgm.play
+    end
     field.battle_now(hero,enemy,field,merchant,first,diff_level,liria,srag)
+    if bgm_rand == 1
+      $battle1_bgm.stop
+    else
+      $battle2_bgm.stop
+    end
     if hero.hp>0
       progress=8
     else 
@@ -3715,6 +3739,10 @@ Window.loop do
         clock.now_day=clock.now_day+1
         clock.now_time=0
         progress=4
+        #debug
+        #enemy.bossflag = true      
+
+
       end
     elsif clock.now_day==1
       if story.tale(9,picture)==1
@@ -3947,7 +3975,9 @@ Window.loop do
     #魔王討伐
     elsif progress==18
       if story.tale(39,picture)==1  
+        $boss_bgm.play
         field.battle_now(hero,enemy,field,merchant,first,diff_level,liria,srag)
+        $boss_bgm.stop
         if hero.hp>0
           progress=19
         else 
@@ -3958,8 +3988,10 @@ Window.loop do
     elsif progress==19
       #エンディング処理
       if story.tale(40,picture)==1
+        $end_bgm.play
         endroll
         gameclear
+        $end_bgm.stop
         break
       end
     elsif progress==99
