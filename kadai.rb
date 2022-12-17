@@ -1485,7 +1485,6 @@ class Enemy
     elsif field.enemy_level == 1
       @exp = @exp/2
     end
-    #@exp = @exp * 20
     @exp = @exp.to_i
     #お金
     @money = (@exp / 1.5) * 2.5
