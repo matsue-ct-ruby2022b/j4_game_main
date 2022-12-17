@@ -5,7 +5,7 @@ Window.height = 768
 Window.x = 0
 Window.y = 0
 class Node
-    attr_accessor :node_num, :parent, :child1, :child2, :child3, :child4, :status, :detail, :flag, :money, :x, :y, :node_icon[]
+    attr_accessor :node_num, :parent, :child1, :child2, :child3, :child4, :status, :detail, :flag, :money, :x, :y, #:node_icon[]
     def initialize
         @node_icon[0] = Image.load("images/shield1.png")
         @node_icon[1] = Image.load("images/shield2.png")

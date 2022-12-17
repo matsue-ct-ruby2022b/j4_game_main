@@ -111,7 +111,7 @@ class SkillTree
         if n>=NODE_MAX_NUM
             return -1
         end
-        if node.node_num == n
+        if node.node_num == n #rootノードだったら
             return node
         end
          
@@ -130,6 +130,61 @@ class SkillTree
         node=get_node(n)
         node.release_flag = 1
     end
+
+    def detail_print(node) #選択されたノードを渡す
+        detail_font = Font.new(20)
+        ui_font = Font.new(32)
+        coin_img = Image.load("images/money.png")
+
+        
+            x = Input.mouse_pos_x  # マウスカーソルのx座標
+            y = Input.mouse_pos_y  # マウスカーソルのy座標
+            detail_pos_y = 50 #説明文の1行目のy座標
+            #Window.draw_font(100, 100, "x : #{x}, y : #{y}", detail_font)
+            Window.draw_box_fill(800, 0, 1023, 767, C_WHITE, z=1)
+            Window.draw_font(870, 700, "#{node.effected_status}", ui_font, color:C_BLACK, z:2)
+
+            #debug用変数,Nodeクラスのメンバを用いる
+            str1 = " HPが10増加します"
+            str2 = " -500G"
+            node_name = "HP+++"
+            Window.draw_font(850, detail_pos_y, "「#{node.effected_status}」", Font.new(22), color:C_BLACK, z:2)
+            Window.draw_font(810, detail_pos_y + 30, "効果:", detail_font, color:C_BLACK, z:2)
+            Window.draw_font(810, detail_pos_y + 50, "#{str1}", detail_font, color:C_BLACK, z:2)
+            Window.draw_font(810, detail_pos_y + 80, "金額:", detail_font, color:C_BLACK, z:2)
+            Window.draw_font(810, detail_pos_y + 100, "#{str2}", detail_font, color:C_BLACK, z:2)
+            #Window.draw_scale(890, 120, coin_img, 0.1, 0.1, z=5)
+
+            if 860 <= x && x <= 950 && 640 <= y && y <= 680
+                #コマンド選択画像
+                Window.draw_box(860, 690, 950, 740, C_BLACK, z=4)
+                if Input.mousePush?(M_LBUTTON)
+                    #強化処理
+                    #break
+                end
+            end
+    end
+
+    #マウスクリックされたら呼ばれる, ノード番号を返す
+    def click_node(x,y)
+        x = Input.mouse_pos_x  # マウスカーソルのx座標
+        y = Input.mouse_pos_y  # マウスカーソルのy座標
+
+        NODE_MAX_NUM.times do |i|
+            #マウスカーソルがノードi内にあるか
+            if @tree_nodes[i][3] -15 < x && x < @tree_nodes[i][3] + 15
+                if @tree_nodes[i][4] -15 < y && y < @tree_nodes[i][4] + 15
+                    return i
+                end
+            end
+        end
+        return nil
+    end
+
+    def debug_print
+        puts "tree_nodes[0][0] = #{@tree_nodes[0][0]}"
+    end
+
 end 
 
 def my_draw_image(x,y,image)#中心座標で表示
@@ -138,13 +193,16 @@ end
 
 tree = SkillTree.new()
 tree.init
-#tree.show(tree.root)
+tree.show(tree.root)
 #tree.open_node(3)
 #node=tree.get_node(3)
 #puts "#{node.node_num},#{node.x},#{node.y},#{node.release_flag}"
+selected_node = NODE_MAX_NUM + 1 #初期化, nodeの最大値+1を持たせる
 Window.loop do
     x=Input.mouse_pos_x
     y=Input.mouse_pos_y
+
+    #表示関連
     Window.draw_box_fill(800, 0, 1023, 767, C_WHITE, z=1)
     Window.draw_font(850, 100, "「#{x},#{y}」", Font.new(22), color:C_BLACK, z:2)
     NODE_MAX_NUM.times do |i|
@@ -160,5 +218,12 @@ Window.loop do
         image.draw_font(10,10,"#{node.effected_status}",Font.new(20),C_BLACK)
         my_draw_image(node.x,node.y,image)
     end
- 
+
+    if Input.mouse_push?(M_LBUTTON)
+        selected_node = tree.click_node(x,y)
+    end
+    if(selected_node != NODE_MAX_NUM + 1) #selected_nodeの初期化時の数値以外だったた()
+        Window.draw_font(870, 50, "#{selected_node}", Font.new(32), color:C_BLACK, z:2)
+    end
+
 end
