@@ -3,10 +3,7 @@ require 'dxruby'
 Window.width=1024
 Window.height=768
 
-NODE_MAX_NUM = 29
-ROOT_X = (Window.width-200)/2
-ROOT_Y = Window.height/2
-MAX_DEPTH = 3
+
 
 def my_draw_image(x,y,image)#中心座標で表示
     Window.draw(x-image.width/2,y-image.height/2,image)
@@ -32,41 +29,45 @@ class SkillTree
     end
 
     def initialize
+        @node_max_num = 29
+        @root_x = (Window.width-200)/2
+        @root_y = Window.height/2
+        @max_depth = 3
         #スキルツリーのノード[ノードの名前,影響を与えるステータス,変化値,必要なゴールド,x座標,y座標]
         @tree_nodes = [
-               ["root","root",0,0,ROOT_X,ROOT_Y],#0
+               ["root","root",0,0,@root_x,@root_y],#0
 
-               ["HP+","hp",20,100,ROOT_X-100,ROOT_Y-100],#1
-               ["HP++","hp",50,200,ROOT_X-100,ROOT_Y-200],#2
-               ["HP+++","hp",120,500,ROOT_X-100,ROOT_Y-300],#3
-               ["HP++++","hp",150,700,ROOT_X-200,ROOT_Y-300],#4
-               ["MP+","mp",30,150,ROOT_X-200,ROOT_Y-100],#5
-               ["MP++","mp",70,300,ROOT_X-300,ROOT_Y-200],#6
-               ["MP+++","mp",200,700,ROOT_X-300,ROOT_Y-100],#7
+               ["HP+","hp",50,100,@root_x-100,@root_y-100],#1
+               ["HP++","hp",100,200,@root_x-100,@root_y-200],#2
+               ["HP+++","hp",150,500,@root_x-100,@root_y-300],#3
+               ["HP++++","hp",300,1000,@root_x-200,@root_y-300],#4
+               ["MP+","mp",30,150,@root_x-200,@root_y-100],#5
+               ["MP++","mp",70,300,@root_x-300,@root_y-200],#6
+               ["MP+++","mp",200,700,@root_x-300,@root_y-100],#7
 
-               ["ちから+","pow",10,100,ROOT_X+100,ROOT_Y-100],#8
-               ["ちから++","pow",30,200,ROOT_X+100,ROOT_Y-200],#9
-               ["ちから+++","pow",70,300,ROOT_X+100,ROOT_Y-300],#10
-               ["ちから++++","pow",100,500,ROOT_X+200,ROOT_Y-300],#11
-               ["ずのう+","bra",30,200,ROOT_X+200,ROOT_Y-100],#12
-               ["ずのう++","bra",70,300,ROOT_X+300,ROOT_Y-100],#13
-               ["ずのう+++","bra",100,500,ROOT_X+300,ROOT_Y-200],#14
+               ["ちから+","pow",10,100,@root_x+100,@root_y-100],#8
+               ["ちから++","pow",30,200,@root_x+100,@root_y-200],#9
+               ["ちから+++","pow",70,300,@root_x+100,@root_y-300],#10
+               ["ちから++++","pow",100,500,@root_x+200,@root_y-300],#11
+               ["ずのう+","bra",30,200,@root_x+200,@root_y-100],#12
+               ["ずのう++","bra",70,300,@root_x+300,@root_y-100],#13
+               ["ずのう+++","bra",100,500,@root_x+300,@root_y-200],#14
 
-               ["まもり+","def",10,100,ROOT_X-100,ROOT_Y+100],#15
-               ["まもり++","def",30,150,ROOT_X-200,ROOT_Y+100],#16
-               ["まもり+++","def",60,300,ROOT_X-300,ROOT_Y+100],#17
-               ["まもり++++","def",100,700,ROOT_X-300,ROOT_Y+200],#18
-               ["ちから+","pow",20,150,ROOT_X-100,ROOT_Y+200],#19
-               ["ちから++","pow",50,200,ROOT_X-100,ROOT_Y+300],#20
-               ["ちから++","pow",50,200,ROOT_X-200,ROOT_Y+300],#21
+               ["まもり+","def",10,100,@root_x-100,@root_y+100],#15
+               ["まもり++","def",30,150,@root_x-200,@root_y+100],#16
+               ["まもり+++","def",60,300,@root_x-300,@root_y+100],#17
+               ["まもり++++","def",100,700,@root_x-300,@root_y+200],#18
+               ["ちから+","pow",20,150,@root_x-100,@root_y+200],#19
+               ["ちから++","pow",50,200,@root_x-100,@root_y+300],#20
+               ["ちから++","pow",50,200,@root_x-200,@root_y+300],#21
 
-               ["そくど+","spe",10,100,ROOT_X+100,ROOT_Y+100],#22
-               ["そくど++","spe",20,150,ROOT_X+200,ROOT_Y+100],#23
-               ["そくど+++","spe",100,350,ROOT_X+300,ROOT_Y+100],#24
-               ["そくど++++","spe",200,700,ROOT_X+300,ROOT_Y+200],#25
-               ["まもり+","def",10,150,ROOT_X+100,ROOT_Y+200],#26
-               ["まもり++","def",30,150,ROOT_X+100,ROOT_Y+300],#27
-               ["まもり+++","def",60,300,ROOT_X+200,ROOT_Y+300]#28
+               ["そくど+","spe",10,100,@root_x+100,@root_y+100],#22
+               ["そくど++","spe",20,150,@root_x+200,@root_y+100],#23
+               ["そくど+++","spe",100,350,@root_x+300,@root_y+100],#24
+               ["そくど++++","spe",200,700,@root_x+300,@root_y+200],#25
+               ["まもり+","def",10,150,@root_x+100,@root_y+200],#26
+               ["まもり++","def",30,150,@root_x+100,@root_y+300],#27
+               ["まもり+++","def",60,300,@root_x+200,@root_y+300]#28
             ]
         @root = nil
         @count = 0
@@ -78,6 +79,7 @@ class SkillTree
         @node_icon["bra"] = Image.load("images/money.png")#BRAINノード画像
         @node_icon["def"] = Image.load("images/shield1.png")#DEFENCEノード画像
         @node_icon["spe"] = Image.load("images/shield1.png")#SPEEDノード画像
+        @tree_back_img = Image.load("images/stone.jpg")
         
     end
     attr_accessor :root
@@ -86,7 +88,7 @@ class SkillTree
     #tree = SkillTree.new()
     #tree.init
     def init(node=nil,depth=0,parent=nil)
-        if depth > MAX_DEPTH || @tree_nodes[@count] == nil
+        if depth > @max_depth || @tree_nodes[@count] == nil
             return nil
         end
         
@@ -98,7 +100,7 @@ class SkillTree
             child_num = 2;
         end
         
-        if depth < MAX_DEPTH
+        if depth < @max_depth
             child_num.times do |i|
                 @count+=1
                 node.children[i]=init(node.children,depth+1,node)
@@ -127,7 +129,7 @@ class SkillTree
     #引数のノード番号のノードが返ってくる
     #node = get_node(3)
     def get_node(n,node=@root)
-        if n>=NODE_MAX_NUM
+        if n>=@node_max_num
             return -1
         end
         if node.node_num == n
@@ -146,9 +148,27 @@ class SkillTree
     end
 
     #ノードを解放状態にする
-    def open_node(n)
+    def open_node(n,hero)
         node=get_node(n)
         node.release_flag = 1
+        if node.effected_status == "hp"
+            hero.hp_max += node.effect_value
+            hero.hp = hero.hp_max
+        elsif node.effected_status == "mp"
+            hero.mp_max += node.effect_value
+            hero.mp = hero.mp_max
+        elsif node.effected_status == "pow"
+            hero.power += node.effect_value
+            hero.origin_power += node.effect_value
+        elsif node.effected_status == "bra"
+            hero.brain += node.effect_value
+        elsif node.effected_status == "def"
+            hero.def += node.effect_value
+            hero.origin_def = hero.def * 2
+            hero.before_def += node.effect_value
+        elsif node.effected_status == "spe"
+            hero.speed += node.effect_value
+        end
     end
 
     def select_circle
@@ -183,7 +203,8 @@ class SkillTree
         ui_font = Font.new(32)
         coin_img = Image.load("images/money.png")
 
-        
+        Window.draw_morph(0,0,1024,0,1024,768,0,768,@tree_back_img,alpha:100)#背景描画
+
             x = Input.mouse_pos_x  # マウスカーソルのx座標
             y = Input.mouse_pos_y  # マウスカーソルのy座標
             detail_pos_y = 50 #説明文の1行目のy座標
@@ -213,10 +234,28 @@ class SkillTree
     end
 end 
 
-tree = SkillTree.new()
-tree.init
+def skilltree_loop(tree,hero)
+    Window.loop do
+        tree.detail_print
+        tree.node_print
+        if Input.mouse_push?(M_LBUTTON)
+            tree.open_node(4,hero)
+            tree.open_node(7,hero)
+            tree.open_node(11,hero)
+            tree.open_node(14,hero)
+            tree.open_node(18,hero)
+            tree.open_node(25,hero)
+            return
+        end
+    end
+end
 
+#tree = SkillTree.new()
+#tree.init
+
+=begin
 Window.loop do
     tree.detail_print
     tree.node_print
 end
+=end
