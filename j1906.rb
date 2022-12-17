@@ -7,6 +7,9 @@ Window.height = 768
 
 TITLE=50
 SIZE=22
+SIZE1=20
+SIZE2=50
+SIZE3=100
 
 @font=Font.new(SIZE,fontname="MS 明朝")
 
@@ -15,7 +18,220 @@ frame=Image.new(924,700,[0,0,0])
 
 judge_frame=Image.new(500,150,[255,255,255])
 judge_frame_in=Image.new(480,130,[0,0,0])
+###########################################j1916#######################################################
+def endroll
+	i = 0
+	text=50
+	
+	Window.loop do
 
+		@font1=Font.new(SIZE1,fontname="MS 明朝")
+		@font2=Font.new(SIZE2,fontname="MS 明朝")
+		
+		message("Program",text,820-i,@font2)
+		message("井山 剣心",text,1020-i,@font1)
+		message("Iyama Kenshin",text,1050-i,@font1)			
+		message("風穴 輔",text,1250-i,@font1)
+		message("Kazaana Tasuku",text,1280-i,@font1)
+		message("金築 孝典",text,1480-i,@font1)
+		message("kanetsuki Takanori",text,1510-i,@font1)			
+		message("久野 智貴",text,1710-i,@font1)
+		message("Kuno Tomoki",text,1740-i,@font1)
+		message("高橋 千賢",text,1940-i,@font1)			
+		message("Takahashi Chisato",text,1970-i,@font1)
+
+		message("タイトル・エンドロール制作",text,2170-i,@font2)
+		message("久野 智貴",text,2370-i,@font1)
+		message("Kuno Tomoki",text,2400-i,@font1)
+
+		message("ストーリー制作",text,2600-i,@font2)
+		message("井山 剣心",text,2800-i,@font1)
+		message("Iyama Kenshin",text,2830-i,@font1)
+
+		message("スキルツリー制作",text,3030-i,@font2)
+		message("風穴 輔",text,3230-i,@font1)
+		message("Kazaana Tasuku",text,3260-i,@font1)
+		message("金築 孝典",text,3460-i,@font1)
+		message("kanetsuki Takanori",text,3490-i,@font1)
+
+		message("バトル制作",text,3690-i,@font2)
+		message("高橋 千賢",text,3890-i,@font1)			
+		message("Takahashi Chisato",text,3920-i,@font1)
+
+		message("作曲",text,4120-i,@font2)
+		message("高橋 千賢",text,4320-i,@font1)			
+		message("Takahashi Chisato",text,4350-i,@font1)
+
+		message("総合取締役",text,4550-i,@font2)
+		message("高橋 千賢",text,4750-i,@font1)			
+		message("Takahashi Chisato",text,4780-i,@font1)
+
+		i += 1
+
+		if(i>4850)
+			return 
+		end
+	end
+end
+
+def gameclear
+	Window.loop do
+		Window.draw_box_fill(0,0,1024,768,[255,255,255],z=0)
+    @font3=Font.new(SIZE3,fontname="MS 明朝")
+    def message(mes,pos_x,pos_y,font)
+      Window.draw_font(pos_x,pos_y,"#{mes}",font,z:5,color:[255,0,0])    
+    end
+		message("GAME CLEAR!!",200,300,@font3)
+
+		if Input.key_push?(K_RETURN)
+			break
+		end
+	end
+end
+
+def gameover
+	Window.loop do
+		@font3=Font.new(SIZE3,fontname="MS 明朝")
+    def message(mes,pos_x,pos_y,font)
+      Window.draw_font(pos_x,pos_y,"#{mes}",@font,z:5,color:[255,0,0])    
+    end
+		message("GAME OVER",200,300,@font3)
+
+		if Input.key_push?(K_RETURN)
+			break
+		end
+	end
+
+end
+
+#タイトル画面
+def title_start(picture,font)
+  title_font = Font.new(40)
+  Window.loop do
+
+    #背景を描画
+    Window.draw_morph(0,0,1024,0,1024,768,0,768,picture.title_img)
+  
+    #タイトル表示
+    Window.draw_morph(300,0,724,0,724,400,300,400,picture.title_name)
+  
+    #マウス座標取得
+    x = Input.mouse_pos_x  # マウスカーソルのx座標
+    y = Input.mouse_pos_y  # マウスカーソルのy座標
+  
+    #マウス座標表示
+    #Window.draw_font(100, 100, "x : #{x}, y : #{y}", font)
+  
+    #コマンド選択背景
+    Window.draw_box_fill(390, 390, 630, 710, C_WHITE, z=2)
+    Window.draw_box_fill(395, 395, 625, 705, C_BLACK, z=3)
+  
+    #コマンド選択
+    Window.draw_font(435, 430, "はじめる", title_font, color:[255,255,255,255],z:4)
+    Window.draw_font(430, 530, "つづきから", title_font, color:[255,255,255,255],z:4)
+    Window.draw_font(452, 630, "おわる", title_font, color:[255,255,255,255],z:4)
+  
+    #はじめる
+    if x >= 435 && x <= 595 && y >= 430 && y <= 470
+      #コマンド選択画像
+      Window.draw_box(425, 420, 590, 480, C_WHITE, z=4)
+      if Input.mousePush?(M_LBUTTON)
+        break
+      end
+    end
+  
+    #エクストラ
+    if x >= 430 && x <= 630 && y >= 530 && y <= 570
+      #コマンド選択画像
+      Window.draw_box(420, 520, 605, 580, C_WHITE, z=4)
+      if Input.mousePush?(M_LBUTTON)
+        exit(0)
+      end
+    end
+  
+    #おわる
+    if x >= 452 && x <= 572 && y >= 630 && y <= 670
+      #コマンド選択画像
+      Window.draw_box(442, 620, 571, 680, C_WHITE, z=4)
+      if Input.mousePush?(M_LBUTTON)
+        exit(0)
+      end
+    end
+  
+  end
+end
+
+def diff_select(picture,font,field)
+  title_font = Font.new(40)
+  intro_font = Font.new(25)
+  Window.loop do
+
+    #背景を描画
+    #Window.draw_morph(0,0,1024,0,1024,768,0,768,chara_pick)
+
+    #下の枠
+    Window.draw_box_fill(80, 580, 946, 730, C_WHITE, z=0)
+
+    #マウス座標取得
+    x = Input.mouse_pos_x  # マウスカーソルのx座標
+    y = Input.mouse_pos_y  # マウスカーソルのy座標
+ 
+    #マウス座標表示
+    #Window.draw_font(100, 100, "x : #{x}, y : #{y}", font) 
+
+    #3つの枠
+    Window.draw_box_fill(360,  80, 660, 190, C_GREEN, z=1)
+    Window.draw_box_fill(360,  250, 660, 360, C_BLUE, z=1)
+    Window.draw_box_fill(360,  420, 660, 530, C_RED, z=1)
+
+    #白四角
+    Window.draw_box_fill(370,  90, 650, 180, C_WHITE, z=2)
+    Window.draw_box_fill(370,  260, 650, 350, C_WHITE, z=2)
+    Window.draw_box_fill(370,  430, 650, 520, C_WHITE,  z=2)
+
+    #表示
+    Window.draw_font(431, 120, "かんたん", title_font, color:[0,240,0], z:3)
+    Window.draw_font(431, 290, "へいぼん", title_font, color:[0,0,240], z:3)
+    Window.draw_font(432, 460, "きびしい", title_font, color:[240,0,0], z:3)
+
+    #カーソル判定表示
+    if x >= 360 && x <= 660 && y >= 80 && y <= 190
+      Window.draw_font(110, 600, "【かんたん】", intro_font, color:[0,240,0], z:1)
+      Window.draw_font(110, 640, "敵の攻撃力と最大HPが低下します。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "初心者向けの難易度です。", intro_font, color:[0,0,0], z:3)
+      if Input.mousePush?(M_LBUTTON)
+        diff_level = 1 #かんたん
+        break
+      end
+    elsif x >= 360 && x <= 660 && y >= 250 && y <= 360
+      Window.draw_font(110, 600, "【へいぼん】", intro_font, color:[0,0,240], z:1)
+      Window.draw_font(110, 640, "敵は全員標準状態に設定されます。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "1度はプレイされた方向けの難易度です。", intro_font, color:[0,0,0], z:3)  
+      if Input.mousePush?(M_LBUTTON)
+        diff_level = 2 #へいぼん
+        break
+      end
+    elsif x >= 360 && x <= 660 && y >= 420 && y <= 530
+      Window.draw_font(110, 600, "【きびしい】", intro_font, color:[240,0,0], z:1)
+      Window.draw_font(110, 640, "敵の攻撃力と最大HPが大幅に増加します。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "熟練者でもかなり厳しい難易度です。", intro_font, color:[0,0,0], z:3)  
+      if Input.mousePush?(M_LBUTTON)
+        diff_level = 3 #きびしい
+        break
+      end
+    else
+      Window.draw_font(110, 600, "【難易度選択】", intro_font, color:[255,0,0], z:1)
+      Window.draw_font(110, 640, "このゲームの難易度を選択できます。", intro_font, color:[0,0,0], z:2)
+      Window.draw_font(110, 680, "キャラに合わせた難易度を選択することも大切です。", intro_font, color:[0,0,0], z:3)  
+    end
+
+    #難易度登録
+    field.set_enemy_level(diff_level)
+
+  end
+end
+
+#######################################################################################################
 #サポートキャラ
 class Support_chara
     attr_accessor :name, :party, :love,:encount
@@ -904,6 +1120,7 @@ class Picture
 end
 
 picture=Picture.new
+
 #フィールド全体
 class Field
   attr_accessor :enemy_level, :field_option, :turn, :status, :battle_speed, :crt_enemy, :next_enemy
@@ -983,6 +1200,12 @@ class Field
     Window.draw_font(172,545,"たたかう", command_font, fontcolor:[255,255,255],z:3)
     Window.draw_font(173,605,"ぼうぎょ", command_font, fontcolor:[255,255,255],z:3)
     Window.draw_font(183,665,"にげる",   command_font, fontcolor:[255,255,255],z:3)
+    #画像
+    #タイトル画面背景
+    title_img = Image.load("images/タイトル.jpg")
+    #タイトル画像
+    title_name = Image.load("images/title_logo.png")
+
     #キャラアイコン
     #女性キャラ1
     woman1_normal = Image.load("images/chara/woman1/face_normal.png")
@@ -3005,7 +3228,7 @@ end
   first = true
 
   #ちらつき対策
-  #Window.update
+ # Window.update
 ###############################################
 
 
@@ -3015,7 +3238,23 @@ branch=0
 Window.loop do
   #スタート画面
   if progress==-1
+    title_start(picture,@font)
+    diff_select(picture,@font,field)
+    #ターンをリセット(迷い人のラプソディ用)
+    hero.limit_turn = 12  
+    #主人公を生成
+    hero.set_status
+    #「逃げる」フラグ
+    hero.is_escaped = nil
+    #「ぼうぎょ」コマンド
+    hero.is_def = nil
+    
+    first = true
+    
+    #ちらつき対策
+    Window.update
     progress=0
+
   #序章
   elsif progress==0
     if story.tale(0,picture)==1
@@ -3436,11 +3675,12 @@ Window.loop do
     elsif progress==19
       #エンディング処理
       if story.tale(40,picture)==1
-        #エンディングロール
+        endroll
+        gameclear
         break
       end
     elsif progress==99
-      #ゲームオーバー
+      gameover
       break
     end
 end
