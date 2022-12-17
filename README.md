@@ -1,6 +1,5 @@
 <h2>タイトル : 「一週間で魔王を倒すゲーム(仮)」</h2>
 <h3>【ゲーム概要】</h3>
-add to introduction here.<br>
 <br>
 
 ![logo](/images/title_logo.png)
@@ -67,6 +66,10 @@ https://www.shopify.com/jp/tools/logo-maker/onboarding/select-logo
 <br>
 ・画像オンライン検索サイト<br>
 https://smallseotools.com/ja/reverse-image-search/
+<br>
+<br>
+・mp4をwavへ変換するサイト<br>
+https://convertio.co/ja/download/362ec84f2d5c61d52c85035a0504c00e152732/
 <br>
 <br>
 <br>
