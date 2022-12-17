@@ -3010,11 +3010,14 @@ end
 
 
 #main文
-progress=18
+progress=-1
 branch=0
 Window.loop do
+  #スタート画面
+  if progress==-1
+    progress=0
   #序章
-  if progress==0
+  elsif progress==0
     if story.tale(0,picture)==1
       progress=1
     end
@@ -3078,7 +3081,11 @@ Window.loop do
   #バトル
   elsif progress==5
     field.battle_now(hero,enemy,field,merchant,first,diff_level,liria,srag)
-    progress=8
+    if hero.hp>0
+      progress=8
+    else 
+      progress=99
+    end
   #ステータスツリー
   elsif progress==6
 
@@ -3417,15 +3424,23 @@ Window.loop do
 
     #魔王討伐
     elsif progress==18
-      if story.tale(39,picture)==1      
+      if story.tale(39,picture)==1  
         field.battle_now(hero,enemy,field,merchant,first,diff_level,liria,srag)
-        progress=19
+        if hero.hp>0
+          progress=19
+        else 
+          progress=99
+        end    
       end
     #エンディング
     elsif progress==19
       #エンディング処理
       if story.tale(40,picture)==1
         #エンディングロール
+        break
       end
+    elsif progress==99
+      #ゲームオーバー
+      break
     end
 end
