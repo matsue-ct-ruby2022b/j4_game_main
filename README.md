@@ -1,6 +1,8 @@
 <h2>タイトル : 「一週間で魔王を倒すゲーム(仮)」</h2>
 <h3>【ゲーム概要】</h3>
-add to introduction here.
+add to introduction here.<br>
+<br>
+
 ![logo](/images/title_logo.png)
 <br>
 <br>
