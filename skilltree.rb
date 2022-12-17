@@ -288,13 +288,3 @@ def skilltree_loop(tree,hero)
         end
     end
 end
-
-#tree = SkillTree.new()
-#tree.init
-
-=begin
-Window.loop do
-    tree.detail_print
-    tree.node_print
-end
-=end
