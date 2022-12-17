@@ -194,9 +194,9 @@ class SkillTree
                 Window.draw_line(node.x, node.y, node.children[i].x, node.children[i].y, line_color, z=1)
             end
             if node.release_flag == 0
-                Window.draw_scale(node.x-nodew, node.y-nodeh, @node_icon[node.effected_status], 0.15, 0.15,nodew,nodeh, z=2)
+                Window.draw_ex(node.x-nodew, node.y-nodeh, @node_icon[node.effected_status], scale_x:0.15, scale_y:0.15,center_x:nodew,center_y:nodeh, alpha:100,z:2)
             elsif node.release_flag == 1
-                Window.draw_scale(node.x-nodew, node.y-nodeh, @node_icon[node.effected_status], 0.15, 0.15,nodew,nodeh, z=2)
+                Window.draw_ex(node.x-nodew, node.y-nodeh, @node_icon[node.effected_status], scale_x:0.15, scale_y:0.15,center_x:nodew,center_y:nodeh, alpha:255,z:2)
             end
             if node.children.empty?
                 next
