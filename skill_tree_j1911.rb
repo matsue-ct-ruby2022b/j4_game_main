@@ -29,40 +29,50 @@ class SkillTree
     def initialize
         #スキルツリーのノード[影響を与えるステータス,変化値,必要なゴールド,x座標,y座標]
         @tree_nodes = [
-               ["root",0,0,ROOT_X,ROOT_Y],#0
+            ["root",0,0,ROOT_X,ROOT_Y],#0
 
-               ["hp",20,100,ROOT_X-100,ROOT_Y-100],#1
-               ["hp",50,200,ROOT_X-100,ROOT_Y-200],#2
-               ["hp",120,500,ROOT_X-100,ROOT_Y-300],#3
-               ["hp",150,700,ROOT_X-200,ROOT_Y-300],#4
-               ["mp",30,150,ROOT_X-200,ROOT_Y-100],#5
-               ["mp",70,300,ROOT_X-300,ROOT_Y-200],#6
-               ["mp",200,700,ROOT_X-300,ROOT_Y-100],#7
+            ["hp",20,100,ROOT_X-100,ROOT_Y-100],#1
+            ["hp",50,200,ROOT_X-100,ROOT_Y-200],#2
+            ["hp",120,500,ROOT_X-100,ROOT_Y-300],#3
+            ["hp",150,700,ROOT_X-200,ROOT_Y-300],#4
 
-               ["pow",10,100,ROOT_X+100,ROOT_Y-100],#8
-               ["pow",30,200,ROOT_X+100,ROOT_Y-200],#9
-               ["pow",70,300,ROOT_X+100,ROOT_Y-300],#10
-               ["pow",100,500,ROOT_X+200,ROOT_Y-300],#11
-               ["bra",30,200,ROOT_X+200,ROOT_Y-100],#12
-               ["bra",70,300,ROOT_X+300,ROOT_Y-100],#13
-               ["bra",100,500,ROOT_X+300,ROOT_Y-200],#14
+            ["mp",30,150,ROOT_X-200,ROOT_Y-100],#5
+            ["mp",70,300,ROOT_X-300,ROOT_Y-200],#6
+            ["mp",200,700,ROOT_X-300,ROOT_Y-100],#7
 
-               ["def",10,100,ROOT_X-100,ROOT_Y+100],#15
-               ["def",30,150,ROOT_X-200,ROOT_Y+100],#16
-               ["def",60,300,ROOT_X-300,ROOT_Y+100],#17
-               ["def",100,700,ROOT_X-300,ROOT_Y+200],#18
-               ["pow",20,150,ROOT_X-100,ROOT_Y+200],#19
-               ["pow",50,200,ROOT_X-100,ROOT_Y+300],#20
-               ["pow",50,200,ROOT_X-200,ROOT_Y+300],#21
+            ["pow",10,100,ROOT_X+100,ROOT_Y-100],#8
+            ["pow",30,200,ROOT_X+100,ROOT_Y-200],#9
+            ["pow",70,300,ROOT_X+100,ROOT_Y-300],#10
+            ["pow",100,500,ROOT_X+200,ROOT_Y-300],#11
+            ["bra",30,200,ROOT_X+200,ROOT_Y-100],#12
+            ["bra",70,300,ROOT_X+300,ROOT_Y-100],#13
+            ["bra",100,500,ROOT_X+300,ROOT_Y-200],#14
 
-               ["spe",10,100,ROOT_X+100,ROOT_Y+100],#22
-               ["spe",20,150,ROOT_X+200,ROOT_Y+100],#23
-               ["spe",100,350,ROOT_X+300,ROOT_Y+100],#24
-               ["spe",200,700,ROOT_X+300,ROOT_Y+200],#25
-               ["def",10,150,ROOT_X+100,ROOT_Y+200],#26
-               ["def",30,150,ROOT_X+100,ROOT_Y+300],#27
-               ["def",60,300,ROOT_X+200,ROOT_Y+300]#28
-            ]
+            ["def",10,100,ROOT_X-100,ROOT_Y+100],#15
+            ["def",30,150,ROOT_X-200,ROOT_Y+100],#16
+            ["def",60,300,ROOT_X-300,ROOT_Y+100],#17
+            ["def",100,700,ROOT_X-300,ROOT_Y+200],#18
+            ["pow",20,150,ROOT_X-100,ROOT_Y+200],#19
+            ["pow",50,200,ROOT_X-100,ROOT_Y+300],#20
+            ["pow",50,200,ROOT_X-200,ROOT_Y+300],#21
+
+            ["spe",10,100,ROOT_X+100,ROOT_Y+100],#22
+            ["spe",20,150,ROOT_X+200,ROOT_Y+100],#23
+            ["spe",100,350,ROOT_X+300,ROOT_Y+100],#24
+            ["spe",200,700,ROOT_X+300,ROOT_Y+200],#25
+            ["def",10,150,ROOT_X+100,ROOT_Y+200],#26
+            ["def",30,150,ROOT_X+100,ROOT_Y+300],#27
+            ["def",60,300,ROOT_X+200,ROOT_Y+300]#28
+        ]
+        @node_icon = [
+            ["root", Image.load("images/node_icons/root.png")],
+            ["hp", Image.load("images/node_icons/hp1.png")],
+            ["mp", Image.load("images/node_icons/mp1.png")],
+            ["pow", Image.load("images/node_icons/pow1.png")],
+            ["bra", Image.load("images/node_icons/bra1.png")],
+            ["def", Image.load("images/node_icons/def1.png")],
+            ["spe", Image.load("images/node_icons/spe1.png")],
+        ]
         @root = nil
         @count = 0
     end

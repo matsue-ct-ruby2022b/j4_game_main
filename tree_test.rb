@@ -7,11 +7,11 @@ Window.y = 0
 class Node
     attr_accessor :node_num, :parent, :child1, :child2, :child3, :child4, :status, :detail, :flag, :money, :x, :y, #:node_icon[]
     def initialize
-        @node_icon[0] = Image.load("images/shield1.png")
-        @node_icon[1] = Image.load("images/shield2.png")
-        @node_icon[2] = Image.load("images/shield3.png")
-        @node_icon[3] = Image.load("images/money.png")
-        @node_icon[4] = Image.load("images/shield1.png")
+        @node_icon[0] = Image.load("images/shield1.png") #root
+        @node_icon[1] = Image.load("images/shield2.png") #hp
+        @node_icon[2] = Image.load("images/shield3.png") #hp
+        @node_icon[3] = Image.load("images/money.png") #hp
+        @node_icon[4] = Image.load("images/shield1.png") #hp
         @node_icon[5] = Image.load("images/shield2.png")
         @node_icon[6] = Image.load("images/shield3.png")
         @node_icon[7] = Image.load("images/money.png")
