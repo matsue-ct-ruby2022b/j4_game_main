@@ -969,7 +969,7 @@ class Hero
         hero.mp = 0 #mp全消費
       elsif num == 1 #聖戦の響き
         die_rand = rand(1..10)
-          if die_rand == 1 || die_rand == 2 || die_flag == 3
+          if (die_rand == 1 || die_rand == 2 || die_flag == 3) && enemy.bossflag != 1
             die_flag = true #即死したか
             dmg = enemy.hp
             enemy.hp = 0
@@ -1151,10 +1151,18 @@ class Hero
           #HP残量でセリフ変化
           if field.turn == 1
             Window.draw_font(310,350,"ここまで辿りつく輩がいるとはのう・・・", intro_font, color:[255,255,255,255],z:16)
-          elsif hero.hp < (hero.hp_max * 0.2) #20%を下回ったら
+          elsif hero.hp < (hero.hp_max * 0.1) #10%を下回ったら
             Window.draw_font(410,350,"やすらかに眠れ", intro_font, color:[255,255,255,255],z:16)
           else
-            Window.draw_font(390,350,"まだまだこれから！", intro_font, color:[255,255,255,255],z:16)
+            #Window.draw_font(390,350,"まだまだこれから！", intro_font, color:[255,255,255,255],z:16)
+            talk_rand = rand(1..3)
+            if talk_rand == 1
+              Window.draw_font(390,350,"まだまだこれから！", intro_font, color:[255,255,255,255],z:16)
+            elsif talk_rand == 2
+              Window.draw_font(430,350,"滅びよ！", intro_font, color:[255,255,255,255],z:16)
+            else
+              Window.draw_font(430,350,"・・・", intro_font, color:[255,255,255,255],z:16)
+            end
           end
           #クリックしたら
           if Input.mousePush?(M_LBUTTON)
@@ -1997,7 +2005,11 @@ enemy = Enemy.new
 merchant = Merchant.new
 
 #BGM設定
-title_bgm = Sound.new("musics/title.m4a")
+title_bgm = Sound.new("musics/title.wav")
+battle1_bgm = Sound.new("musics/battle_1.wav")
+battle2_bgm = Sound.new("musics/battle_2.wav")
+boss_bgm = Sound.new("musics/boss_1.wav")
+end_bgm = Sound.new("musics/end_1.wav")
 
 Window.loop do
   #タイトル曲再生
@@ -2246,13 +2258,27 @@ Window.loop do
   #ちらつき対策
   Window.update
 
+  #bgmストップ
+  title_bgm.stop
+
   #メインループ
+  bgm_rand = rand(1..2)
+  if bgm_rand == 1
+    battle1_bgm.play
+  else
+    battle2_bgm.play
+  end
   field.battle_now(hero,enemy,field,merchant,first,diff_level)
+  if bgm_rand == 1
+    battle1_bgm.stop
+  else
+    battle2_bgm.stop
+  end
 
   #この辺に入れてほしい
   if hero.check_hp() == true
     #ゲームオーバー処理
-
+    end_bgm.play
   end
   #
 
