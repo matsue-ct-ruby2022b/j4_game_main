@@ -405,7 +405,10 @@ class Field
       hero.exp += enemy.exp
       if hero.exp >= hero.need_exp
         hero.exp -= hero.need_exp
-        up_need = hero.need_exp * 0.3
+        #up_need = (hero.need_exp * 0.1)
+        #up_need = ((hero.level * 1))
+        up_need = 10
+        up_need = up_need.to_i
         hero.need_exp += up_need
         hero.need_exp = hero.need_exp.to_i
         #ステータス増加
@@ -438,7 +441,6 @@ class Field
       end
       exp_cnt += 1
     end
-    #hero.origin_def = hero.def *= 2
     new_level = hero.level #取得後のレベル
     new_power = hero.power.to_s.rjust(3)
     new_hp = hero.hp_max.to_s.rjust(3)
@@ -448,6 +450,9 @@ class Field
     new_brain = hero.brain.to_s.rjust(3)
     hero.origin_power = hero.power
     hero.power = hero.origin_power
+    #hero.def = new_def
+    hero.origin_def = hero.def * 2
+    hero.before_def = hero.def
     #レベルアップ表示
     if is_levelup != nil
       #クリック待ち
@@ -969,7 +974,7 @@ class Hero
         hero.mp = 0 #mp全消費
       elsif num == 1 #聖戦の響き
         die_rand = rand(1..10)
-          if (die_rand == 1 || die_rand == 2 || die_flag == 3) && enemy.bossflag != 1
+          if (die_rand == 1 || die_rand == 2 || die_flag == 3) && enemy.bossflag != true
             die_flag = true #即死したか
             dmg = enemy.hp
             enemy.hp = 0
@@ -1480,6 +1485,7 @@ class Enemy
     elsif field.enemy_level == 1
       @exp = @exp/2
     end
+    #@exp = @exp * 20
     @exp = @exp.to_i
     #お金
     @money = (@exp / 1.5) * 2.5
@@ -2268,7 +2274,27 @@ Window.loop do
   else
     battle2_bgm.play
   end
-  field.battle_now(hero,enemy,field,merchant,first,diff_level)
+
+  #製作者用チート
+=begin
+  hero.hp_max = 1200
+  hero.hp = 1200
+  hero.mp = 1200
+  hero.mp_max = 1200
+  hero.power = 1200
+  hero.origin_power = 1200
+  hero.def = 1200
+  hero.origin_def = 1200
+  hero.before_def = 1200
+  hero.brain = 1200
+  battle1_bgm.stop
+  battle2_bgm.stop
+  boss_bgm.play
+  enemy.bossflag = true
+=end
+  Window.loop do
+    field.battle_now(hero,enemy,field,merchant,first,diff_level)
+  end
   if bgm_rand == 1
     battle1_bgm.stop
   else
@@ -2279,6 +2305,8 @@ Window.loop do
   if hero.check_hp() == true
     #ゲームオーバー処理
     end_bgm.play
+
+    end_bgm.stop
   end
   #
 
